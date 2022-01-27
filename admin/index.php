@@ -10,5 +10,6 @@
 <body>
     <?php include("inc/header.php"); ?>
     <?php include("inc/body_left.php") ?>
+    <?php include("inc/body_right.php") ?>
 </body>
 </html>

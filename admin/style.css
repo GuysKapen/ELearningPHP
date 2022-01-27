@@ -212,3 +212,44 @@
 .mt-2{
     margin-top: 1rem;
 }
+
+#edit-form {
+    width: 50%;
+    margin: auto;
+    padding: 2%;
+    box-sizing: border-box;
+}
+
+#edit-form input {
+    width: 100%;
+    height: 32px;
+    outline: none;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
+#edit-form select {
+    width: 100%;
+    height: 32px;
+    outline: none;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
+#edit-form button {
+    height: 32px;
+    background: none;
+    outline: none;
+    border: 0.1rem solid #3f5267;
+    color: #3f5267;
+    display: block;
+    margin: auto;
+    margin-top: 16px;
+    padding: 0px 32px;
+}
+
+#edit-form button:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #3f5267;
+}

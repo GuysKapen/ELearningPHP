@@ -24,8 +24,8 @@
                 echo "<tr>
                 <td>" . $i++ . "</td>
                 <td>" . $cat['name'] . "</td>
-                <td><a href='#'>Edit</a></td>
-                <td><a href='#'>Delete</a></td>
+                <td><a href='index.php?edit_cat=" . $cat['id'] . "'>Edit</a></td>
+                <td><a href='index.php?cat&del_cat=" . $cat['id'] . "'>Delete</a></td>
                 </tr>";
             }
             ?>

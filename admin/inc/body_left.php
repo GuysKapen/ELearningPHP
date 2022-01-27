@@ -33,13 +33,3 @@
         <li><a href="">Edit Slider</a></li>
     </ul>
 </div>
-
-<?php
-    if (isset($_GET['cat'])) {
-        include("category.php");
-    }
-
-    if (isset($_GET['sub_cat'])) {
-        include("sub_category.php");
-    }
- ?>
