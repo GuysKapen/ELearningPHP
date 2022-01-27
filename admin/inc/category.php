@@ -5,7 +5,7 @@
             <summary>Add category</summary>
             <form method="post" enctype="multipart/form-data">
                 <input type="text" name="cat_name" placeholder="Enter category name">
-                <button>Add category</button>
+                <button name="add_cat">Add category</button>
             </form>
         </details>
     </div>

@@ -128,10 +128,15 @@
 }
 
 #add-cat {
-    width: 60%;
+    width: 100%;
     margin: auto;
     padding: 2%;
     box-sizing: border-box;
+}
+
+#add-cat details {
+    width: 60%;
+    margin: auto;
 }
 
 #add-cat details summary {
@@ -159,6 +164,14 @@
     box-sizing: border-box;
 }
 
+#add-cat details form select {
+    width: 100%;
+    height: 32px;
+    outline: none;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
 #add-cat details form button {
     width: 25%;
     height: 32px;
@@ -176,4 +189,8 @@
     background: #fff;
     color: #3f5267;
 
+}
+
+.mt-2{
+    margin-top: 1rem;
 }

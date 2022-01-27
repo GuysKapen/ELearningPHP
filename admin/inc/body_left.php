@@ -1,9 +1,9 @@
 <div id="body-left">
     <h3>Categories Management</h3>
     <ul>
-        <li><a href="">Dash board</a></li>
+        <li><a href="index.php">Dash board</a></li>
         <li><a href="index.php?cat">View course</a></li>
-        <li><a href="">View sub course</a></li>
+        <li><a href="index.php?sub_cat">View sub course</a></li>
     </ul>
     <h3>Course Management</h3>
     <ul>
@@ -33,3 +33,13 @@
         <li><a href="">Edit Slider</a></li>
     </ul>
 </div>
+
+<?php
+    if (isset($_GET['cat'])) {
+        include("category.php");
+    }
+
+    if (isset($_GET['sub_cat'])) {
+        include("sub_category.php");
+    }
+ ?>
