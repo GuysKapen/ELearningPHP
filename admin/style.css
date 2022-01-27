@@ -191,6 +191,24 @@
 
 }
 
+#add-cat table {
+    width: 100%;
+    margin-top: 2rem;
+    border-spacing: 0;
+}
+
+#add-cat table tr th {
+    height: 36px;
+    background: #3f5267;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+#add-cat table tr td {
+    height: 36px;
+    text-align: center;
+}
+
 .mt-2{
     margin-top: 1rem;
 }

@@ -20,6 +20,30 @@
                 <button name="add_sub_cat">Add category</button>
             </form>
         </details>
+
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Main</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+
+            <?php
+            $i = 1;
+            $cats = select_sub_categories();
+            foreach ($cats as $cat) {
+                echo "<tr>
+                <td>" . $i++ . "</td>
+                <td>" . $cat['name'] . "</td>
+                <td>" . $cat['cat_name'] . "</td>
+                <td><a href='#'>Edit</a></td>
+                <td><a href='#'>Delete</a></td>
+                </tr>";
+            }
+            ?>
+        </table>
     </div>
 </div>
 

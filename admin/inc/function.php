@@ -74,3 +74,18 @@ function select_categories()
     }
     return $cats;
 }
+
+
+function select_sub_categories()
+{
+    include("inc/connect.php");
+    $sel_cat = $con->prepare("select c.cat_name, s.sub_cat_name, s.sub_cat_id from categories c inner join sub_categories s on c.cat_id=s.cat_id");
+    $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
+    $sel_cat->execute();
+
+    $cats = array();
+    while($row = $sel_cat->fetch()) {
+        array_push($cats, array("name" => $row["sub_cat_name"], "id" => $row["sub_cat_id"], "cat_name" => $row["cat_name"]));
+    }
+    return $cats;
+}
