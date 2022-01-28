@@ -35,4 +35,5 @@
 
 
 <?php
-echo add_cat(); ?>
+echo add_cat();
+echo del_category() ?>

@@ -38,8 +38,8 @@
                 <td>" . $i++ . "</td>
                 <td>" . $cat['name'] . "</td>
                 <td>" . $cat['cat_name'] . "</td>
-                <td><a href='index.php?edit_sub_cat=". $cat["id"] ."'>Edit</a></td>
-                <td><a href='index.php?edit_sub_cat=". $cat["id"] ."'>Delete</a></td>
+                <td><a href='index.php?edit_sub_cat=" . $cat["id"] . "'>Edit</a></td>
+                <td><a href='index.php?del_sub_cat=" . $cat["id"] . "'>Delete</a></td>
                 </tr>";
             }
             ?>
@@ -50,4 +50,5 @@
 
 <?php
 
-echo add_sub_cat(); ?>
+echo add_sub_cat();
+echo del_sub_category(); ?>

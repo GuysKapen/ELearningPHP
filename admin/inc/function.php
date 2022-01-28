@@ -139,7 +139,7 @@ function select_categories()
     $sel_cat->execute();
 
     $cats = array();
-    while($row = $sel_cat->fetch()) {
+    while ($row = $sel_cat->fetch()) {
         array_push($cats, array("name" => $row["cat_name"], "id" => $row["cat_id"]));
     }
     $con = null;
@@ -155,14 +155,15 @@ function select_sub_categories()
     $sel_cat->execute();
 
     $cats = array();
-    while($row = $sel_cat->fetch()) {
+    while ($row = $sel_cat->fetch()) {
         array_push($cats, array("name" => $row["sub_cat_name"], "id" => $row["sub_cat_id"], "cat_name" => $row["cat_name"]));
     }
     $con = null;
     return $cats;
 }
 
-function get_category($id) {
+function get_category($id)
+{
     include("inc/connect.php");
     $sel_cat = $con->prepare("select * from categories where cat_id=:id");
     $sel_cat->bindParam("id", $id);
@@ -175,7 +176,8 @@ function get_category($id) {
     return array("name" => $row["cat_name"], "id" => $row["cat_id"]);
 }
 
-function get_sub_category($id) {
+function get_sub_category($id)
+{
     include("inc/connect.php");
     $sel_cat = $con->prepare("select * from sub_categories where sub_cat_id=:id");
     $sel_cat->bindParam("id", $id);
@@ -187,4 +189,40 @@ function get_sub_category($id) {
 
     $con = null;
     return array("name" => $row["sub_cat_name"], "id" => $row["sub_cat_id"], "cat_id" => $row["cat_id"]);
+}
+
+function del_category()
+{
+    if (!isset($_GET['del_cat'])) return;
+    $id = $_GET['del_cat'];
+    include("inc/connect.php");
+    $del_cat = $con->prepare("delete from categories where cat_id=:id");
+    $del_cat->bindParam("id", $id);
+    if ($del_cat->execute()) {
+        echo "<script>alert('Delete category successfully!');</script>";
+        echo "<script>window.open('index.php?sub_cat', '_self')</script>";
+    } else {
+        echo "<script>alert('Delete category Failed!');</script>";
+        echo "<script>window.open('index.php?sub_cat', '_self')</script>";
+    }
+    $con = null;
+}
+
+
+function del_sub_category()
+{
+    if (!isset($_GET['del_sub_cat'])) return;
+    $id = $_GET['del_sub_cat'];
+    include("inc/connect.php");
+    $del_cat = $con->prepare("delete from sub_categories where sub_cat_id=:id");
+    $del_cat->bindParam("id", $id);
+    if ($del_cat->execute()) {
+        echo "<script>alert('Delete sub category successfully!');</script>";
+        echo "<script>window.open('index.php?sub_cat', '_self')</script>";
+    } else {
+        echo "<script>alert('Delete sub category Failed!');</script>";
+        echo "<script>window.open('index.php?sub_cat', '_self')</script>";
+    }
+
+    $con = null;
 }
