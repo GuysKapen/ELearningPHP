@@ -102,8 +102,9 @@ function update_sub_cat()
         $cat_id = $_POST["cat_id"];
         $id = $_POST["id"];
 
-        $check = $con->prepare("select 1 as result from sub_categories where sub_cat_name like :sub_cat_name limit 1");
+        $check = $con->prepare("select 1 as result from sub_categories where sub_cat_name like :sub_cat_name and cat_id=:cat_id limit 1");
         $check->bindParam("sub_cat_name", $cat_name);
+        $check->bindParam("cat_id", $cat_id);
         $check->execute();
         $count = $check->fetch()['result'];
 
