@@ -4,6 +4,7 @@
         <li><a href="index.php">Dash board</a></li>
         <li><a href="index.php?cat">View course</a></li>
         <li><a href="index.php?sub_cat">View sub course</a></li>
+        <li><a href="index.php?lang">View all language</a></li>
     </ul>
     <h3>Course Management</h3>
     <ul>
