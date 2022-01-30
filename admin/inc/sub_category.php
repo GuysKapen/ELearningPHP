@@ -26,8 +26,7 @@
                 <th>No.</th>
                 <th>Name</th>
                 <th>Main</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Action</th>
             </tr>
 
             <?php
@@ -38,8 +37,10 @@
                 <td>" . $i++ . "</td>
                 <td>" . $cat['name'] . "</td>
                 <td>" . $cat['cat_name'] . "</td>
-                <td><a href='index.php?edit_sub_cat=" . $cat["id"] . "'>Edit</a></td>
-                <td><a href='index.php?del_sub_cat=" . $cat["id"] . "'>Delete</a></td>
+                <td>
+                    <a href='index.php?edit_sub_cat=" . $cat['id'] . "'><i class='fa fa-edit'></i></a>
+                    <a href='index.php?cat&del_sub_cat=" . $cat['id'] . "'><i class='fa fa-trash'></i></a>
+                </td>
                 </tr>";
             }
             ?>

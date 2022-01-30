@@ -13,8 +13,7 @@
             <tr>
                 <th>No.</th>
                 <th>Name</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Action</th>
             </tr>
 
             <?php
@@ -24,8 +23,10 @@
                 echo "<tr>
                 <td>" . $i++ . "</td>
                 <td>" . $cat['name'] . "</td>
-                <td><a href='index.php?edit_cat=" . $cat['id'] . "'>Edit</a></td>
-                <td><a href='index.php?cat&del_cat=" . $cat['id'] . "'>Delete</a></td>
+                <td>
+                    <a href='index.php?edit_cat=" . $cat['id'] . "'><i class='fa fa-edit'></i></a>
+                    <a href='index.php?cat&del_cat=" . $cat['id'] . "'><i class='fa fa-trash'></i></a>
+                </td>
                 </tr>";
             }
             ?>

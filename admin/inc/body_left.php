@@ -1,8 +1,8 @@
 <div id="body-left">
     <h3>Categories Management</h3>
     <ul>
-        <li><a href="index.php">Dash board</a></li>
-        <li><a href="index.php?cat">View course</a></li>
+        <li><a href="index.php"><i class="fa fa-home"></i> Dash board</a></li>
+        <li><a href="index.php?cat"><i class="fa fa-th"></i>View courses</a></li>
         <li><a href="index.php?sub_cat">View sub course</a></li>
         <li><a href="index.php?lang">View all language</a></li>
     </ul>

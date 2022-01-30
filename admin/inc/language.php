@@ -13,8 +13,7 @@
             <tr>
                 <th>No.</th>
                 <th>Name</th>   
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Action</th>
             </tr>
 
             <?php
@@ -24,8 +23,10 @@
                 echo "<tr>
                 <td>" . $i++ . "</td>
                 <td>" . $lang['name'] . "</td>
-                <td><a href='index.php?edit_lang=" . $lang['id'] . "'>Edit</a></td>
-                <td><a href='index.php?lang&del_lang=" . $lang['id'] . "'>Delete</a></td>
+                <td>
+                    <a href='index.php?edit_lagn=" . $lang['id'] . "'><i class='fa fa-edit'></i></a>
+                    <a href='index.php?cat&del_lang=" . $lang['id'] . "'><i class='fa fa-trash'></i></a>
+                </td>
                 </tr>";
             }
             ?>
