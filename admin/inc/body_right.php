@@ -22,3 +22,11 @@ if (isset($_GET['lang'])) {
 if (isset($_GET['edit_lang'])) {
     include("edit_language.php");
 }
+
+if (isset($_GET['term'])) {
+    include("term.php");
+}
+
+if (isset($_GET['edit_term'])) {
+    include("edit_term.php");
+}

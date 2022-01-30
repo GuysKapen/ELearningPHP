@@ -333,3 +333,115 @@ function select_langs()
     $con = null;
     return $langs;
 }
+
+function select_terms()
+{
+    include("inc/connect.php");
+    $sel_term = $con->prepare("select * from terms");
+    $sel_term->setFetchMode(PDO::FETCH_ASSOC);
+    $sel_term->execute();
+
+    $terms = array();
+    while ($row = $sel_term->fetch()) {
+        array_push($terms, array("name" => $row["name"], "id" => $row["id"], "type" => $row["type"]));
+    }
+    $con = null;
+    return $terms;
+}
+
+function add_term()
+{
+    include("inc/connect.php");
+    if (isset($_POST['add_term'])) {
+        $term_name = $_POST["name"];
+        $term_type = $_POST["type"];
+
+        $check = $con->prepare("select 1 as result from terms where name like :name limit 1");
+        $check->bindParam("name", $term_name);
+        $check->execute();
+        $count = $check->fetch()['result'];
+
+        if ($count > 0) {
+            echo "<script>alert('Term already existed');</script>";
+            $con = null;
+            return;
+        }
+
+        $add_term= $con->prepare("insert into terms (name, type) values (:name, :type)");
+        $add_term->bindParam("name", $term_name);
+        $add_term->bindParam("type", $term_type);
+        if ($add_term->execute()) {
+            echo "<script>alert('Add term successfully!');</script>";
+            echo "<script>window.open('index.php?term', '_self')</script>";
+        } else {
+            echo "<script>alert('Add term Failed!');</script>";
+            echo "<script>window.open('index.php?term', '_self')</script>";
+        }
+        $con = null;
+    }
+}
+
+function update_term()
+{
+    include("inc/connect.php");
+    if (isset($_POST['update_term'])) {
+        $term_name = $_POST["name"];
+        $term_id = $_POST["id"];
+        $term_type = $_POST["type"];
+
+        $check = $con->prepare("select 1 as result from terms where name like :name and type=:type limit 1");
+        $check->bindParam("name", $term_name);
+        $check->bindParam("type", $term_type);
+        $check->execute();
+        $count = $check->fetch()['result'];
+
+        if ($count > 0) {
+            echo "<script>alert('Term already existed');</script>";
+            $con = null;
+            return;
+        }
+
+        $update_term = $con->prepare("update terms set name=:name, type=:type where id=:id");
+        $update_term->bindParam("name", $term_name);
+        $update_term->bindParam("id", $term_id);
+        $update_term->bindParam("type", $term_type);
+        if ($update_term->execute()) {
+            echo "<script>alert('Update term successfully!');</script>";
+            echo "<script>window.open('index.php?term', '_self')</script>";
+        } else {
+            echo "<script>alert('Update term Failed!');</script>";
+            echo "<script>window.open('index.php?term', '_self')</script>";
+        }
+        $con = null;
+    }
+}
+
+function del_term()
+{
+    if (!isset($_GET['del_term'])) return;
+    $id = $_GET['del_term'];
+    include("inc/connect.php");
+    $del = $con->prepare("delete from terms where id=:id");
+    $del->bindParam("id", $id);
+    if ($del->execute()) {
+        echo "<script>alert('Delete term successfully!');</script>";
+        echo "<script>window.open('index.php?term', '_self')</script>";
+    } else {
+        echo "<script>alert('Delete term Failed!');</script>";
+        echo "<script>window.open('index.php?term', '_self')</script>";
+    }
+    $con = null;
+}
+
+function get_term($id)
+{
+    include("inc/connect.php");
+    $sel = $con->prepare("select * from terms where id=:id");
+    $sel->bindParam("id", $id);
+    $sel->setFetchMode(PDO::FETCH_ASSOC);
+    $sel->execute();
+
+    $row = $sel->fetch();
+    $con = null;
+    return array("name" => $row["name"], "type" => $row["type"], "id" => $row["id"]);
+}
