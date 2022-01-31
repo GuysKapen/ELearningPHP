@@ -30,3 +30,7 @@ if (isset($_GET['term'])) {
 if (isset($_GET['edit_term'])) {
     include("edit_term.php");
 }
+
+if (isset($_GET['contact'])) {
+    include("contact.php");
+}

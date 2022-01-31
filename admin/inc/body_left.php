@@ -28,7 +28,7 @@
     <h3>Pages Management</h3>
     <ul>
         <li><a href="index.php?term">Terms & Conditions</a></li>
-        <li><a href="">Contact Us</a></li>
+        <li><a href="index.php?contact">Contact Us</a></li>
         <li><a href="">About Us</a></li>
         <li><a href="">FAQs</a></li>
         <li><a href="">Edit Slider</a></li>

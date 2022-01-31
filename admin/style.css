@@ -265,3 +265,48 @@
     color: #fff;
     background-color: #3f5267;
 }
+
+#contact {
+    width: 75%;
+    margin: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+
+}
+
+#contact table {
+    width: 100%;
+}
+
+#contact table input {
+    width: 100%;
+    height: 28px;
+    outline: none;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
+#contact table tr td {
+    height: 36px;
+    font-size: 12px;
+}
+
+#contact button {
+    height: 32px;
+    background: none;
+    outline: none;
+    border: 0.1rem solid #3f5267;
+    color: #3f5267;
+    display: block;
+    margin-left: auto;
+    margin-top: 16px;
+    padding: 0px 32px;
+    font-size: 12px;
+    font-style: bold;
+}
+
+#contact button:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #3f5267;
+}
