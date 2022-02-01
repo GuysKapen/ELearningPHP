@@ -34,3 +34,7 @@ if (isset($_GET['edit_term'])) {
 if (isset($_GET['contact'])) {
     include("contact.php");
 }
+
+if (isset($_GET['faq'])) {
+    include("faq.php");
+}

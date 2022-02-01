@@ -445,3 +445,104 @@ function get_term($id)
     $con = null;
     return array("name" => $row["name"], "type" => $row["type"], "id" => $row["id"]);
 }
+
+function add_faq()
+{
+    include("inc/connect.php");
+    if (isset($_POST['add_faq'])) {
+        $question = $_POST["question"];
+        $answer = $_POST["answer"];
+
+        $check = $con->prepare("select 1 as result from faqs where question like :question limit 1");
+        $check->bindParam("question", $question);
+        $check->execute();
+        $count = $check->fetch()['result'];
+
+        if ($count > 0) {
+            echo "<script>alert('FAQ already existed');</script>";
+            $con = null;
+            return;
+        }
+
+        $query = $con->prepare("insert into faqs (question, answer) values (:question, :answer)");
+        $query->bindParam("question", $question);
+        $query->bindParam("answer", $answer);
+
+        if ($query->execute()) {
+            echo "<script>alert('Add FAQ successfully!');</script>";
+            echo "<script>window.open('index.php?faq', '_self')</script>";
+        } else {
+            echo "<script>alert('Add FAQ Failed!');</script>";
+            echo "<script>window.open('index.php?faq', '_self')</script>";
+        }
+        $con = null;
+    }
+}
+
+function del_faq()
+{
+    if (!isset($_GET['del_faq'])) return;
+    $id = $_GET['del_faq'];
+    include("inc/connect.php");
+    $del = $con->prepare("delete from faqs where id=:id");
+    $del->bindParam("id", $id);
+    if ($del->execute()) {
+        echo "<script>alert('Delete FAQ successfully!');</script>";
+        echo "<script>window.open('index.php?faq', '_self')</script>";
+    } else {
+        echo "<script>alert('Delete FAQ Failed!');</script>";
+        echo "<script>window.open('index.php?faq', '_self')</script>";
+    }
+    $con = null;
+}
+
+function update_faq()
+{
+    include("inc/connect.php");
+    if (isset($_POST['update_faq'])) {
+        $question = $_POST["question"];
+        $id = $_POST["id"];
+        $answer = $_POST["answer"];
+
+        $check = $con->prepare("select 1 as result from faqs where answer like :answer and question like :question and type=:type limit 1");
+        $check->bindParam("answer", $answer);
+        $check->bindParam("question", $question);
+        $check->execute();
+        $count = $check->fetch()['result'];
+
+        if ($count > 0) {
+            echo "<script>alert('FAQ already existed');</script>";
+            $con = null;
+            return;
+        }
+
+        $update = $con->prepare("update faqs set question=:question, answer=:answer where id=:id");
+        $update->bindParam("question", $question);
+        $update->bindParam("id", $id);
+        $update->bindParam("answer", $answer);
+        if ($update->execute()) {
+            echo "<script>alert('Update FAQ successfully!');</script>";
+            echo "<script>window.open('index.php?faq', '_self')</script>";
+        } else {
+            echo "<script>alert('Update FAQ Failed!');</script>";
+            print_r($update->errorInfo());
+            // echo "<script>window.open('index.php?faq', '_self')</script>";
+        }
+        $con = null;
+    }
+}
+
+function select_faqs()
+{
+    include("inc/connect.php");
+    $sel = $con->prepare("select * from faqs");
+    $sel->setFetchMode(PDO::FETCH_ASSOC);
+    $sel->execute();
+
+    $faqs = array();
+    while ($row = $sel->fetch()) {
+        array_push($faqs, array("question" => $row["question"], "id" => $row["id"], "answer" => $row["answer"]));
+    }
+    $con = null;
+    return $faqs;
+}
