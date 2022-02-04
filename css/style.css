@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e6e6e6;
+}
+
+#header {
+    width: 100%;
+    height: 100px;
+    background: #3f5267;
+}
+
+#up-header {
+    width: 100%;
+    height: 40px;
+    background: #74889e;
+    display: flex;
+    align-items: center;
+}
+
+#up-header > * {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+#up-header #link ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+#up-header #link ul li {
+    padding: 4px 8px;
+}
+
+#up-header #link ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+#up-header #date {
+    font-family: 'Jost', sans-serif;
+}
+
+#up-header #date p {
+    color: #fff;
+    margin: auto;
+    font-size: 14px;
+    text-align: center;
+}
+
+#up-header #slog p {
+    color: #fff;
+    margin: auto;
+    font-size: 14px;
+    text-align: center;
+}
+
+#down-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+#title {
+    width: 20%;
+    height: 60px;
+}
+
+#title h2 {
+    text-align: center;
+}
+
+#title h2 a {
+    line-height: 60px;
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 2px 2px 2px #000;
+}
+
+#menu {
+    width: 8%;
+}
+
+#menu h2 {
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+#header-search {
+    width: 50%;
+}
+
+#header-search form {
+    margin: 0;
+    padding: 0 2%;
+}
+
+#header-search form input {
+    width: 90%;
+    height: 32px;
+    background: #fff;
+    outline: none;
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+    border: 1px solid #3f5267;
+    border-right: none;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+#header-search form button {
+    width: 5%;
+    height: 32px;
+    background: #fff;
+    outline: none;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    border: 1px solid #3f5267;
+    border-left: none;
+    padding-right: 16px;
+    margin-left: -16px;
+    box-sizing: border-box;
+}
+
+
+#header-cart {
+    width: 6%;
+    height: 60px;
+}
+
+#header-cart a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;    
+    line-height: 60px;
+}
+
+#header-cart a span {
+    margin-left: 4px;
+    font-size: 12px;
+}
+
+#header-login {
+    width: 10%;
+    height: 60px;
+}
+
+#header-login h4 {
+    line-height: 60px;
+    cursor: pointer;
+}
+
+#header-login h4 a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#header-login h4 a i {
+    margin-right: 8px;
+}
+
+#header-signup {
+    width: 10%;
+    height: 60px;
+}
+
+#header-signup h4 {
+    cursor: pointer;
+    line-height: 60px;
+}
+
+#header-signup h4 a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#header-signup h4 a i {
+    margin-right: 8px;
+}
+
+#slider {
+    width: 100%;
+    height: 420px;
+}
+
+#slider img {
+    width: 100%;
+    height: 100%;
+}
