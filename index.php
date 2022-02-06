@@ -16,6 +16,7 @@
     <?php include("inc/slider.php") ?>
     <?php include("inc/category.php") ?>
     <?php include("inc/courses.php") ?>
+    <?php include("inc/footer.php") ?>
 
 </body>
 
