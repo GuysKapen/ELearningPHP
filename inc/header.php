@@ -24,6 +24,7 @@
             </div>
             <div id="menu">
                 <h2><i class="fas fa-bars"></i></h2>
+                <?php include("inc/cat_main.php") ?>
             </div>
             <div id="header-search">
                 <form action="">
