@@ -13,9 +13,11 @@
 <body>
 
     <?php include("inc/header.php") ?>
-    <?php include("inc/slider.php") ?>
-    <?php include("inc/category.php") ?>
-    <?php include("inc/courses.php") ?>
+    <div id="wrap">
+        <?php include("inc/slider.php") ?>
+        <?php include("inc/category.php") ?>
+        <?php include("inc/courses.php") ?>
+    </div>
     <?php include("inc/footer.php") ?>
 
 </body>

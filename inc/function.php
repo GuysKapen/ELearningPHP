@@ -7,8 +7,6 @@ function get_contact() {
     $row = $query->fetch();
 
     $allowed = ["email", "address_1", "address_2", "fb", "gp", "tw", "link", "phone", "yt"];
-    // print_r($row);
-    // return;
     $filtered = array_filter(
         $row,
         function ($key) use ($allowed) {
