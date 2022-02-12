@@ -59,9 +59,14 @@
 
                 </tr>
             </table>
-            <div class="mt-2">
-                <button class="primary-btn">Keep Shoping</button>
-                <button class="primary-btn"><a class="decorate-none text-white" href="">Checkout</a></button>
+            <div class="mt-2 flex space-between">
+                <div>
+                    <button class="primary-btn">Keep Shoping</button>
+                    <button class="primary-btn"><a class="decorate-none text-white" href="">Checkout</a></button>
+                </div>
+                <div>
+                    <p>Amount payable: <b>$120</b></p>
+                </div>
             </div>
         </div>
 
