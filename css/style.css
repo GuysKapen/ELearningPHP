@@ -10,6 +10,14 @@
     margin-top: 1rem;
 }
 
+.mt-1 {
+    margin-top: 0.5rem;
+}
+
+.mt-8 {
+    margin-top: 4rem;
+}
+
 .mr-1 {
     margin-right: 0.5rem;
 }
@@ -30,12 +38,28 @@
     width: 66.66%;
 }
 
+.w-1\/5 {
+    width: 20%;
+}
+
+.w-4\/5 {
+    width: 80%;
+}
+
 .h-full {
     height: 100%;
 }
 
 .h-24 {
     height: 6rem;
+}
+
+.h-screen {
+    height: 100vh;
+}
+
+.min-h-screen {
+    min-height: 100vh;
 }
 
 .pl-2 {
@@ -48,6 +72,19 @@
 
 .p-4 {
     padding: 1.5rem;
+}
+
+.p-6 {
+    padding: 2rem;
+}
+
+.pb-6 {
+    padding-bottom: 2rem;
+}
+
+.px-6 {
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .w-full {
@@ -82,6 +119,18 @@
     background: #fff;
 }
 
+.bg-white-imp {
+    background: #fff !important;
+}
+
+.bg-primary {
+    background: #3d5267;
+}
+
+.text-primary-imp {
+    color: #3d5267 !important;
+}
+
 .text-white {
     color: white;
 }
@@ -92,6 +141,10 @@
 
 .flex {
     display: flex;
+}
+
+.flex-grow {
+    flex-grow: 1;
 }
 
 .space-between {
@@ -481,32 +534,34 @@ body {
     font-family: 'Jost', sans-serif;
 }
 
-#top-course .course-card {
+.course-card {
     background: #fff;
-    margin: 0.75rem;
     padding: 0.75rem;
-    width: 160px;
-    height: 240px;
     transition: all 250ms ease-in-out;
 }
 
-#top-course .course-card a {
+.course-card a {
     text-decoration: none;
 }
 
-#top-course .course-card img {
+.course-card img {
     width: 100%;
     height: 120px;
 }
 
-#top-course .course-card a h3 {
+.course-card a h3 {
     color: #3f5267;
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: normal;
     text-align: left;
 }
 
-#top-course .course-card a h4 {
+#top-course .course-card a h3 {
+    font-size: 1rem;
+    text-align: left;
+}
+
+.course-card a h4 {
     color: #3f5267;
     font-size: 16px;
     font-weight: bold;
@@ -514,21 +569,28 @@ body {
     margin-top: 8px;
 }
 
-#top-course .course-card a h5 {
+.course-card a h5 {
     font-size: 12px;
     font-weight: normal;
     text-align: left;
 }
 
-#top-course .course-card:hover {
+.course-card:hover {
     transform: scale(1.12);
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(5, auto);
-    justify-content: space-evenly;
-    grid-gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.grid-gap-2 {
+    grid-gap: 1rem;
+}
+
+.grid-col-4 {
+    grid-template-columns: repeat(4, auto);
 }
 
 #footer {

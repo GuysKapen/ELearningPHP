@@ -1,6 +1,6 @@
 <div id="top-course">
     <h3>Top courses</h3>
-    <div class="grid">
+    <div class="grid grid-gap-2">
         <div class="course-card">
             <a href="">
                 <img src="imgs/courses/course_1.jpg" alt="">
