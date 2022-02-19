@@ -188,3 +188,15 @@
 .border-spacing-0 {
     border-spacing: 0;
 }
+
+.rounded-lg {
+    border-radius: 1rem;
+}
+
+.rounded-md {
+    border-radius: 0.5rem;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}

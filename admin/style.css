@@ -318,3 +318,93 @@
     color: #fff;
     background-color: #3f5267;
 }
+
+.section-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.25rem;
+    font-family: 'Jost', sans-serif;
+}
+
+
+
+.m-0 {
+    margin: 0;
+}
+
+label {
+    text-align: left;
+    display: block;
+}
+
+
+.form-input {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+.form-input input {
+    outline: none;
+    height: 40px;
+    background: none;
+    font-size: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.form-input input::-webkit-input-placeholder {
+    font-size: 13px;
+    font-family: "Jost", sans-serif;
+}
+
+.form-input input::placeholder {
+    font-size: 13px;
+    font-family: "Jost", sans-serif;
+}
+
+.form-input i {
+    color: #fff;
+    width: 8%;
+    margin-left: 0.75rem;
+}
+
+.form-input textarea {
+    outline: none;
+    background: none;
+    border: none;
+    width: 88%;
+    height: 120px;
+    padding: 1rem;
+    border-radius: 8px;
+    resize: vertical;
+}
+
+.primary-btn {
+    outline: none;
+    background: #3f5267;
+    height: 32px;
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    font-size: 12px;
+    font-weight: 900;
+    border-radius: 32px;
+    cursor: pointer;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.shadow-lg {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.primary {
+    background: #3d5267;
+}
