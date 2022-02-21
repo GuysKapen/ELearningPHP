@@ -41,7 +41,7 @@
         </div>
         <div id="header-login">
             <h4><a href=""><i class="fas fa-user"></i>Login</a></h4>
-            <form action="" method="POST">
+            <form action="login.php" method="POST">
                 <h3><i class="fa fa-user"></i></h3>
                 <h4 class="center">Login</h4>
                 <div class="form-control mt-2">
@@ -53,7 +53,7 @@
                     <input type="password" name="password" placeholder="Please enter your password">
                 </div>
                 <div class="flex space-between items-center">
-                    <button type="submit">Login</button>
+                    <button type="submit" name="login">Login</button>
                     <a href="">
                         <h5>Forgot password?</h5>
                     </a>
@@ -62,7 +62,7 @@
         </div>
         <div id="header-signup">
             <h4><a href=""><i class="fas fa-user-plus"></i>Signup</a></h4>
-            <form action="" method="POST">
+            <form action="registration.php" method="POST">
                 <h3><i class="fa fa-user-plus"></i></h3>
                 <h4 class="center">Signup</h4>
                 <div class="form-control">
@@ -85,7 +85,7 @@
                     <i class="fa fa-lock"></i>
                     <input type="password" name="re_password" placeholder="Please re enter your password">
                 </div>
-                <button type="submit" class="mt-2">Signup</button>
+                <button type="submit" class="mt-2" name="registration">Signup</button>
             </form>
         </div>
     </div>

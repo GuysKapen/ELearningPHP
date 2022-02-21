@@ -6,6 +6,9 @@
     box-sizing: border-box;
 }
 
+button {
+    cursor: pointer;
+}
 
 .primary-btn {
     outline: none;
@@ -669,7 +672,7 @@ body {
     font-size: 12px;
     font-weight: 900;
     border-radius: 32px;
-
+    cursor: pointer;
 }
 
 #cart {
