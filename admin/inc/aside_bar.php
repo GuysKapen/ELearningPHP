@@ -18,12 +18,32 @@
         </ul>
         <p class="p-3 text-xs uppercase dark:text-gray-400">Examples</p>
         <ul>
-            <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2"><span class="inline-flex justify-center items-center w-12 h-6 flex-none"><svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                            <path fill="currentColor" d="M5,4H19A2,2 0 0,1 21,6V18A2,2 0 0,1 19,20H5A2,2 0 0,1 3,18V6A2,2 0 0,1 5,4M5,8V12H11V8H5M13,8V12H19V8H13M5,14V18H11V14H5M13,14V18H19V14H13Z" style="--darkreader-inline-fill:currentColor;" data-darkreader-inline-fill=""></path>
-                        </svg></span><span class="grow">Tables</span>
-                    <!---->
+            <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" href="index.php?cat">
+                    <span class="inline-flex justify-center items-center w-12 h-6 flex-none">
+                        <span class="material-icons outlined text-xl">
+                           home 
+                        </span>
+                    </span>
+                    <span class="grow">Categories</span>
                 </a>
-                <!---->
+            </li>
+            <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" href="index.php?sub_cat">
+                    <span class="inline-flex justify-center items-center w-12 h-6 flex-none">
+                        <span class="material-icons outlined text-xl">
+                            category
+                        </span>
+                    </span>
+                    <span class="grow">Sub Categories</span>
+                </a>
+            </li>
+            <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" href="index.php?lang">
+                    <span class="inline-flex justify-center items-center w-12 h-6 flex-none">
+                        <span class="material-icons outlined text-xl">
+                            language
+                        </span>
+                    </span>
+                    <span class="grow">Language</span>
+                </a>
             </li>
         </ul>
         <p class="p-3 text-xs uppercase dark:text-gray-400">About</p>
