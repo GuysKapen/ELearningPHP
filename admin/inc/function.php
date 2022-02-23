@@ -39,14 +39,13 @@ function update_cat()
         $check = $con->prepare("select 1 as result from categories where cat_name like :cat_name limit 1");
         $check->bindParam("cat_name", $cat_name);
         $check->execute();
-        $count = $check->fetch()['result'];
-
+        $res = $check->fetch(PDO::FETCH_ASSOC);
+        $count = $res['result'];
         if ($count > 0) {
             echo "<script>alert('Category already existed');</script>";
             $con = null;
             return;
         }
-
 
         $update_cat = $con->prepare("update categories set cat_name=:name where cat_id=:id");
         $update_cat->bindParam("name", $cat_name);
@@ -367,7 +366,7 @@ function add_term()
             return;
         }
 
-        $add_term= $con->prepare("insert into terms (name, type) values (:name, :type)");
+        $add_term = $con->prepare("insert into terms (name, type) values (:name, :type)");
         $add_term->bindParam("name", $term_name);
         $add_term->bindParam("type", $term_type);
         if ($add_term->execute()) {
