@@ -9,12 +9,13 @@
     </div>
 
     <form method="POST" action="inc/controller/course_controller.php" class="ml-3 mt-4">
-        <input type="hidden" name="course_id" value="<?php echo $res['id']; ?>">
+        <input type="hidden" name="id" value="<?php echo $res['id']; ?>">
+        <input type="hidden" name="course_id" value="<?php echo $res['course_id']; ?>">
 
         <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 mt-4" for="inline-full-name">
             Course name
         </label>
-        <input type="text" name="coursename" readonly="readonly" class="form-control mt-1" value="<?php echo $res['course_name'] ?>"><br>
+        <input type="text" name="course_name" readonly="readonly" class="form-control mt-1" value="<?php echo $res['course_name'] ?>"><br>
         <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 mt-4" for="inline-full-name">
             Topic name
         </label>

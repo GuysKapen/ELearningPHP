@@ -162,19 +162,33 @@ if (isset($_POST['add_topic'])) {
 if (isset($_POST['update_topic'])) {
 
 	$course_id = $_POST['course_id'];
-	$course_name = $_POST['coursename'];
+	$id = $_POST['id'];
 	$topic_name = $_POST['topic_name'];
 	$description = $_POST['editor'];
 
-	$q = $con->prepare("UPDATE `course_topics` SET `topic_name`=:topic_name,`description`=:description,`course_name`=:course_name WHERE course_id=:course_id");
+	$q = $con->prepare("UPDATE `course_topics` SET `topic_name`=:topic_name,`description`=:description WHERE id=:id");
 	$q->bindParam("topic_name", $topic_name);
-	$q->bindParam("course_name", $course_name);
 	$q->bindParam("description", $description);
+	$q->bindParam("id", $id);
 	$r = $q->execute();
-
 	if ($r) {
-		header("location:../edit_topics.php?course_name=" . $course_name);
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course=' . $course_id);
 	} else {
 		echo "something went wrong";
+	}
+}
+
+
+if (isset($_POST['del_topic'])) {
+	$topic_id = $_POST['topic_id'];
+	$q = $con->prepare("DELETE FROM course_topic WHERE id=:topic_id");
+	$q->bindParam("topic_id", $topic_id);
+	$r = $q->execute();
+	if ($r == true) {
+		echo "<script>alert('Delete course successfully!');</script>";
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
+	} else {
+		echo "<script>alert('Delete course Failed!');</script>";
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 	}
 }
