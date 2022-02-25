@@ -1,4 +1,4 @@
-<div class="pl-60">
+<div class="">
 
     <section class="p-6">
         <div class="justify-between items-center block md:flex">

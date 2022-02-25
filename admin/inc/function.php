@@ -545,3 +545,47 @@ function select_faqs()
     $con = null;
     return $faqs;
 }
+
+function display_courses()
+{
+    include("inc/connect.php");
+    $course_list;
+    $query = $con->prepare("select * from programming_languages");
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $course_list[] = $row;
+    }
+    return $course_list;
+}
+
+function course_topics($course_id)
+{
+    include("inc/connect.php");
+    $topic_list;
+    $query = $con->prepare("select * from course_topics where course_id=:course_id");
+    $query->bindParam("course_id", $course_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $topic_list[] = $row;
+    }
+    return $topic_list;
+}
+
+
+function get_topic($topic_id)
+{
+    include("inc/connect.php");
+    $topic_list;
+    $query = $con->prepare("select * from courses c inner join course_topics t on c.id=t.course_id where t.id=:topic_id");
+    $query->bindParam("topic_id", $topic_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $row = $query->fetch();
+    $con = null;
+    return $row;
+}

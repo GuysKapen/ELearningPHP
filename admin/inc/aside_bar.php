@@ -45,6 +45,15 @@
                     <span class="grow">Language</span>
                 </a>
             </li>
+            <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" href="index.php?course">
+                    <span class="inline-flex justify-center items-center w-12 h-6 flex-none">
+                        <span class="material-icons outlined text-xl">
+                           school 
+                        </span>
+                    </span>
+                    <span class="grow">Course</span>
+                </a>
+            </li>
         </ul>
         <p class="p-3 text-xs uppercase dark:text-gray-400">About</p>
         <ul>
