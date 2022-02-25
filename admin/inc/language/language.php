@@ -1,11 +1,9 @@
-<div class="pl-60">
-
     <section class="p-6">
         <div class="justify-between items-center block md:flex">
             <div class="flex shrink-0 grow-0 items-center justify-center mb-6 md:mb-0">
                 <ul>
                     <li class="title-stack-item inline-block pr-3 text-2xl text-gray-500 dark:text-gray-400 last:pr-0 last:font-black last:text-black dark:text-gray-100" data-v-fecf18ac="">Admin</li>
-                    <li class="title-stack-item inline-block pr-3 text-2xl text-gray-500 dark:text-gray-400 last:pr-0 last:font-black last:text-black dark:text-gray-100" data-v-fecf18ac="">Category</li>
+                    <li class="title-stack-item inline-block pr-3 text-2xl text-gray-500 dark:text-gray-400 last:pr-0 last:font-black last:text-black dark:text-gray-100" data-v-fecf18ac="">Language</li>
                 </ul>
             </div>
         </div>
@@ -100,8 +98,6 @@
 
 
     </section>
-
-</div>
 
 <?php
 echo add_lang();

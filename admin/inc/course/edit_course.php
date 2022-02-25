@@ -7,10 +7,10 @@
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="flex flex-col flex-grow mt-4">
       <div class="flex items-center justify-between px-4">
-        <p class="text-2xl font-bold">Manage courses</p>
+        <p class="text-2xl font-bold">Course topics</p>
         <div class="px-4 py-2 rounded-full bg-indigo-600 font-bold text-sm text-white">
           <a href="add_new_topic.php?course_name=<?php echo $coursename ?>">
-            Add course
+            Add topic
           </a>
         </div>
       </div>

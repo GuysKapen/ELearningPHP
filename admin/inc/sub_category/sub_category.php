@@ -1,5 +1,3 @@
-<div class="pl-60">
-
     <section class="p-6">
         <div class="justify-between items-center block md:flex">
             <div class="flex shrink-0 grow-0 items-center justify-center mb-6 md:mb-0">
@@ -127,9 +125,9 @@
 
     </section>
 
-</div>
 
-<?php
 
-echo add_sub_cat();
-echo del_sub_category(); ?>
+    <?php
+
+    echo add_sub_cat();
+    echo del_sub_category(); ?>
