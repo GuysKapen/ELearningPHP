@@ -1,4 +1,26 @@
+<?php
+$course_id = $_GET['edit_course'];
+$course = get_course($course_id);
+?>
 <div class="">
+  <header class="border-gray-100 flex items-stretch border-b dark:border-gray-800">
+    <div class="flex items-center py-3 flex-grow font-bold px-4">
+      <details class="w-full">
+        <summary>Update course</summary>
+        <div class="mt-2">
+          <form method="post" enctype="multipart/form-data" action="inc/controller/course_controller.php">
+            <input type="hidden" value="<?php echo $course['id'] ?>" name="id">
+            <input type="text" name="name" value="<?php echo $course['course_name'] ?>" class="form-control mr-4" placeholder="Course name">
+            <div class="flex items-end mt-2">
+              <textarea type="text" name="description" class="form-control mr-4" placeholder="Course description"><?php echo $course['course_description'] ?></textarea>
+              <button name="update_course" class="px-4 py-2 rounded-full bg-indigo-600 font-bold text-sm text-white w-1/4">Update course</button>
+            </div>
+          </form>
+        </div>
+      </details>
+    </div>
+  </header>
+
   <div class="flex">
     <!-- ========================================================================================================================== -->
     <!-- ========================================================================================================================== -->
@@ -31,7 +53,7 @@
 
                 <?php
 
-                $course_id = $_GET['edit_course'];
+
                 $topics = course_topics($course_id);
 
                 foreach ($topics as $res) {

@@ -550,7 +550,7 @@ function display_courses()
 {
     include("inc/connect.php");
     $course_list;
-    $query = $con->prepare("select * from programming_languages");
+    $query = $con->prepare("select * from courses");
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
 
@@ -582,6 +582,19 @@ function get_topic($topic_id)
     $topic_list;
     $query = $con->prepare("select * from courses c inner join course_topics t on c.id=t.course_id where t.id=:topic_id");
     $query->bindParam("topic_id", $topic_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $row = $query->fetch();
+    $con = null;
+    return $row;
+}
+
+function get_course($course_id)
+{
+    include("inc/connect.php");
+    $query = $con->prepare("select * from courses where id=:course_id");
+    $query->bindParam("course_id", $course_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
 

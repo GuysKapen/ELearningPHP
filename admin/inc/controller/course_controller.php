@@ -11,13 +11,13 @@ include("../connect.php");
 // code to add a new course by admin from manage_courses.php
 
 if (isset($_POST['add_course'])) {
-	$language_name = $_POST['course_name'];
-	$language_img = $_FILES['course_image'];
-	$language_desc = $_POST['course_desc'];
+	$course_name = $_POST['course_name'];
+	$course_img = $_FILES['course_image'];
+	$course_desc = $_POST['course_desc'];
 
-	$file_name = $language_img['name'];
-	$file_error = $language_img['error'];
-	$file_tmp = $language_img['tmp_name'];
+	$file_name = $course_img['name'];
+	$file_error = $course_img['error'];
+	$file_tmp = $course_img['tmp_name'];
 
 
 	$file_ext = explode('.', $file_name);
@@ -30,10 +30,10 @@ if (isset($_POST['add_course'])) {
 		$destination_file = 'upload_imgs/' . $file_name;
 		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
 
-		$q = $con->prepare("insert into programming_languages(language_name,language_image,language_description) values(:language_name, :destination_file, :language_desc)");
-		$q->bindParam("language_name", $language_name);
+		$q = $con->prepare("insert into courses(course_name,course_image,course_description) values(:course_name, :destination_file, :course_desc)");
+		$q->bindParam("course_name", $course_name);
 		$q->bindParam("destination_file", $destination_file);
-		$q->bindParam("language_desc", $language_desc);
+		$q->bindParam("course_desc", $course_desc);
 		$r = $q->execute();
 		if ($r == true) {
 			echo "<script>alert('Add course successfully!');</script>";
@@ -53,7 +53,7 @@ if (isset($_POST['add_course'])) {
 
 if (isset($_POST['del_course'])) {
 	$course_name = $_POST['selected_course'];
-	$q = $con->prepare("DELETE FROM programming_languages WHERE language_name=:course_name");
+	$q = $con->prepare("DELETE FROM courses WHERE course_name=:course_name");
 	$q->bindParam("course_name", $course_name);
 	$r = $q->execute();
 	if ($r == true) {
@@ -68,7 +68,7 @@ if (isset($_POST['del_course'])) {
 
 if (isset($_POST['del_course_id'])) {
 	$course_id = $_POST['course_id'];
-	$q = $con->prepare("DELETE FROM programming_languages WHERE id=:course_id");
+	$q = $con->prepare("DELETE FROM courses WHERE id=:course_id");
 	$q->bindParam("course_id", $course_id);
 	$r = $q->execute();
 	if ($r == true) {
@@ -86,13 +86,13 @@ if (isset($_POST['del_course_id'])) {
 
 
 if (isset($_POST['update_course'])) {
-	$language_name = $_POST['selected_course'];
-	$language_img = $_FILES['course_image'];
-	$language_desc = $_POST['course_desc'];
+	$course_name = $_POST['selected_course'];
+	$course_img = $_FILES['course_image'];
+	$course_desc = $_POST['course_desc'];
 
-	$file_name = $language_img['name'];
-	$file_error = $language_img['error'];
-	$file_tmp = $language_img['tmp_name'];
+	$file_name = $course_img['name'];
+	$file_error = $course_img['error'];
+	$file_tmp = $course_img['tmp_name'];
 
 
 	$file_ext = explode('.', $file_name);
@@ -104,17 +104,17 @@ if (isset($_POST['update_course'])) {
 		$destination_file = 'uploadimg/' . $file_name;
 		move_uploaded_file($file_tmp, $destination_file);
 
-		$q = $con->prepare("UPDATE programming_languages SET language_image=:destination_file,language_description=:language_desc WHERE language_name=:language_name");
+		$q = $con->prepare("UPDATE courses SET course_image=:destination_file,course_description=:course_desc WHERE course_name=:course_name");
 		$q->bindParam("destination_file", $destination_file);
-		$q->bindParam("language_desc", $language_desc);
-		$q->bindParam("language_name", $language_name);
+		$q->bindParam("course_desc", $course_desc);
+		$q->bindParam("course_name", $course_name);
 		$r = $q->execute();
 
 		if ($r == true) {
-			echo "<script>alert('Add course successfully!');</script>";
+			echo "<script>alert('Update course successfully!');</script>";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		} else {
-			echo "<script>alert('Add course Failed!');</script>";
+			echo "<script>alert('Update course Failed!');</script>";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		}
 	}

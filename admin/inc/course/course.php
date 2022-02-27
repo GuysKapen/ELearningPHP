@@ -104,7 +104,7 @@ $courses = display_courses(); ?>
 
                                                 <?php foreach ($courses as $course_list) {
                                                 ?>
-                                                    <option><?php echo  $course_list['language_name']; ?></option>
+                                                    <option><?php echo  $course_list['course_name']; ?></option>
                                                 <?php } ?>
 
                                             </select>
@@ -149,7 +149,7 @@ $courses = display_courses(); ?>
                                             <select class="form-control mt-1" id="exampleFormControlSelect1" name="selected_course">
                                                 <?php foreach ($courses as $course_list) {
                                                 ?>
-                                                    <option><?php echo  $course_list['language_name']; ?></option>
+                                                    <option><?php echo  $course_list['course_name']; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -204,13 +204,13 @@ $courses = display_courses(); ?>
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                <div class="text-sm font-medium text-gray-900"> <?php echo $course['language_name'] ?> </div>
+                                                <div class="text-sm font-medium text-gray-900"> <?php echo $course['course_name'] ?> </div>
                                             </div>
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                <div class="text-sm font-medium text-gray-900"> <?php echo $course['language_description'] ?> </div>
+                                                <div class="text-sm font-medium text-gray-900"> <?php echo $course['course_description'] ?> </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">

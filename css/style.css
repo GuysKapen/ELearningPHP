@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
 
+
+:root {
+    --bgColor: #fff;
+    --secondaryBgColor: #fafafa;
+    --darkTextTitleColor: #000;
+    --darkTextColor: #6e6d7a;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -43,7 +51,7 @@ body {
 #header {
     width: 100%;
     height: 100px;
-    background: #3f5267;
+    background: var(--secondaryBgColor);
     top: 0;
     position: fixed;
     z-index: 999;
@@ -56,7 +64,7 @@ body {
 #up-header {
     width: 100%;
     height: 40px;
-    background: #74889e;
+    background: var(--bgColor);
     display: flex;
     align-items: center;
 }
@@ -77,7 +85,7 @@ body {
 }
 
 #up-header #link ul li a {
-    color: #fff;
+    color: var(--darkTextColor);
     text-decoration: none;
     font-size: 12px;
 }
@@ -87,14 +95,14 @@ body {
 }
 
 #up-header #date p {
-    color: #fff;
+    color: var(--darkTextTitleColor);
     margin: auto;
     font-size: 14px;
     text-align: center;
 }
 
 #up-header #slog p {
-    color: #fff;
+    color: var(--darkTextTitleColor);
     margin: auto;
     font-size: 14px;
     text-align: center;
@@ -127,7 +135,7 @@ body {
 }
 
 #menu h2 {
-    color: #fff;
+    color: var(--darkTextColor);
     text-align: center;
     cursor: pointer;
 }
@@ -244,7 +252,7 @@ body {
 
 #header-cart a {
     text-decoration: none;
-    color: #fff;
+    color: var(--darkTextColor);
     font-size: 24px;    
     line-height: 60px;
 }
@@ -266,7 +274,7 @@ body {
 
 #header-login h4 a {
     text-decoration: none;
-    color: #fff;
+    color: var(--darkTextColor);
 }
 
 #header-login h4 a i {
@@ -285,7 +293,7 @@ body {
 
 #header-signup h4 a {
     text-decoration: none;
-    color: #fff;
+    color: var(--darkTextColor);
 }
 
 #header-signup h4 a i {
@@ -449,7 +457,7 @@ body {
     width: 100%;
     padding: 1.25rem 2.5rem;
     box-sizing: border-box;
-    background: #3f5267;   
+    background: var(--secondaryBgColor);   
 }
 
 #footer ul {
@@ -465,12 +473,12 @@ body {
 }
 
 #footer ul li h2 {
-    color: #fff;
+    color: var(--darkTextTitleColor);
     margin-bottom: 1rem;
 }
 
 #footer ul li p {
-    color: #74889e;
+    color: var(--darkTextColor);
     line-height: 28px;
 }
 
@@ -488,12 +496,12 @@ body {
 
 #footer .info i {
     margin-top: 4px;
-    color: #fff;
+    color: var(--darkTextColor);
 }
 
 .form-control {
     width: 100%;
-    background: #74889e;
+    background: var(--bgColor);
     margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
@@ -522,7 +530,7 @@ body {
 }
 
 .form-control i {
-    color: #fff;
+    color: var(--darkTextColor);
     width: 8%;
     margin-left: 0.75rem;
 }
