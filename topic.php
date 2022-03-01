@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("inc/function.php")
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +57,16 @@ session_start();
 		.link-no-styled:hover {
 			text-decoration: none;
 		}
+
+		li .active {
+			background-color: rgba(79, 70, 229, 1);
+			color: #fff;
+		}
+
+		li .active:hover {
+			color: rgba(79, 70, 229, 1);
+			background-color: #fff;
+		}
 	</style>
 </head>
 
@@ -70,34 +81,22 @@ session_start();
 			<div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800">
 				<ul class="space-y-2">
 					<li>
-						<a href="#" class="flex items-center p-2 font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+						<a href="#" class="flex items-center px-4 py-3 font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
 							<span class="ml-3">Dashboard</span>
 						</a>
 					</li>
 					<?php
-					$con = mysqli_connect('127.0.0.1', 'uniqueDev', 'uniqueDev');
-					mysqli_select_db($con, 'uniquedeveloper');
-					$course_name = $_GET['course_name'];
-
-					//$_GET['course_name'];
-					// unset($_GET['course_name']);
-					$q = "select * from courses where course_name='$course_name'";
-					$result = mysqli_query($con, $q);
-					while ($res = mysqli_fetch_array($result)) { ?>
-
-						<form action="fetch_main_content.php" method="POST">
-
-							<input type="hidden" name="txt1" value="<?php echo $res['id'] ?>">
-							<button style="background-color: transparent;border: none;text-align:left;color: white;">
-								<li>
-									<a href="#" class="flex items-center p-2 font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 link-no-styled">
-										<span class="ml-3"><?php echo $res['topic_name']; ?></span>
-									</a>
-								</li>
-							</button>
-
-						</form>
-
+					$topic_id = $_GET['topic_id'];
+					$topic = get_topic($topic_id);
+					$topics = course_topics($topic["course_id"]);
+					foreach ($topics as $res) { ?>
+						<li>
+							<a href="?topic_id=<?php echo $res["id"] ?>" class="flex items-center py-3 px-4 font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 link-no-styled <?php echo (($topic_id == $res["id"]) ? "active" : ""); ?>">
+								<span class="ml-3">
+									<?php echo $res['topic_name']; ?>
+								</span>
+							</a>
+						</li>
 
 					<?php } ?>
 				</ul>
@@ -115,8 +114,8 @@ session_start();
 				<p>
 					<?php
 
-					if (isset($_SESSION['message'])) {
-						echo $_SESSION['message'];
+					if (isset($topic)) {
+						echo $topic["description"];
 					}
 
 					?>
@@ -131,10 +130,6 @@ session_start();
 		</div>
 
 	</div>
-
-	<script type="text/javascript">
-		var li = document.getElementsByTagName('li')[0].style = "color:red";
-	</script>
 
 </body>
 
