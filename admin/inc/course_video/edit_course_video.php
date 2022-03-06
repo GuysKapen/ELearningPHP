@@ -1,6 +1,6 @@
 <?php
-$course_id = $_GET['edit_course'];
-$course = get_course($course_id);
+$course_id = $_GET['edit_course_video'];
+$course = get_course_video($course_id);
 ?>
 <div class="">
   <header class="border-gray-100 flex items-stretch border-b dark:border-gray-800">
@@ -25,12 +25,13 @@ $course = get_course($course_id);
     <!-- ========================================================================================================================== -->
     <!-- ========================================================================================================================== -->
 
+    <?php $coursename = 'java'; ?>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="flex flex-col flex-grow mt-4">
       <div class="flex items-center justify-between px-4">
         <p class="text-2xl font-bold">Course topics</p>
         <div class="px-4 py-2 rounded-full bg-indigo-600 font-bold text-sm text-white">
-          <a href="?add_topic&course_id=<?php echo $course_id ?>">
+          <a href="add_topic?course_name=<?php echo $coursename ?>">
             Add topic
           </a>
         </div>
@@ -53,7 +54,7 @@ $course = get_course($course_id);
                 <?php
 
 
-                $topics = course_topics($course_id);
+                $topics = course_video_topics($course_id);
 
                 foreach ($topics as $res) {
                 ?>

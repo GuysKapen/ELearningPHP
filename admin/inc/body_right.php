@@ -29,12 +29,28 @@
         include("course/course.php");
     }
 
+    if (isset($_GET['add_topic'])) {
+        include("course/add_new_topic.php");
+    }
+
     if (isset($_GET['edit_course'])) {
         include("course/edit_course.php");
     }
 
     if (isset($_GET['edit_topic'])) {
         include("course/edit_topic.php");
+    }
+
+    if (isset($_GET['course_video'])) {
+        include("course_video/course_video.php");
+    }
+
+    if (isset($_GET['add_video_topic'])) {
+        include("course_video/add_new_video_topic.php");
+    }
+
+    if (isset($_GET['edit_course_video'])) {
+        include("course_video/edit_course_video.php");
     }
 
     if (isset($_GET['term'])) {

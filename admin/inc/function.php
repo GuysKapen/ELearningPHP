@@ -602,3 +602,48 @@ function get_course($course_id)
     $con = null;
     return $row;
 }
+
+
+function display_course_videos()
+{
+    include("inc/connect.php");
+    $course_video_list = [];
+    $query = $con->prepare("select * from course_videos");
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $course_video_list[] = $row;
+    }
+    return $course_video_list;
+}
+
+
+function get_course_video($course_id)
+{
+    include("inc/connect.php");
+    $query = $con->prepare("select * from course_videos where id=:course_id");
+    $query->bindParam("course_id", $course_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $row = $query->fetch();
+    $con = null;
+    return $row;
+}
+
+
+function course_video_topics($course_id)
+{
+    include("inc/connect.php");
+    $topic_list = [];
+    $query = $con->prepare("select * from course_video_topics where course_id=:course_id");
+    $query->bindParam("course_id", $course_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $topic_list[] = $row;
+    }
+    return $topic_list;
+}
