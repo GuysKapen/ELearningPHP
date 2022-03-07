@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | Home</title>
 
+    <!-- Toast -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -26,6 +32,19 @@
 
 <body class="bg-white text-base dark:bg-gray-800 dark:text-gray-100 pt-20">
     <div id="app" data-v-app="">
+
+        <?php
+        session_start();
+        if (isset($_SESSION["success_message"])) {
+            echo '<script type="text/javascript">toastr.success("' . $_SESSION["success_message"] . '")</script>';
+            unset($_SESSION["success_message"]);
+        }
+        if (isset($_SESSION["error_message"])) {
+            echo '<script type="text/javascript">toastr.error("' . $_SESSION["error_message"] . '")</script>';
+            unset($_SESSION["error_message"]);
+        }
+
+        ?>
 
         <?php
         include("inc/header.php"); ?>

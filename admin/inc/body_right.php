@@ -53,6 +53,18 @@
         include("course_video/edit_course_video.php");
     }
 
+    if (isset($_GET['quiz'])) {
+        include("quiz/quiz.php");
+    }
+
+    if (isset($_GET['edit_quiz'])) {
+        include("quiz/edit_quiz.php");
+    }
+
+    if (isset($_GET['add_question'])) {
+        include("quiz/add_new_question.php");
+    }
+
     if (isset($_GET['term'])) {
         include("term.php");
     }

@@ -647,3 +647,45 @@ function course_video_topics($course_id)
     }
     return $topic_list;
 }
+
+function display_quizz()
+{
+    include("inc/connect.php");
+    $list = [];
+    $query = $con->prepare("select * from course_quizz q inner join courses c on q.course_id=c.id");
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $list[] = $row;
+    }
+    return $list;
+}
+
+function get_quiz($quiz_id)
+{
+    include("inc/connect.php");
+    $query = $con->prepare("select * from course_quizz where id=:quiz_id");
+    $query->bindParam("quiz_id", $quiz_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $row = $query->fetch();
+    $con = null;
+    return $row;
+}
+
+function quiz_questions($quiz_id)
+{
+    include("inc/connect.php");
+    $topic_list = [];
+    $query = $con->prepare("select * from course_questions where quiz_id=:quiz_id");
+    $query->bindParam("quiz_id", $quiz_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $topic_list[] = $row;
+    }
+    return $topic_list;
+}
