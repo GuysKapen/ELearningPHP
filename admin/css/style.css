@@ -116,7 +116,6 @@
     text-shadow: none;
 }
 
-
 #body-right {
     width: 80%;
     height: 550px;
@@ -205,7 +204,6 @@
     cursor: pointer;
     background: #fff;
     color: #3f5267;
-
 }
 
 #add-cat table {
@@ -228,7 +226,7 @@
     text-align: center;
 }
 
-.mt-2{
+.mt-2 {
     margin-top: 1rem;
 }
 
@@ -278,7 +276,6 @@
     margin: auto;
     padding: 1rem;
     box-sizing: border-box;
-
 }
 
 #contact table {
@@ -307,7 +304,7 @@
     display: block;
     margin-left: auto;
     margin-top: 16px;
-    padding: 0px 32px;      
+    padding: 0px 32px;
     cursor: pointer;
     font-size: 12px;
     font-style: bold;
@@ -326,8 +323,6 @@
     font-family: 'Jost', sans-serif;
 }
 
-
-
 .m-0 {
     margin: 0;
 }
@@ -336,7 +331,6 @@ label {
     text-align: left;
     display: block;
 }
-
 
 .form-input {
     width: 100%;
@@ -409,7 +403,6 @@ label {
     background: #3d5267;
 }
 
-
 .form-control {
     display: block;
     width: 100%;
@@ -422,13 +415,13 @@ label {
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  }
+}
 
-  .form-control:disabled,
-  .form-control[readonly] {
+.form-control:disabled,
+.form-control[readonly] {
     background-color: #e9ecef;
     opacity: 1;
-  }
+}
 
 .tab-content>.tab-pane {
     display: none;
@@ -446,7 +439,39 @@ label {
     border-color: rgba(37, 99, 235, var(--tw-border-opacity));
 }
 
-
 summary {
     cursor: pointer;
+}
+
+.max-w-4\/12 {
+    max-width: 33.33%;
+}
+
+.form-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    display: inline-block;
+    vertical-align: middle;
+    background-origin: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    flex-shrink: 0;
+    height: 1em;
+    width: 1em;
+    color: #4299e1;
+    background-color: #fff;
+    border-color: #e2e8f0;
+    border-width: 1px;
+    border-radius: 0.25rem;
+}
+
+.form-checkbox:checked {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+    border-color: transparent;
+    background-color: currentcolor;
 }

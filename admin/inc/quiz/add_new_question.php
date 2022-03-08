@@ -22,7 +22,7 @@ $quiz = get_quiz($quiz_id);
         <input type="hidden" name="quiz_id" value="<?php echo $quiz_id; ?>">
 
         <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-full-name">
-          Course name
+          Quiz name
         </label>
         <input type="text" name="quiz_name" id="course_name" class="form-control mt-2" readonly="readonly" value="<?php echo $quiz['quiz_name'] ?>"> <span id="name_error"></span><br>
 
@@ -37,7 +37,7 @@ $quiz = get_quiz($quiz_id);
             <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-full-name">
               Option 1 is answer
             </label>
-            <input type="checkbox" name="answers[]" id="answers" value="0" class="h-4 w-4 ml-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+            <input type="checkbox" name="answers[]" id="answers" value="0" class="form-checkbox h-4 w-4 ml-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
           </div>
           <input type="text" name="options[]" id="options" class="form-control mt-2">
         </div>
@@ -46,7 +46,7 @@ $quiz = get_quiz($quiz_id);
             <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-full-name">
               Option 2 is answer
             </label>
-            <input type="checkbox" name="answers[]" id="answers" value="1" class="h-4 w-4 ml-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+            <input type="checkbox" name="answers[]" id="answers" value="1" class="form-checkbox h-4 w-4 ml-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
           </div>
           <input type="text" name="options[]" id="options" class="form-control mt-2">
         </div>
@@ -55,7 +55,7 @@ $quiz = get_quiz($quiz_id);
             <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-full-name">
               Option 3 is answer
             </label>
-            <input type="checkbox" name="answers[]" id="answers" value="2" class="h-4 w-4 ml-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+            <input type="checkbox" name="answers[]" id="answers" value="2" class="form-checkbox h-4 w-4 ml-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
           </div>
           <input type="text" name="options[]" id="options" class="form-control mt-2">
         </div>
@@ -64,7 +64,7 @@ $quiz = get_quiz($quiz_id);
             <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-full-name">
               Option 4 is answer
             </label>
-            <input type="checkbox" name="answers[]" id="answers" value="3" class="h-4 w-4 ml-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+            <input type="checkbox" name="answers[]" id="answers" value="3" class="form-checkbox h-4 w-4 ml-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
           </div>
           <input type="text" name="options[]" id="options" class="form-control mt-2">
         </div>

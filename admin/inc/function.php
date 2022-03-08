@@ -689,3 +689,40 @@ function quiz_questions($quiz_id)
     }
     return $topic_list;
 }
+
+function quiz_question_options($quiz_id)
+{
+    include("inc/connect.php");
+    $separator = '<--br-->';
+    $topic_list = [];
+    $query = $con->prepare("select q.*, group_concat(o.content separator  '<--br-->') as options, group_concat(o.id separator '<--br-->') as option_ids,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.quiz_id=:quiz_id group by q.id;");
+    $query->bindParam("quiz_id", $quiz_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $row['options'] = explode($separator, $row['options']);
+        $row['option_ids'] = explode($separator, $row['option_ids']);
+        $row['answers'] = explode($separator, $row['answers']);
+        $topic_list[] = $row;
+    }
+    return $topic_list;
+}
+
+
+function get_question($question_id)
+{
+    include("inc/connect.php");
+    $separator = '<--br-->';
+    $query = $con->prepare("select q.*, group_concat(o.content separator  '<--br-->') as options, group_concat(o.id separator '<--br-->') as option_ids,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.id=:question_id group by q.id;");
+    $query->bindParam("question_id", $question_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $row = $query->fetch();
+    $row['options'] = explode($separator, $row['options']);
+    $row['option_ids'] = explode($separator, $row['option_ids']);
+    $row['answers'] = explode($separator, $row['answers']);
+    $con = null;
+    return $row;
+}

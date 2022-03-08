@@ -48,7 +48,7 @@ if (isset($_POST['update_quiz'])) {
 	$r = $q->execute();
 	if ($r) {
 		$_SESSION["success_message"] = "Update quiz successful!";
-		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course=' . $course_id);
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_quiz=' . $id);
 	} else {
 		echo "something went wrong";
 	}
@@ -141,10 +141,10 @@ if (isset($_POST['add_question'])) {
 	} catch (Exception $e) {
 		$con->rollBack();
 		$_SESSION["error_message"] = "Add question failed!";
-		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_quiz=' . $quiz_id);
 		return;
 	}
 
 	$_SESSION["success_message"] = "Add question successful!";
-	header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
+	header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_quiz=' . $quiz_id);
 }

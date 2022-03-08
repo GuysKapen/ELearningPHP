@@ -65,6 +65,10 @@
         include("quiz/add_new_question.php");
     }
 
+    if (isset($_GET['edit_question'])) {
+        include("quiz/edit_question.php");
+    }
+
     if (isset($_GET['term'])) {
         include("term.php");
     }
