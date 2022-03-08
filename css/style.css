@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
 
-
 :root {
     --bgColor: #fff;
     --secondaryBgColor: #fafafa;
@@ -30,7 +29,6 @@ button {
     border-radius: 32px;
     cursor: pointer;
 }
-
 
 .bubble {
     border-radius: 2rem;
@@ -69,7 +67,7 @@ body {
     align-items: center;
 }
 
-#up-header > * {
+#up-header>* {
     flex-basis: 0;
     flex-grow: 1;
 }
@@ -201,30 +199,34 @@ body {
 #header-search form input,
 .left-rounded-input {
     width: 90%;
-    height: 32px;
+    height: 38px;
     background: #fff;
     outline: none;
     border-top-left-radius: 32px;
     border-bottom-left-radius: 32px;
-    border: 1px solid #3f5267;
+    border: 2px solid rgba(209, 213, 219, 1);
     border-right: none;
-    padding: 0 16px;
+    padding: 8px 16px;
     box-sizing: border-box;
+    font-size: 0.875rem;
+    color: rgba(75, 85, 99, 1);
 }
 
 #header-search form button {
     width: 8%;
-    height: 32px;
+    height: 38px;
     background: #fff;
     outline: none;
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
-    border: 1px solid #3f5267;
+    border: 2px solid rgba(209, 213, 219, 1);
     border-left: none;
     padding-right: auto 16px;
     margin-left: -16px;
     box-sizing: border-box;
     cursor: pointer;
+    font-size: 0.875rem;
+    color: rgba(75, 85, 99, 1);
 }
 
 .right-rounded-button {
@@ -244,7 +246,6 @@ body {
     background: #e6e6e6;
 }
 
-
 #header-cart {
     width: 6%;
     height: 60px;
@@ -253,7 +254,7 @@ body {
 #header-cart a {
     text-decoration: none;
     color: var(--darkTextColor);
-    font-size: 24px;    
+    font-size: 24px;
     line-height: 60px;
 }
 
@@ -373,10 +374,9 @@ body {
     border-radius: 999px;
 }
 
-
 #home-cat ul li:hover a h4,
 #home-cat ul li:hover a i,
-#home-cat ul li:hover a p { 
+#home-cat ul li:hover a p {
     color: #fff;
 }
 
@@ -459,7 +459,7 @@ body {
     width: 100%;
     padding: 1.25rem 2.5rem;
     box-sizing: border-box;
-    background: var(--secondaryBgColor);   
+    background: var(--secondaryBgColor);
 }
 
 #footer ul {
@@ -493,7 +493,7 @@ body {
 
 #footer .info p {
     width: 80%;
-    margin-left: 1rem;    
+    margin-left: 1rem;
 }
 
 #footer .info i {
@@ -590,7 +590,6 @@ body {
     color: #fff;
 }
 
-
 #header-login form .form-control {
     background: none;
     border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
@@ -606,7 +605,7 @@ body {
 #header-login form a {
     text-decoration: none;
     float: right;
-    color:  #3f5267;
+    color: #3f5267;
     margin: 16px 0;
 }
 
@@ -619,10 +618,7 @@ body {
     font-size: 12px;
     font-weight: 900;
     border-radius: 32px;
-
 }
-
-
 
 #header-signup form {
     position: absolute;
@@ -652,7 +648,6 @@ body {
     color: #fff;
 }
 
-
 #header-signup form .form-control {
     background: none;
     border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
@@ -668,7 +663,7 @@ body {
 #header-signup form a {
     text-decoration: none;
     float: right;
-    color:  #3f5267;
+    color: #3f5267;
     margin: 16px 0;
 }
 
@@ -802,8 +797,7 @@ body {
     background: #fff;
     border-radius: 0.5rem;
     margin: 1rem auto;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2),
-    0px 0px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), 0px 0px 2px rgba(0, 0, 0, 0.05);
 }
 
 #curr ul li p {
@@ -828,7 +822,6 @@ body {
 #dash-table th {
     padding: 0.5rem 1rem;
 }
-
 
 .icon-wrap {
     display: inline-block;

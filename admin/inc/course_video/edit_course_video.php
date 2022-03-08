@@ -31,7 +31,7 @@ $course = get_course_video($course_id);
       <div class="flex items-center justify-between px-4">
         <p class="text-2xl font-bold">Course topics</p>
         <div class="px-4 py-2 rounded-full bg-indigo-600 font-bold text-sm text-white">
-          <a href="add_topic?course_name=<?php echo $coursename ?>">
+          <a href="?add_video_topic&course_id=<?php echo $course_id ?>">
             Add topic
           </a>
         </div>

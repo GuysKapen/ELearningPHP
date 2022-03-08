@@ -33,6 +33,20 @@ function get_courses() {
     return $courses;
 }
 
+function get_course_videos() {
+    include('connect.php');
+    $query = $con->prepare("select c.*, (select min(id) from course_video_topics t where t.course_id = c.id) as topic_id from course_videos c;");
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $courses = array();
+    while ($row = $query->fetch()) {
+        array_push($courses, $row);
+    }
+    $con = null;
+    return $courses;
+}
+
 function course_topics($course_id)
 {
     include("connect.php");

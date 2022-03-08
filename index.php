@@ -37,7 +37,10 @@
                         <div class="flex items-center justify-center h-12 w-12 mx-auto rounded-md bg-primary text-white">
                             <i class="fa-solid fa-code fa"></i>
                         </div>
-                        <p class="mt-4 text-lg leading-6 font-medium text-gray-900">Programming</p>
+
+                        <a href="courses.php">
+                            <p class="mt-4 text-lg leading-6 font-medium text-gray-900">Programming</p>
+                        </a>
                         <p class="mt-2 text-base text-gray-500">Here you will find all the lecture tutorials related to programming languages like JAVA,PYTHON,ANDROID etc</p>
                     </div>
 
@@ -45,7 +48,9 @@
                         <div class="flex items-center justify-center h-12 w-12 mx-auto rounded-md bg-primary text-white">
                             <i class="fa-solid fa-laptop-code fa"></i>
                         </div>
-                        <p class="mt-4 text-lg leading-6 font-medium text-gray-900">Video tutorials</p>
+                        <a href="course_videos.php">
+                            <p class="mt-4 text-lg leading-6 font-medium text-gray-900">Video tutorials</p>
+                        </a>
                         <p class="mt-2 text-base text-gray-500">Here you will find all the videos tutorials related to programming languages like JAVA,PYTHON,ANDROID etc</dd>
                     </div>
 
@@ -54,7 +59,9 @@
                             <!-- Heroicon name: outline/globe-alt -->
                             <i class="fa-solid fa-question fa"></i>
                         </div>
-                        <p class="mt-4 text-lg leading-6 font-medium text-gray-900">Exercise</p>
+                        <a href="quizz.php">
+                            <p class="mt-4 text-lg leading-6 font-medium text-gray-900">Exercise</p>
+                        </a>
                         <p class="mt-2 text-base text-gray-500">Here you will find problem programs for practice and their implementation also which will improve your coding skill </dd>
                     </div>
 
