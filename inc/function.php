@@ -1,5 +1,7 @@
-<?php 
-function get_contact() {
+<?php
+
+function get_contact()
+{
     include('connect.php');
     $query = $con->prepare("select * from contacts");
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -19,7 +21,8 @@ function get_contact() {
 }
 
 
-function get_courses() {
+function get_courses()
+{
     include('connect.php');
     $query = $con->prepare("select c.*, (select min(id) from course_topics t where t.course_id = c.id) as topic_id from courses c;");
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -33,7 +36,8 @@ function get_courses() {
     return $courses;
 }
 
-function get_course_videos() {
+function get_course_videos()
+{
     include('connect.php');
     $query = $con->prepare("select c.*, (select min(id) from course_video_topics t where t.course_id = c.id) as topic_id from course_videos c;");
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -74,4 +78,50 @@ function get_topic($topic_id)
     $row = $query->fetch();
     $con = null;
     return $row;
+}
+
+function get_quizz()
+{
+    include('connect.php');
+    $query = $con->prepare("select * from course_quizz;");
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $courses = array();
+    while ($row = $query->fetch()) {
+        array_push($courses, $row);
+    }
+    $con = null;
+    return $courses;
+}
+
+function quiz_question_options($quiz_id)
+{
+    include($_SERVER['DOCUMENT_ROOT'] . '/ELearning/inc/connect.php');
+    $separator = '<--br-->';
+    $concat_sep = '<---->';
+    $topic_list = [];
+    $query = $con->prepare("select q.*, group_concat(distinct o.content,'<---->' , o.id separator  '<--br-->') as options,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.quiz_id=1 group by q.id;    ");
+    $query->bindParam("quiz_id", $quiz_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $concat_options = explode($separator, $row['options']);
+        $options = [];
+        $option_ids = [];
+
+        for ($i = 0; $i < count($concat_options); $i++) {
+            $option = $concat_options[$i];
+            $split = explode($concat_sep, $option);
+            $options[] = $split[0];
+            $option_ids[] = $split[1];
+        }
+
+        $row['options'] = $options;
+        $row['option_ids'] = $option_ids;
+        $row['answers'] = explode($separator, $row['answers']);
+        $topic_list[] = $row;
+    }
+    return $topic_list;
 }
