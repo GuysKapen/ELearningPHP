@@ -18,7 +18,7 @@
 	<?php include("inc/header.php") ?>
 	<div id="wrap">
 		<div id="" class="w-1/3 mx-auto py-8">
-			<form action="login.php" method="POST">
+			<form action="inc/controller/auth_controller.php" method="POST">
 				<h3 class="login-circle"><i class="fa fa-user"></i></h3>
 				<h4 class="center mt-2">Login</h4>
 				<div class="form-control mt-2">

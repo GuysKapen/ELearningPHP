@@ -1,5 +1,11 @@
 <?php
 session_start();
+if (!isset($_SESSION['user'])) {
+	$_SESSION['redirect'] = 'topic.php?topic_id=' . $_GET['topic_id'];
+	header('location:login.php');
+}
+
+
 include("inc/function.php")
 ?>
 

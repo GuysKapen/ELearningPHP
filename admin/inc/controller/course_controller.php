@@ -313,10 +313,10 @@ if (isset($_POST['add_video_topic'])) {
 
 		if ($r == true) {
 			echo "<script>alert('Add course successfully!');</script>";
-			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
+			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course_video=' . $course_id);
 		} else {
 			echo "<script>alert('Add course Failed!');</script>";
-			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
+			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course_video=' . $course_id);
 		}
 	}
 }

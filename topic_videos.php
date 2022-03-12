@@ -1,9 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['user'])) {
-    $_SESSION['redirect'] = 'quiz_show.php';
-    header('location:login.php');
-} ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +17,7 @@ if (!isset($_SESSION['user'])) {
 
     <?php include("inc/header.php") ?>
     <div id="wrap">
-        <?php include("inc/quiz_show.php") ?>
+        <?php include("inc/topic_videos.php") ?>
     </div>
 
     <?php include("inc/footer.php") ?>

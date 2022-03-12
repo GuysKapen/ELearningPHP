@@ -66,6 +66,21 @@ function course_topics($course_id)
     return $topic_list;
 }
 
+function course_topic_videos($course_id)
+{
+    include("connect.php");
+    $topic_list = [];
+    $query = $con->prepare("select * from course_video_topics where course_id=:course_id");
+    $query->bindParam("course_id", $course_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $topic_list[] = $row;
+    }
+    return $topic_list;
+}
+
 function get_topic($topic_id)
 {
     include("inc/connect.php");
@@ -78,6 +93,35 @@ function get_topic($topic_id)
     $row = $query->fetch();
     $con = null;
     return $row;
+}
+
+function get_topic_video($topic_id)
+{
+    include("inc/connect.php");
+    $topic_list;
+    $query = $con->prepare("select * from course_videos c inner join course_video_topics t on c.id=t.course_id where t.id=:topic_id");
+    $query->bindParam("topic_id", $topic_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $row = $query->fetch();
+    $con = null;
+    return $row;
+}
+
+function get_related_topic_video($topic_id)
+{
+    include("inc/connect.php");
+    $topic_list = [];
+    $query = $con->prepare("select distinct t.* from course_video_topics t inner join course_video_topics o on t.course_id=o.course_id where o.id=:topic_id;");
+    $query->bindParam("topic_id", $topic_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $topic_list[] = $row;
+    }
+    return $topic_list;
 }
 
 function get_quizz()

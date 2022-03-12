@@ -1,4 +1,4 @@
-<?php include("function.php"); ?>
+<?php include_once("function.php"); ?>
 <div id="header">
     <div id="up-header">
         <div id="link">
@@ -41,7 +41,7 @@
         </div>
         <div id="header-login">
             <h4><a href=""><i class="fas fa-user"></i>Login</a></h4>
-            <form action="login.php" method="POST">
+            <form action="inc/controller/auth_controller.php" method="POST">
                 <h3><i class="fa fa-user"></i></h3>
                 <h4 class="center">Login</h4>
                 <div class="form-control mt-2">
@@ -62,7 +62,7 @@
         </div>
         <div id="header-signup">
             <h4><a href=""><i class="fas fa-user-plus"></i>Signup</a></h4>
-            <form action="registration.php" method="POST">
+            <form action="inc/controller/auth_controller.php" method="POST">
                 <h3><i class="fa fa-user-plus"></i></h3>
                 <h4 class="center">Signup</h4>
                 <div class="form-control">

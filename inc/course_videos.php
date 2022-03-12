@@ -8,7 +8,7 @@
 
         foreach ($courses as $course) { ?>
             <div class="course-card">
-                <a href="topic.php?topic_id=<?php echo $course["topic_id"] ?>">
+                <a href="topic_videos.php?course_id=<?php echo $course["id"] ?>">
                     <img src="<?php echo $course["course_image"] ?>" alt="">
                     <h3><?php echo $course["course_name"] ?></h3>
                     <h4><?php echo $course["course_description"] ?></h4>

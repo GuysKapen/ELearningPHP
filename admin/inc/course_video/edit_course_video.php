@@ -25,7 +25,6 @@ $course = get_course_video($course_id);
     <!-- ========================================================================================================================== -->
     <!-- ========================================================================================================================== -->
 
-    <?php $coursename = 'java'; ?>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="flex flex-col flex-grow mt-4">
       <div class="flex items-center justify-between px-4">
@@ -43,8 +42,7 @@ $course = get_course_video($course_id);
               <thead class="bg-gray-50">
                 <tr>
                   <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Content</th>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Video</th>
                   <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
                   <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-right">Action</th>
                 </tr>
@@ -64,10 +62,7 @@ $course = get_course_video($course_id);
                       <div class="text-sm font-medium text-gray-900"> <?php echo $res['topic_name'] ?> </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-gray-500"><textarea rows="3" class="w-full"><?php echo html_entity_decode($res['description'], ENT_QUOTES); ?></textarea></div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"> Active </span>
+                      <div class="text-sm font-medium text-gray-900"> <?php echo $res['video_path'] ?> </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end">
