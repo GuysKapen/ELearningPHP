@@ -1,74 +1,52 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-session_start();
-include("inc/connect.php");
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>E Learning | Home</title>
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/function.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+</head>
 
-if (isset($_POST['registration'])) {
-	if (
-		!isset($_POST['username']) ||
-		!isset($_POST['email']) ||
-		!isset($_POST['password'])
-	) {
-		return;
-	}
+<body>
 
-	$name = $_POST['username'];
-	$pass = $_POST['password'];
-	$email = $_POST['email'];
+	<?php include("inc/header.php") ?>
+	<div id="wrap">
+		<div id="" class="w-1/3 mx-auto py-8">
+		<form action="registration.php" method="POST">
+                <h3 class="login-circle"><i class="fa fa-user-plus"></i></h3>
+                <h4 class="center my-4">Signup</h4>
+                <div class="form-control">
+                    <i class="fa fa-user"></i>
+                    <input type="text" name="username" placeholder="Please enter your name">
+                </div>
+                <div class="form-control mt-2">
+                    <i class="fa fa-envelope"></i>
+                    <input type="text" name="email" placeholder="Please enter your email">
+                </div>
+                <div class="form-control mt-2">
+                    <i class="fa fa-phone"></i>
+                    <input type="text" name="phone" placeholder="Please enter your phone">
+                </div>
+                <div class="form-control mt-2">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" name="password" placeholder="Please enter your password">
+                </div>
+                <div class="form-control mt-2">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" name="re_password" placeholder="Please re enter your password">
+                </div>
+                <button type="submit" class="mt-2 btn-login block ml-auto" name="registration">Signup</button>
+            </form>
+		</div>
+		<?php include("inc/footer.php") ?>
+	</div>
 
-	$check = $con->prepare("select 1 as result from users where email=:email and password=:password limit 1");
-	$check->bindParam("email", $email);
-	$check->bindParam("password", $pass);
-	$check->execute();
-	$count = $check->fetch()['result'];
+</body>
 
-	if ($count > 0) {
-		echo "<script>alert('User already existed');</script>";
-		$con = null;
-		return;
-	}
-
-	$query = $con->prepare("insert into users (username, email, password) values (:username, :email, :password)");
-	$query->bindParam("username", $name);
-	$query->bindParam("email", $email);
-	$hashed_password = password_hash($pass, PASSWORD_BCRYPT);
-	$query->bindParam("password", $hashed_password);
-
-	if ($query->execute()) {
-		echo "<script>alert('Registration successfully!');</script>";
-		echo "<script>window.open('index.php?sub_cat', '_self')</script>";
-	} else {
-		echo "<script>alert('Registration Failed!');</script>";
-		echo "<script>window.open('index.php?sub_cat', '_self')</script>";
-	}
-	$con = null;
-}
-
-
-// $con = mysqli_connect('127.0.0.1', 'uniqueDev', 'uniqueDev');
-
-// if ($con) {
-// 	echo "connection successful";
-// } else {
-// 	echo "no connection";
-// }
-
-// mysqli_select_db($con, 'uniquedeveloper');
-// $name = $_POST['name'];
-// $pass = $_POST['password'];
-// $email = $_POST['email'];
-
-// $q = "select * from login where username='$name' && password='$pass'";
-
-// $result = mysqli_query($con, $q);
-// $num = mysqli_num_rows($result);
-// if ($num == 1) {
-// 	"duplicate data";
-// 	header('location:signup.html');
-// } else {
-// 	$qy = "insert into login(username,password,email) values('$name','$pass','$email')";
-// 	mysqli_query($con, $qy);
-// 	echo "inserted";
-// 	header('location:login.php');
-// }
+</html>

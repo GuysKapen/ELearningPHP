@@ -579,7 +579,8 @@ body {
     visibility: visible;
 }
 
-#header-login form h3 {
+#header-login form h3,
+.login-circle {
     width: 80px;
     height: 80px;
     border-radius: 80px;
@@ -609,7 +610,8 @@ body {
     margin: 16px 0;
 }
 
-#header-login form button {
+#header-login form button,
+.btn-login {
     outline: none;
     padding: 8px 24px;
     background: #3f5267;

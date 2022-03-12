@@ -77,7 +77,7 @@
                     <i class="fa fa-phone"></i>
                     <input type="text" name="phone" placeholder="Please enter your phone">
                 </div>
-                <div class="form-control">
+                <div class="form-control mt-2">
                     <i class="fa fa-lock"></i>
                     <input type="password" name="password" placeholder="Please enter your password">
                 </div>
