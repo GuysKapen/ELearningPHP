@@ -1,3 +1,13 @@
+<?php
+session_start();
+include_once('inc/function.php');
+if (
+    !isset($_SESSION['user'])
+    || !is_admin($_SESSION['user'])
+) {
+    $_SESSION['redirect'] = 'admin/index.php';
+    header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/login.php');
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +44,6 @@
     <div id="app" data-v-app="">
 
         <?php
-        session_start();
         if (isset($_SESSION["success_message"])) {
             echo '<script type="text/javascript">toastr.success("' . $_SESSION["success_message"] . '")</script>';
             unset($_SESSION["success_message"]);

@@ -1,4 +1,3 @@
-<?php include("inc/function.php") ?>
 <nav class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b z-30 w-screen transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:bg-gray-900 dark:border-gray-800 border-gray-100">
     <div class="flex-1 items-stretch flex h-14">
         <div class="flex lg:hidden items-center grow-0 shrink-0 relative cursor-pointer text-blue-600 dark:text-white dark:hover:text-gray-400 hover:text-black py-2 px-3"><span class="inline-flex justify-center items-center w-6 h-6"><svg viewBox="0 0 24 24" width="24" height="24" class="inline-block">

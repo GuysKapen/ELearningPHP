@@ -1,6 +1,12 @@
 <div class="pl-60">
 
     <?php
+
+    if (empty(array_diff($_GET, ['']))) {
+        include("course/course.php");
+        return;
+    }
+
     if (isset($_GET['cat'])) {
         include("category/category.php");
     }
@@ -84,6 +90,7 @@
     if (isset($_GET['faq'])) {
         include("faq.php");
     }
+
 
     ?>
 

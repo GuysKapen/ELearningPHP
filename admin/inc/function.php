@@ -1,4 +1,14 @@
 <?php
+
+function is_admin($user_id) {
+    include("inc/connect.php");
+    $check = $con->prepare("select role_id from users where id=:id limit 1");
+    $check->bindParam("id", $user_id);
+    $check->execute();
+    $role_id = $check->fetch()['role_id'];
+    return $role_id == 2;
+}
+
 function add_cat()
 {
     include("inc/connect.php");

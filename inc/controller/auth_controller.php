@@ -22,18 +22,19 @@ if (isset($_POST['login'])) {
     $hashed_password = $user['password'];
 
     if ($hashed_password == null) {
-        echo "<script>alert('Incorrect email or password');</script>";
+		$_SESSION["failed_message"] = "Incorrect email or password";
         $con = null;
         return;
     }
 
     if (password_verify($pass, $hashed_password)) {
-        header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning\/' . $_SESSION['redirect'] ?? 'index.php');
+		$_SESSION["success_message"] = "Login success";
         $con = null;
         $_SESSION['user'] = $user['id'];
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning\/' . $_SESSION['redirect'] ?? 'index.php');
         return;
     } else {
-        echo "<script>alert('Incorrect email or password');</script>";
+		$_SESSION["failed_message"] = "Incorrect email or password";
         $con = null;
         return;
     }
@@ -55,14 +56,13 @@ if (isset($_POST['registration'])) {
     $pass = $_POST['password'];
     $email = $_POST['email'];
 
-    $check = $con->prepare("select 1 as result from users where email=:email and password=:password limit 1");
+    $check = $con->prepare("select 1 as result from users where email=:email limit 1");
     $check->bindParam("email", $email);
-    $check->bindParam("password", $pass);
     $check->execute();
     $count = $check->fetch()['result'];
 
     if ($count > 0) {
-        echo "<script>alert('User already existed');</script>";
+		$_SESSION["failed_message"] = "User already existed";
         $con = null;
         return;
     }
@@ -74,10 +74,10 @@ if (isset($_POST['registration'])) {
     $query->bindParam("password", $hashed_password);
 
     if ($query->execute()) {
-        echo "<script>alert('Registration successfully!');</script>";
-        echo "<script>window.open('index.php?sub_cat', '_self')</script>";
+		$_SESSION["success_message"] = "Registration successfully!";
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/login.php');
     } else {
-        echo "<script>alert('Registration Failed!');</script>";
+		$_SESSION["failed_message"] = "Registration failed";
         echo "<script>window.open('index.php?sub_cat', '_self')</script>";
     }
     $con = null;

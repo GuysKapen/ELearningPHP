@@ -1,4 +1,16 @@
 <?php include_once("function.php"); ?>
+<?php
+session_start();
+if (isset($_SESSION["success_message"])) {
+    echo '<script type="text/javascript">toastr.success("' . $_SESSION["success_message"] . '")</script>';
+    unset($_SESSION["success_message"]);
+}
+if (isset($_SESSION["error_message"])) {
+    echo '<script type="text/javascript">toastr.error("' . $_SESSION["error_message"] . '")</script>';
+    unset($_SESSION["error_message"]);
+}
+
+?>
 <div id="header">
     <div id="up-header">
         <div id="link">
