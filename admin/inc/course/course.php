@@ -84,6 +84,21 @@ $courses = display_courses(); ?>
                                             <span id="image_error" class="text-danger font-weight-bold"></span>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 w-1/6 flex-shrink-0" for="inline-full-name">
+                                                Category
+                                            </label>
+                                            <select name="cat_id" id="cat_id" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                                <option value="">Select category</option>
+                                                <?php
+                                                $cats = select_categories();
+                                                foreach ($cats as $cat) {
+                                                    echo "<option value='" . $cat['id'] . "'>" . $cat['name'] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+
                                         <div class="text-right">
                                             <button name="add_course" class="px-4 py-2 mt-4 rounded-full bg-indigo-600 font-bold text-sm text-white w-1/4">Add course</button>
                                         </div>
@@ -102,11 +117,26 @@ $courses = display_courses(); ?>
                                             </label>
                                             <select class="form-control mt-1" id="exampleFormControlSelect1" name="selected_course">
 
-                                                <?php foreach ($courses as $course_list) {
+                                                <?php foreach ($courses as $course) {
                                                 ?>
-                                                    <option><?php echo  $course_list['course_name']; ?></option>
+                                                    <option value="<?php echo $course['id'] ?>"><?php echo  $course['course_name']; ?></option>
                                                 <?php } ?>
 
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 w-1/6 flex-shrink-0" for="exampleFormControlSelect1">
+                                                Category
+                                            </label>
+                                            <select name="cat_id" id="cat_id" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                                <option value="">Select category</option>
+                                                <?php
+                                                $cats = select_categories();
+                                                foreach ($cats as $cat) {
+                                                    echo "<option value='" . $cat['id'] . "'>" . $cat['name'] . "</option>";
+                                                }
+                                                ?>
                                             </select>
                                         </div>
 

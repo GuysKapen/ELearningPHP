@@ -25,7 +25,6 @@ if (isset($_POST['add_course'])) {
 
 	$file_ext_stored = array('png', 'jpg', 'jpeg');
 
-
 	if (in_array($file_check, $file_ext_stored)) {
 		$destination_file = 'upload_imgs/' . $file_name;
 		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
@@ -35,6 +34,16 @@ if (isset($_POST['add_course'])) {
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
 		$r = $q->execute();
+
+		if (isset($_POST['cat_id'])) {
+			$category_id = $_POST['cat_id'];
+			$course_id = $con->lastInsertId();
+			$q = $con->prepare("insert into course_categories values(:course_id, :category_id)");
+			$q->bindParam("course_id", $course_id);
+			$q->bindParam("category_id", $category_id);
+			$q->execute();
+		}
+
 		if ($r == true) {
 			echo "<script>alert('Add course successfully!');</script>";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
@@ -86,7 +95,7 @@ if (isset($_POST['del_course_id'])) {
 
 
 if (isset($_POST['update_course'])) {
-	$course_name = $_POST['selected_course'];
+	$course_id = $_POST['selected_course'];
 	$course_img = $_FILES['course_image'];
 	$course_desc = $_POST['course_desc'];
 
@@ -104,11 +113,19 @@ if (isset($_POST['update_course'])) {
 		$destination_file = 'upload_imgs/' . $file_name;
 		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
 
-		$q = $con->prepare("UPDATE courses SET course_image=:destination_file,course_description=:course_desc WHERE course_name=:course_name");
+		$q = $con->prepare("UPDATE courses SET course_image=:destination_file,course_description=:course_desc WHERE course_id=:course_id");
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
-		$q->bindParam("course_name", $course_name);
+		$q->bindParam("course_id", $course_id);
 		$r = $q->execute();
+
+		if (isset($_POST['cat_id'])) {
+			$category_id = $_POST['cat_id'];
+			$q = $con->prepare("update course_categories set category_id=:category_id where course_id=:course_id");
+			$q->bindParam("course_id", $course_id);
+			$q->bindParam("category_id", $category_id);
+			$q->execute();
+		}
 
 		if ($r == true) {
 			echo "<script>alert('Update course successfully!');</script>";
