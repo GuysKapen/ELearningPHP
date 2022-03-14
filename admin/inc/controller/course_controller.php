@@ -5,6 +5,7 @@
 session_start();
 
 include("../connect.php");
+include("../utils.php");
 
 // ==========================================================================================
 
@@ -25,7 +26,9 @@ if (isset($_POST['add_course'])) {
 
 	$file_ext_stored = array('png', 'jpg', 'jpeg');
 
+
 	if (in_array($file_check, $file_ext_stored)) {
+		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
 		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
 
@@ -110,10 +113,21 @@ if (isset($_POST['update_course'])) {
 	$file_ext_stored = array('png', 'jpg', 'jpeg');
 
 	if (in_array($file_check, $file_ext_stored)) {
+		// Remove old image
+		$q = $con->prepare("select course_image from courses WHERE id=:course_id");
+		$q->bindParam("course_id", $course_id);
+		$q->execute();
+		$old_img = $q->fetch()['course_image'];
+		$old_img_path = '/opt/lampp/htdocs/ELearning/' . $old_img;
+		if (file_exists($old_img_path)) {
+			unlink($old_img_path);
+		}
+
+		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
 		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
 
-		$q = $con->prepare("UPDATE courses SET course_image=:destination_file,course_description=:course_desc WHERE course_id=:course_id");
+		$q = $con->prepare("UPDATE courses SET course_image=:destination_file,course_description=:course_desc WHERE id=:course_id");
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
 		$q->bindParam("course_id", $course_id);

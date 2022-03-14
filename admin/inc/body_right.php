@@ -2,7 +2,7 @@
 
     <?php
 
-    if (empty(array_diff($_GET, ['']))) {
+    if (count($_GET) == 0) {
         include("course/course.php");
         return;
     }
