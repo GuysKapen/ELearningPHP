@@ -31,6 +31,14 @@
         include("language/edit_language.php");
     }
 
+    if (isset($_GET['pro_lang'])) {
+        include("programming_language/programming_languages.php");
+    }
+
+    if (isset($_GET['edit_pro_lang'])) {
+        include("programming_language/edit_programming_language.php");
+    }
+
     if (isset($_GET['course'])) {
         include("course/course.php");
     }

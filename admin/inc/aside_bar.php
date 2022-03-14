@@ -42,7 +42,16 @@
                             language
                         </span>
                     </span>
-                    <span class="grow">Language</span>
+                    <span class="grow">Languages</span>
+                </a>
+            </li>
+            <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" href="index.php?pro_lang">
+                    <span class="inline-flex justify-center items-center w-12 h-6 flex-none">
+                        <span class="material-icons outlined text-xl">
+                            language
+                        </span>
+                    </span>
+                    <span class="grow">Programming Languages</span>
                 </a>
             </li>
             <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" href="index.php?course">

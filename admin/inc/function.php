@@ -1,6 +1,7 @@
 <?php
 
-function is_admin($user_id) {
+function is_admin($user_id)
+{
     include("inc/connect.php");
     $check = $con->prepare("select role_id from users where id=:id limit 1");
     $check->bindParam("id", $user_id);
@@ -241,7 +242,7 @@ function add_lang()
     if (isset($_POST['add_lang'])) {
         $lang_name = $_POST["name"];
 
-        $check = $con->prepare("select 1 as result from language where lang_name like :lang_name limit 1");
+        $check = $con->prepare("select 1 as result from languages where lang_name like :lang_name limit 1");
         $check->bindParam("lang_name", $lang_name);
         $check->execute();
         $count = $check->fetch()['result'];
@@ -252,7 +253,7 @@ function add_lang()
             return;
         }
 
-        $add_lang = $con->prepare("insert into language (lang_name) values (:name)");
+        $add_lang = $con->prepare("insert into languages (lang_name) values (:name)");
         $add_lang->bindParam("name", $lang_name);
         if ($add_lang->execute()) {
             echo "<script>alert('Add lang successfully!');</script>";
@@ -268,7 +269,7 @@ function add_lang()
 function get_language($id)
 {
     include("inc/connect.php");
-    $sel_lang = $con->prepare("select * from language where lang_id=:id");
+    $sel_lang = $con->prepare("select * from languages where lang_id=:id");
     $sel_lang->bindParam("id", $id);
     $sel_lang->setFetchMode(PDO::FETCH_ASSOC);
     $sel_lang->execute();
@@ -285,7 +286,7 @@ function update_lang()
         $lang_name = $_POST["name"];
         $lang_id = $_POST["id"];
 
-        $check = $con->prepare("select 1 as result from language where lang_name like :lang_name limit 1");
+        $check = $con->prepare("select 1 as result from languages where lang_name like :lang_name limit 1");
         $check->bindParam("lang_name", $lang_name);
         $check->execute();
         $count = $check->fetch()['result'];
@@ -297,7 +298,7 @@ function update_lang()
         }
 
 
-        $update_lang = $con->prepare("update language set lang_name=:name where lang_id=:id");
+        $update_lang = $con->prepare("update languages set lang_name=:name where lang_id=:id");
         $update_lang->bindParam("name", $lang_name);
         $update_lang->bindParam("id", $lang_id);
         if ($update_lang->execute()) {
@@ -316,7 +317,7 @@ function del_lang()
     if (!isset($_GET['del_lang'])) return;
     $id = $_GET['del_lang'];
     include("inc/connect.php");
-    $del_lang = $con->prepare("delete from language where lang_id=:id");
+    $del_lang = $con->prepare("delete from languages where lang_id=:id");
     $del_lang->bindParam("id", $id);
     if ($del_lang->execute()) {
         echo "<script>alert('Delete language successfully!');</script>";
@@ -331,7 +332,7 @@ function del_lang()
 function select_langs()
 {
     include("inc/connect.php");
-    $sel_lang = $con->prepare("select * from language");
+    $sel_lang = $con->prepare("select * from languages");
     $sel_lang->setFetchMode(PDO::FETCH_ASSOC);
     $sel_lang->execute();
 
@@ -342,6 +343,35 @@ function select_langs()
     $con = null;
     return $langs;
 }
+
+function get_programming_language($id)
+{
+    include("inc/connect.php");
+    $sel_lang = $con->prepare("select * from programming_languages where id=:id");
+    $sel_lang->bindParam("id", $id);
+    $sel_lang->setFetchMode(PDO::FETCH_ASSOC);
+    $sel_lang->execute();
+
+    $row = $sel_lang->fetch();
+    $con = null;
+    return array("name" => $row["lang_name"], "id" => $row["id"]);
+}
+
+function select_programming_langs()
+{
+    include("inc/connect.php");
+    $sel_lang = $con->prepare("select * from programming_languages");
+    $sel_lang->setFetchMode(PDO::FETCH_ASSOC);
+    $sel_lang->execute();
+
+    $langs = array();
+    while ($row = $sel_lang->fetch()) {
+        array_push($langs, array("name" => $row["lang_name"], "id" => $row["id"]));
+    }
+    $con = null;
+    return $langs;
+}
+
 
 function select_terms()
 {

@@ -87,7 +87,7 @@ include("inc/function.php")
 			<div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800">
 				<ul class="space-y-2">
 					<li>
-						<a href="#" class="flex items-center px-4 py-3 font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+						<a href="courses.php" class="flex items-center px-4 py-3 font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
 							<span class="ml-3">Dashboard</span>
 						</a>
 					</li>
