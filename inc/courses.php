@@ -1,6 +1,6 @@
 <div id="top-course">
     <h3>Top courses</h3>
-    <div class="grid grid-col-4 grid-gap-2">
+    <div class="grid grid-col-4 grid-gap-2 justify-center my-4">
 
         <?php
 

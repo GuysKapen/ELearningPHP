@@ -36,6 +36,22 @@ function get_courses()
     return $courses;
 }
 
+function get_courses_of_category($cat_id)
+{
+    include('connect.php');
+    $query = $con->prepare("select co.* from categories c inner join course_categories t on c.cat_id=t.category_id inner join courses co on co.id=t.course_id where c.cat_id=:cat_id;");
+    $query->bindParam("cat_id", $cat_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $courses = array();
+    while ($row = $query->fetch()) {
+        array_push($courses, $row);
+    }
+    $con = null;
+    return $courses;
+}
+
 function get_course_videos()
 {
     include('connect.php');
@@ -168,4 +184,33 @@ function quiz_question_options($quiz_id)
         $topic_list[] = $row;
     }
     return $topic_list;
+}
+
+
+function select_categories()
+{
+    include("inc/connect.php");
+    $sel_cat = $con->prepare("select * from categories");
+    $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
+    $sel_cat->execute();
+
+    $cats = array();
+    while ($row = $sel_cat->fetch()) {
+        array_push($cats, array("name" => $row["cat_name"], "id" => $row["cat_id"]));
+    }
+    $con = null;
+    return $cats;
+}
+
+function get_category($id)
+{
+    include("inc/connect.php");
+    $sel_cat = $con->prepare("select * from categories where cat_id=:id");
+    $sel_cat->bindParam("id", $id);
+    $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
+    $sel_cat->execute();
+
+    $row = $sel_cat->fetch();
+    $con = null;
+    return array("name" => $row["cat_name"], "id" => $row["cat_id"]);
 }

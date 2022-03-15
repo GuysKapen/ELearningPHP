@@ -8,16 +8,6 @@
     <div>
         <p class="p-3 text-xs uppercase dark:text-gray-400">General</p>
         <ul>
-            <li><a class="router-link-active router-link-exact-active flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" aria-current="page"><span class="inline-flex justify-center items-center w-12 h-6 flex-none font-bold text-black dark:text-white"><svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                            <path fill="currentColor" d="M21,14H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10L8,21V22H16V21L14,18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z" style="--darkreader-inline-fill:currentColor;" data-darkreader-inline-fill=""></path>
-                        </svg></span><span class="grow font-bold text-black dark:text-white">Dashboard</span>
-                    <!---->
-                </a>
-                <!---->
-            </li>
-        </ul>
-        <p class="p-3 text-xs uppercase dark:text-gray-400">Examples</p>
-        <ul>
             <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" href="index.php?cat">
                     <span class="inline-flex justify-center items-center w-12 h-6 flex-none">
                         <span class="material-icons outlined text-xl">
