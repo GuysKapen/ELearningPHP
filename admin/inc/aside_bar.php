@@ -17,6 +17,15 @@
                     <span class="grow">Categories</span>
                 </a>
             </li>
+            <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" href="index.php?account">
+                    <span class="inline-flex justify-center items-center w-12 h-6 flex-none">
+                        <span class="material-icons outlined text-xl">
+                            manage_accounts
+                        </span>
+                    </span>
+                    <span class="grow">Accounts</span>
+                </a>
+            </li>
             <li><a class="flex cursor-pointer dark:hover:bg-gray-700/50 text-blue-600 hover:text-black dark:text-white py-2" href="index.php?sub_cat">
                     <span class="inline-flex justify-center items-center w-12 h-6 flex-none">
                         <span class="material-icons outlined text-xl">

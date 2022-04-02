@@ -156,6 +156,37 @@ function select_categories()
     return $cats;
 }
 
+function select_roles()
+{
+    include("inc/connect.php");
+    $sel_cat = $con->prepare("select * from roles");
+    $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
+    $sel_cat->execute();
+
+    $results = array();
+    while ($row = $sel_cat->fetch()) {
+        array_push($results, $row);
+    }
+    $con = null;
+    return $results;
+}
+
+function select_accounts()
+{
+    include("inc/connect.php");
+    $sel_cat = $con->prepare("select * from users u inner join roles r on r.id=u.role_id");
+    $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
+    $sel_cat->execute();
+
+    $users = array();
+    while ($row = $sel_cat->fetch()) {
+        array_push($users, $row);
+    }
+    $con = null;
+    return $users;
+}
+
+
 
 function select_sub_categories()
 {
@@ -183,6 +214,19 @@ function get_category($id)
     $row = $sel_cat->fetch();
     $con = null;
     return array("name" => $row["cat_name"], "id" => $row["cat_id"]);
+}
+
+function get_account($id)
+{
+    include("inc/connect.php");
+    $sel_cat = $con->prepare("select * from users u inner join roles r on r.id=u.role_id where u.id=:id");
+    $sel_cat->bindParam("id", $id);
+    $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
+    $sel_cat->execute();
+
+    $row = $sel_cat->fetch();
+    $con = null;
+    return $row;
 }
 
 function get_sub_category($id)
