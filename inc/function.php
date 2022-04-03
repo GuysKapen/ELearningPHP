@@ -36,6 +36,23 @@ function get_courses()
     return $courses;
 }
 
+function get_courses_match($keyword)
+{
+    include('connect.php');
+    $query = $con->prepare("select c.*, (select min(id) from course_topics t where t.course_id = c.id) as topic_id from courses c where c.course_name like :keyword or c.course_description like :keyword;");
+    $query->bindParam("keyword", $keyword);
+    $query->bindParam("keyword", $keyword);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $courses = array();
+    while ($row = $query->fetch()) {
+        array_push($courses, $row);
+    }
+    $con = null;
+    return $courses;
+}
+
 function get_courses_of_category($cat_id)
 {
     include('connect.php');
@@ -56,6 +73,23 @@ function get_course_videos()
 {
     include('connect.php');
     $query = $con->prepare("select c.*, (select min(id) from course_video_topics t where t.course_id = c.id) as topic_id from course_videos c;");
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $courses = array();
+    while ($row = $query->fetch()) {
+        array_push($courses, $row);
+    }
+    $con = null;
+    return $courses;
+}
+
+function get_course_videos_match($keyword)
+{
+    include('connect.php');
+    $query = $con->prepare("select c.*, (select min(id) from course_video_topics t where t.course_id = c.id) as topic_id from course_videos c where c.course_name like :keyword or c.course_description like :keyword;");
+    $query->bindParam("keyword", $keyword);
+    $query->bindParam("keyword", $keyword);
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
 

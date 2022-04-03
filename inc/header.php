@@ -43,9 +43,9 @@ if (isset($_SESSION["error_message"])) {
             <?php include("inc/cat_main.php") ?>
         </div>
         <div id="header-search">
-            <form action="">
+            <form action="search.php">
                 <input type="search" name="query" placeholder="Search courses">
-                <button name="search"><i class="fas fa-search"></i></button>
+                <button ><i class="fas fa-search"></i></button>
             </form>
         </div>
         <div id="header-cart">
