@@ -75,6 +75,10 @@
         include("course_video/edit_course_video.php");
     }
 
+    if (isset($_GET['edit_video_topic'])) {
+        include("course_video/edit_video_topic.php");
+    }
+
     if (isset($_GET['quiz'])) {
         include("quiz/quiz.php");
     }

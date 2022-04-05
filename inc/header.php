@@ -48,9 +48,9 @@ if (isset($_SESSION["error_message"])) {
                 <button><i class="fas fa-search"></i></button>
             </form>
         </div>
-        <div id="header-cart">
-            <a href="cart.php"><i class="fas fa-shopping-cart"><span>0</span></i></a>
-        </div>
+        <!-- <div id="header-cart"> -->
+            <!-- <a href="cart.php"><i class="fas fa-shopping-cart"><span>0</span></i></a> -->
+        <!-- </div> -->
 
         <?php if (isset($_SESSION['user'])) { ?>
             <form action="inc/controller/auth_controller.php" method="POST">

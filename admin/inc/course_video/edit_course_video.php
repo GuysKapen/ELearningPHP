@@ -66,7 +66,7 @@ $course = get_course_video($course_id);
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end">
-                      <a href="index.php?edit_topic=<?php echo $res['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                      <a href="index.php?edit_video_topic=<?php echo $res['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                       <form action="inc/controller/course_controller.php" method="POST">
                         <input type="hidden" name="topic_id" value="<?php echo $res['id'] ?>">
                         <button name="del_topic" class="text-red-600 hover:text-red-900 ml-2">Delete</button>

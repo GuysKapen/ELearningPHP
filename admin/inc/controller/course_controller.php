@@ -48,11 +48,10 @@ if (isset($_POST['add_course'])) {
 		}
 
 		if ($r == true) {
-			echo "<script>alert('Add course successfully!');</script>";
+			$_SESSION["success_message"] = "Add course successfully!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		} else {
-			echo "<script>alert('Add course Failed!');</script>";
-			echo "<script>window.open('/index.php?course', '_self')</script>";
+			$_SESSION["failed_message"] = "Add course failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		}
 	}
@@ -69,10 +68,10 @@ if (isset($_POST['del_course'])) {
 	$q->bindParam("course_name", $course_name);
 	$r = $q->execute();
 	if ($r == true) {
-		echo "<script>alert('Delete course successfully!');</script>";
+		$_SESSION["success_message"] = "Delete course successfully!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 	} else {
-		echo "<script>alert('Delete course Failed!');</script>";
+		$_SESSION["failed_message"] = "Delete course failed!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 	}
 }
@@ -84,10 +83,10 @@ if (isset($_POST['del_course_id'])) {
 	$q->bindParam("course_id", $course_id);
 	$r = $q->execute();
 	if ($r == true) {
-		echo "<script>alert('Delete course successfully!');</script>";
+		$_SESSION["success_message"] = "Delete course successfully!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 	} else {
-		echo "<script>alert('Delete course Failed!');</script>";
+		$_SESSION["failed_message"] = "Delete course failed!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 	}
 }
@@ -142,10 +141,10 @@ if (isset($_POST['update_course'])) {
 		}
 
 		if ($r == true) {
-			echo "<script>alert('Update course successfully!');</script>";
+			$_SESSION["success_message"] = "Update course successfully!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		} else {
-			echo "<script>alert('Update course Failed!');</script>";
+			$_SESSION["failed_message"] = "Update course failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		}
 	}
@@ -175,10 +174,10 @@ if (isset($_POST['add_topic'])) {
 	$q->bindParam("description", $description);
 	$r = $q->execute();
 	if ($r == true) {
-		echo "<script>alert('Add course successfully!');</script>";
+		$_SESSION["success_message"] = "Add topic successfully!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 	} else {
-		echo "<script>alert('Add course Failed!');</script>";
+		$_SESSION["failed_message"] = "Add topic failed!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 	}
 }
@@ -202,9 +201,11 @@ if (isset($_POST['update_topic'])) {
 	$q->bindParam("id", $id);
 	$r = $q->execute();
 	if ($r) {
+		$_SESSION["success_message"] = "Update topic successfully!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course=' . $course_id);
 	} else {
-		echo "something went wrong";
+		$_SESSION["failed_message"] = "Update topic failed!";
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course=' . $course_id);
 	}
 }
 
@@ -215,10 +216,10 @@ if (isset($_POST['del_topic'])) {
 	$q->bindParam("topic_id", $topic_id);
 	$r = $q->execute();
 	if ($r == true) {
-		echo "<script>alert('Delete course successfully!');</script>";
+		$_SESSION["success_message"] = "Delete topic successfully!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 	} else {
-		echo "<script>alert('Delete course Failed!');</script>";
+		$_SESSION["failed_message"] = "Delete topic failed!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 	}
 }
@@ -250,11 +251,10 @@ if (isset($_POST['add_course_video'])) {
 		$q->bindParam("course_desc", $course_desc);
 		$r = $q->execute();
 		if ($r == true) {
-			echo "<script>alert('Add course successfully!');</script>";
+			$_SESSION["success_message"] = "Add course video successfully!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course_video');
 		} else {
-			echo "<script>alert('Add course Failed!');</script>";
-			echo "<script>window.open('/index.php?course', '_self')</script>";
+			$_SESSION["failed_message"] = "Add course video failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course_video');
 		}
 	}
@@ -287,10 +287,10 @@ if (isset($_POST['update_course_video'])) {
 		$r = $q->execute();
 
 		if ($r == true) {
-			echo "<script>alert('Update course successfully!');</script>";
+			$_SESSION["success_message"] = "Update course video successfully!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course_video');
 		} else {
-			echo "<script>alert('Update course Failed!');</script>";
+			$_SESSION["failed_message"] = "Update course video failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course_video');
 		}
 	}
@@ -303,11 +303,11 @@ if (isset($_POST['del_course_video'])) {
 	$q->bindParam("course_id", $course_id);
 	$r = $q->execute();
 	if ($r == true) {
-		echo "<script>alert('Delete course successfully!');</script>";
+		$_SESSION["success_message"] = "Delete course video successfully!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course_video');
 	} else {
+		$_SESSION["failed_message"] = "Delete course video failed!";
 		echo "<script>alert('Delete course Failed!');</script>";
-		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course_video');
 	}
 }
 
@@ -343,11 +343,70 @@ if (isset($_POST['add_video_topic'])) {
 		$r = $q->execute();
 
 		if ($r == true) {
-			echo "<script>alert('Add course successfully!');</script>";
+			$_SESSION["success_message"] = "Add video topic successfully!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course_video=' . $course_id);
 		} else {
+			$_SESSION["failed_message"] = "Add video topic failed!";
 			echo "<script>alert('Add course Failed!');</script>";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course_video=' . $course_id);
 		}
+	}
+}
+
+if (isset($_POST['update_video_topic'])) {
+
+
+	$topic_name = $_POST['topic_name'];
+	$topic_id = $_POST['topic_id'];
+	$video_path = $_POST['video'];
+
+	if (isset($_FILES['topic_image']) && !empty($_FILES['topic_image']['name'])) {
+		$topic_img = $_FILES['topic_image'];
+
+		$file_name = $topic_img['name'];
+		$file_error = $topic_img['error'];
+		$file_tmp = $topic_img['tmp_name'];
+
+
+		$file_ext = explode('.', $file_name);
+		$file_check = strtolower(end($file_ext));
+
+		$file_ext_stored = array('png', 'jpg', 'jpeg');
+
+		if (in_array($file_check, $file_ext_stored)) {
+			$destination_file = 'upload_imgs/' . $file_name;
+			move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+
+			$q = $con->prepare("UPDATE course_video_topics SET topic_name=:topic_name, topic_image=:topic_image, video_path=:video_path WHERE id=:topic_id");
+			$q->bindParam("topic_name", $topic_name);
+			$q->bindParam("topic_id", $topic_id);
+			$q->bindParam("topic_image", $destination_file);
+			$q->bindParam("video_path", $video_path);
+			$r = $q->execute();
+
+			if ($r == true) {
+				$_SESSION["success_message"] = "Update video topic successfully!";
+				header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_video_topic=' . $topic_id);
+			} else {
+				$_SESSION["failed_message"] = "Update video topic failed!";
+				header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_video_topic=' . $topic_id);
+			}
+		}
+
+		return;
+	}
+
+	$q = $con->prepare("UPDATE course_video_topics SET topic_name=:topic_name, video_path=:video_path WHERE id=:topic_id");
+	$q->bindParam("topic_name", $topic_name);
+	$q->bindParam("topic_id", $topic_id);
+	$q->bindParam("video_path", $video_path);
+	$r = $q->execute();
+
+	if ($r == true) {
+		$_SESSION["success_message"] = "Update video topic successfully!";
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_video_topic=' . $topic_id);
+	} else {
+		$_SESSION["failed_message"] = "Update video topic failed!";
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_video_topic=' . $topic_id);
 	}
 }

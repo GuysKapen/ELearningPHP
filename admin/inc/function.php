@@ -779,7 +779,7 @@ function quiz_question_options($quiz_id)
     include("inc/connect.php");
     $separator = '<--br-->';
     $topic_list = [];
-    $query = $con->prepare("select q.*, group_concat(o.content separator  '<--br-->') as options, group_concat(o.id separator '<--br-->') as option_ids,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.quiz_id=:quiz_id group by q.id;");
+    $query = $con->prepare("select q.*, group_concat(distinct o.content separator  '<--br-->') as options, group_concat(o.id separator '<--br-->') as option_ids,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.quiz_id=:quiz_id group by q.id;");
     $query->bindParam("quiz_id", $quiz_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
@@ -810,3 +810,17 @@ function get_question($question_id)
     $con = null;
     return $row;
 }
+
+function get_topic_video($topic_id)
+{
+    include("inc/connect.php");
+    $topic_list;
+    $query = $con->prepare("select * from course_videos c inner join course_video_topics t on c.id=t.course_id where t.id=:topic_id");
+    $query->bindParam("topic_id", $topic_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $row = $query->fetch();
+    $con = null;
+    return $row;
+}   
