@@ -4,7 +4,7 @@
 
         <?php
 
-        $courses = get_courses();
+        $courses = get_courses_info();
 
         foreach ($courses as $course) { ?>
             <div class="course-card">
@@ -12,7 +12,7 @@
                     <img src="<?php echo $course["course_image"] ?>" alt="">
                     <h3><?php echo $course["course_name"] ?></h3>
                     <h4><?php echo $course["course_description"] ?></h4>
-                    <h5>Teacher: Guys</h5>
+                    <h5>Teacher: <?php echo $course["username"] ?></h5>
                 </a>
             </div>
         <?php } ?>
