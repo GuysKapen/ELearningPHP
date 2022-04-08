@@ -219,6 +219,22 @@ function get_quizz()
     return $courses;
 }
 
+function get_quizz_of($course_id)
+{
+    include('connect.php');
+    $query = $con->prepare("select * from course_quizz where course_id=:course_id;");
+    $query->bindParam("course_id", $course_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $courses = array();
+    while ($row = $query->fetch()) {
+        array_push($courses, $row);
+    }
+    $con = null;
+    return $courses;
+}
+
 function quiz_question_options($quiz_id)
 {
     include($_SERVER['DOCUMENT_ROOT'] . '/ELearning/inc/connect.php');
