@@ -1,12 +1,9 @@
 <?php include('inc/head.php') ?>
-
 <body>
 
     <?php include("inc/header.php") ?>
     <div id="wrap">
         <?php include("inc/slider.php") ?>
-        <!-- <?php include("inc/category.php") ?> -->
-        <!-- <?php include("inc/courses.php") ?> -->
     </div>
 
     <!-- This example requires Tailwind CSS v2.0+ -->
@@ -214,6 +211,7 @@
 
 
     <?php include("inc/footer.php") ?>
+
 
 </body>
 
