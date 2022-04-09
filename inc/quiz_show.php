@@ -27,7 +27,7 @@
 
                         <tr>
                             <td class="px-6 py-4 w-5/12">
-                                <div class="text-sm font-medium text-gray-900"> <?php echo $question['question'] ?> </div>
+                                <div class="text-sm font-medium text-gray-900"> <?php echo nl2br($question['question']) ?> </div>
                                 <div class="text-sm font-medium text-gray-900">
                                     <ul>
                                         <?php
@@ -38,7 +38,7 @@
                                                 <label class="inline-flex items-center mt-3">
                                                     <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600 block" name="answer[<?php echo $question['id']; ?>][<?php echo $question['option_ids'][$i] ?>]">
                                                     <span class="ml-2 text-gray-700">
-                                                        <li><?php echo $option; ?></li>
+                                                        <li><?php echo htmlspecialchars($option); ?></li>
                                                     </span>
                                                 </label>
                                             </div>

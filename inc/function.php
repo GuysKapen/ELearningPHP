@@ -241,7 +241,7 @@ function quiz_question_options($quiz_id)
     $separator = '<--br-->';
     $concat_sep = '<---->';
     $topic_list = [];
-    $query = $con->prepare("select q.*, group_concat(distinct o.content,'<---->' , o.id separator  '<--br-->') as options,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.quiz_id=1 group by q.id;    ");
+    $query = $con->prepare("select q.*, group_concat(distinct o.content,'<---->' , o.id separator  '<--br-->') as options,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.quiz_id=:quiz_id group by q.id;");
     $query->bindParam("quiz_id", $quiz_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();

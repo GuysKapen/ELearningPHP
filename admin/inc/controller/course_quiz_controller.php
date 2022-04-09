@@ -75,7 +75,7 @@ if (isset($_POST['add_question'])) {
 	$question_id;
 
 	$quiz_id = $_POST['quiz_id'];
-	$question = $_POST['question'];
+	$question = htmlspecialchars($_POST['question']);
 
 	try {
 		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -137,7 +137,6 @@ if (isset($_POST['add_question'])) {
 
 
 		$con->commit();
-		
 	} catch (Exception $e) {
 		$con->rollBack();
 		$_SESSION["error_message"] = "Add question failed!";
@@ -147,4 +146,89 @@ if (isset($_POST['add_question'])) {
 
 	$_SESSION["success_message"] = "Add question successful!";
 	header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_quiz=' . $quiz_id);
+}
+
+if (isset($_POST['update_question'])) {
+
+	$options_id = [];
+	$question_id;
+
+	$question_id = $_POST['question_id'];
+	$question = htmlspecialchars($_POST['question']);
+
+	try {
+		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$con->beginTransaction();
+
+		// Clean up old question option
+		$q = $con->prepare("DELETE FROM `course_question_answer` WHERE question_id=:question_id;");
+		$q->bindParam("question_id", $question_id);
+		$q->execute();
+		$q = $con->prepare("DELETE FROM `course_question_options` WHERE question_id=:question_id;");
+		$q->bindParam("question_id", $question_id);
+		$q->execute();
+
+		$q = $con->prepare("UPDATE `course_questions` SET `question`=:question WHERE id=:question_id;");
+		$q->bindParam("question", $question);
+		$q->bindParam("question_id", $question_id);
+		$r = $q->execute();
+
+		if (isset($_POST['options'])) {
+			if (is_array($_POST['options'])) {
+				foreach ($_POST['options'] as $value) {
+					$q = $con->prepare("INSERT INTO `course_question_options`( `question_id`, `content`) VALUES (:question_id, :content)");
+					$q->bindParam("question_id", $question_id);
+					$q->bindParam("content", $value);
+					$r = $q->execute();
+
+					$options_id[] = $con->lastInsertId();
+
+					echo $value;
+				}
+			} else {
+				$value = $_POST['invite'];
+				$q = $con->prepare("INSERT INTO `course_question_options`( `question_id`, `content`) VALUES (:question_id, :content)");
+				$q->bindParam("question_id", $question_id);
+				$q->bindParam("content", $value);
+				$r = $q->execute();
+
+				$options_id[] = $con->lastInsertId();
+
+				echo $value;
+			}
+		}
+
+
+		if (isset($_POST['answers'])) {
+			if (is_array($_POST['answers'])) {
+				foreach ($_POST['answers'] as $value) {
+					$q = $con->prepare("INSERT INTO `course_question_answer`( `question_id`, `option_answer_id`) VALUES (:question_id, :answer_id)");
+					$q->bindParam("question_id", $question_id);
+					$q->bindParam("answer_id", $options_id[$value]);
+					$r = $q->execute();
+
+					echo $value;
+				}
+			} else {
+				$value = $_POST['answers'];
+				$q = $con->prepare("INSERT INTO `course_question_answer`( `question_id`, `option_answer_id`) VALUES (:question_id, :answer_id)");
+				$q->bindParam("question_id", $question_id);
+				$q->bindParam("answer_id", $options_id[$value]);
+				$r = $q->execute();
+
+				echo $value;
+			}
+		}
+
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollBack();
+		$_SESSION["error_message"] = "Update question failed!" . $e->getMessage();
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz=');
+		return;
+	}
+
+	$_SESSION["success_message"] = "Update question successful!";
+	header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
 }

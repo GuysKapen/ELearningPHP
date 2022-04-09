@@ -736,7 +736,7 @@ function display_quizz()
 {
     include("inc/connect.php");
     $list = [];
-    $query = $con->prepare("select * from course_quizz q inner join courses c on q.course_id=c.id");
+    $query = $con->prepare("select q.*, c.course_name from course_quizz q inner join courses c on q.course_id=c.id");
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
 
@@ -778,15 +778,27 @@ function quiz_question_options($quiz_id)
 {
     include("inc/connect.php");
     $separator = '<--br-->';
+    $concat_sep = '<---->';
     $topic_list = [];
-    $query = $con->prepare("select q.*, group_concat(distinct o.content separator  '<--br-->') as options, group_concat(o.id separator '<--br-->') as option_ids,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.quiz_id=:quiz_id group by q.id;");
+    $query = $con->prepare("select q.*, group_concat(distinct o.content,'<---->' , o.id separator  '<--br-->') as options,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.quiz_id=:quiz_id group by q.id;");
     $query->bindParam("quiz_id", $quiz_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
 
     while ($row = $query->fetch()) {
-        $row['options'] = explode($separator, $row['options']);
-        $row['option_ids'] = explode($separator, $row['option_ids']);
+        $concat_options = explode($separator, $row['options']);
+        $options = [];
+        $option_ids = [];
+
+        for ($i = 0; $i < count($concat_options); $i++) {
+            $option = $concat_options[$i];
+            $split = explode($concat_sep, $option);
+            $options[] = $split[0];
+            $option_ids[] = $split[1];
+        }
+
+        $row['options'] = $options;
+        $row['option_ids'] = $option_ids;
         $row['answers'] = explode($separator, $row['answers']);
         $topic_list[] = $row;
     }
@@ -823,4 +835,4 @@ function get_topic_video($topic_id)
     $row = $query->fetch();
     $con = null;
     return $row;
-}   
+}

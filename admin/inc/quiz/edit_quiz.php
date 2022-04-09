@@ -70,7 +70,7 @@ $courses = display_courses();
 
                   <tr>
                     <td class="px-6 py-4 w-5/12">
-                      <div class="text-sm font-medium text-gray-900"> <?php echo $res['question'] ?> </div>
+                      <div class="text-sm font-medium text-gray-900"> <?php echo nl2br($res['question']) ?> </div>
                     </td>
                     <td class="px-6 py-4">
                       <div class="text-sm font-medium text-gray-900">
@@ -84,7 +84,7 @@ $courses = display_courses();
                               <label class="inline-flex items-center mt-3">
                                 <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600 block" <?php echo (in_array($res['option_ids'][$i], $res['answers']) ? 'checked' : '') ?>>
                                 <span class="ml-2 text-gray-700">
-                                  <li><?php echo $option; ?></li>
+                                  <li><?php echo htmlspecialchars($option); ?></li>
                                 </span>
                               </label>
                             </div>

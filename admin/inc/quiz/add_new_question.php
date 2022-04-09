@@ -29,7 +29,23 @@ $quiz = get_quiz($quiz_id);
         <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-full-name">
           Question
         </label>
-        <input type="text" name="question" id="question" class="form-control mt-2">
+
+        <textarea name="question" id="question" rows="6" class="
+        form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        mt-3
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"></textarea>
         <span id="desc_error" class="text-danger small"></span>
 
         <div class="mt-1">

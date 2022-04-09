@@ -24,7 +24,22 @@ $question = get_question($question_id);
         <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-full-name">
           Question
         </label>
-        <input type="text" name="question" id="question" class="form-control mt-2" value="<?php echo $question["question"] ?>">
+        <textarea name="question" id="question" rows="6" class="
+        form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        mt-3
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"><?php echo $question["question"] ?></textarea>
         <span id="desc_error" class="text-danger small"></span>
 
         <?php $i = 0;
@@ -44,7 +59,7 @@ $question = get_question($question_id);
 
         <span id="editor_error" class="text-danger small"></span><br>
 
-        <button type="submit" name="add_question" class="font-bold text-sm px-8 py-2 bg-indigo-600 text-white ml-auto rounded-full float-right">Submit</button>
+        <button type="submit" name="update_question" class="font-bold text-sm px-8 py-2 bg-indigo-600 text-white ml-auto rounded-full float-right">Submit</button>
       </form>
 
     </div>
