@@ -6,20 +6,16 @@
 
     <?php
     $category = get_category($_GET['cat']);
+    $categories = select_categories();
     ?>
 
     <div id="wrap" class="flex min-h-screen">
         <div class="w-1/5 p-4 bg-white">
             <div class="primary-btn bg-primary text-white w-full">Categories</div>
             <ul class="list-none pl-2 mt-2">
-                <li class="mt-1"><a href="" class="decorate-none"><i class="fa fa-code mr-2"></i>Development</a></li>
-                <li class="mt-1"><a href="" class="decorate-none"><i class="fa fa-user mr-2"></i>Design</a></li>
-            </ul>
-
-            <div class="primary-btn bg-primary text-white w-full mt-8">Sub categories</div>
-            <ul class="list-none pl-2 mt-2">
-                <li class="mt-1"><a href="" class="decorate-none"><i class="fa fa-user mr-2"></i>Design</a></li>
-                <li class="mt-1"><a href="" class="decorate-none"><i class="fa fa-code mr-2"></i>Development</a></li>
+                <?php foreach ($categories as $c) { ?>
+                    <li class="mt-1 hover:text-indigo-600"><a href="category.php?cat=<?php echo $c['id']?>" class="decorate-none"><?php echo $c['name'] ?></a></li>
+                <?php } ?>
             </ul>
         </div>
         <div class="w-4/5">
@@ -49,7 +45,7 @@
                             <img src="<?php echo $course["course_image"] ?>" alt="">
                             <h3><?php echo $course["course_name"] ?></h3>
                             <h4><?php echo $course["course_description"] ?></h4>
-                            <h5>Teacher: Guys</h5>
+                            <h5>Teacher: <?php echo $course["username"] ?></h5>
                         </a>
                     </div>
                 <?php } ?>

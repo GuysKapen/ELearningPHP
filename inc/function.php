@@ -71,7 +71,7 @@ function get_courses_match($keyword)
 function get_courses_of_category($cat_id)
 {
     include('connect.php');
-    $query = $con->prepare("select co.* from categories c inner join course_categories t on c.cat_id=t.category_id inner join courses co on co.id=t.course_id where c.cat_id=:cat_id;");
+    $query = $con->prepare("select co.*, u.username, u.email from categories c inner join course_categories t on c.cat_id=t.category_id inner join courses co on co.id=t.course_id inner join users u on u.id=co.user_id where c.cat_id=:cat_id;");
     $query->bindParam("cat_id", $cat_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
