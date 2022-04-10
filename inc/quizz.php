@@ -15,7 +15,7 @@
 
         </select>
 
-        <button type="submit" name="get_quizz_of_course" class="font-bold text-sm px-8 py-2 bg-primary text-white ml-auto rounded-full mt-2">Start quiz</button>
+        <button type="submit" name="get_quizz_of_course" class="font-bold text-sm px-8 py-2 bg-primary text-white ml-auto rounded-full mt-2">Select</button>
 
     </form>
 

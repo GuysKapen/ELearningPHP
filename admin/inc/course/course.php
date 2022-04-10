@@ -1,3 +1,4 @@
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet" />
 <?php
 $courses = display_courses(); ?>
 
@@ -84,14 +85,50 @@ $courses = display_courses(); ?>
                                             <span id="image_error" class="text-danger font-weight-bold"></span>
                                         </div>
 
+                                        <div class="field">
+                                            <div class="form-group">
+                                                <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 w-1/6 flex-shrink-0" for="inline-full-name">
+                                                    Categories
+                                                </label>
+                                                <div class="relative flex w-full mt-1">
+                                                    <select id="select-category" name="categories[]" placeholder="Select categories..." autocomplete="off" class="block w-full rounded-sm cursor-pointer focus:outline-none" multiple>
+                                                        <?php
+                                                        $cats = select_categories();
+                                                        foreach ($cats as $cat) {
+                                                            echo "<option value='" . $cat['id'] . "'>" . $cat['name'] . "</option>";
+                                                        } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">
+                                            <div class="form-group">
+                                                <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 flex-shrink-0" for="inline-full-name">
+                                                    Programing languages
+                                                </label>
+                                                <div class="relative flex w-full mt-1">
+                                                    <select id="select-pro-lang" name="pro_langs[]" placeholder="Select programming languages..." autocomplete="off" class="block w-full rounded-sm cursor-pointer focus:outline-none" multiple>
+                                                        <?php
+                                                        $cats = select_programming_langs();
+                                                        foreach ($cats as $cat) {
+                                                            echo "<option value='" . $cat['id'] . "'>" . $cat['name'] . "</option>";
+                                                        } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
                                         <div class="form-group">
                                             <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 w-1/6 flex-shrink-0" for="inline-full-name">
-                                                Category
+                                                Language
                                             </label>
-                                            <select name="cat_id" id="cat_id" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
-                                                <option value="">Select category</option>
+                                            <select name="lang_id" id="lang_id" class="form-select mt-1 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                                <option value="">Select language</option>
                                                 <?php
-                                                $cats = select_categories();
+                                                $cats = select_langs();
                                                 foreach ($cats as $cat) {
                                                     echo "<option value='" . $cat['id'] . "'>" . $cat['name'] . "</option>";
                                                 }
@@ -125,21 +162,6 @@ $courses = display_courses(); ?>
                                             </select>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 w-1/6 flex-shrink-0" for="exampleFormControlSelect1">
-                                                Category
-                                            </label>
-                                            <select name="cat_id" id="cat_id" class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
-                                                <option value="">Select category</option>
-                                                <?php
-                                                $cats = select_categories();
-                                                foreach ($cats as $cat) {
-                                                    echo "<option value='" . $cat['id'] . "'>" . $cat['name'] . "</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-
 
                                         <div class="form-group">
                                             <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 w-1/6 flex-shrink-0" for="inline-full-name">
@@ -159,6 +181,57 @@ $courses = display_courses(); ?>
                                                 <input type="file" class="form-control" id="c_img" placeholder="Enter Course Image" name="course_image">
                                             </div>
                                             <span id="image_error" class="text-danger font-weight-bold"></span>
+                                        </div>
+
+                                        <div class="field">
+                                            <div class="form-group">
+                                                <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 w-1/6 flex-shrink-0" for="inline-full-name">
+                                                    Categories
+                                                </label>
+                                                <div class="relative flex w-full mt-1">
+                                                    <select id="update-select-category" name="categories[]" placeholder="Select categories..." autocomplete="off" class="block w-full rounded-sm cursor-pointer focus:outline-none" multiple>
+                                                        <?php
+                                                        $cats = select_categories();
+                                                        foreach ($cats as $cat) {
+                                                            echo "<option value='" . $cat['id'] . "'>" . $cat['name'] . "</option>";
+                                                        } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="field">
+                                            <div class="form-group">
+                                                <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 flex-shrink-0" for="inline-full-name">
+                                                    Programing languages
+                                                </label>
+                                                <div class="relative flex w-full mt-1">
+                                                    <select id="update-select-pro-lang" name="pro_langs[]" placeholder="Select programming languages..." autocomplete="off" class="block w-full rounded-sm cursor-pointer focus:outline-none" multiple>
+                                                        <?php
+                                                        $cats = select_programming_langs();
+                                                        foreach ($cats as $cat) {
+                                                            echo "<option value='" . $cat['id'] . "'>" . $cat['name'] . "</option>";
+                                                        } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 w-1/6 flex-shrink-0" for="inline-full-name">
+                                                Language
+                                            </label>
+                                            <select name="lang_id" id="lang_id" class="form-select mt-1 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                                <option value="">Select language</option>
+                                                <?php
+                                                $cats = select_langs();
+                                                foreach ($cats as $cat) {
+                                                    echo "<option value='" . $cat['id'] . "'>" . $cat['name'] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
 
                                         <div class="text-right">
@@ -272,3 +345,12 @@ $courses = display_courses(); ?>
 
 
 </section>
+
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+<script>
+    new TomSelect('#select-category');
+    new TomSelect('#update-select-category');
+    new TomSelect('#select-pro-lang');
+    new TomSelect('#update-select-pro-lang');
+</script>

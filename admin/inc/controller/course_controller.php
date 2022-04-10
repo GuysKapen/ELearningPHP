@@ -15,6 +15,7 @@ if (isset($_POST['add_course'])) {
 	$course_name = $_POST['course_name'];
 	$course_img = $_FILES['course_image'];
 	$course_desc = $_POST['course_desc'];
+	$course_lang_id = $_POST['lang_id'];
 
 	$file_name = $course_img['name'];
 	$file_error = $course_img['error'];
@@ -31,29 +32,56 @@ if (isset($_POST['add_course'])) {
 		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
 		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+	}
 
-		$q = $con->prepare("insert into courses(course_name,course_image,course_description) values(:course_name, :destination_file, :course_desc)");
+	try {
+		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$con->beginTransaction();
+
+		$success = true;
+
+		$q = $con->prepare("insert into courses(course_name,course_image,course_description, language_id) values(:course_name, :destination_file, :course_desc, :language_id)");
 		$q->bindParam("course_name", $course_name);
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
-		$r = $q->execute();
+		$q->bindParam("language_id", $course_lang_id);
+		$success = $success && $q->execute();
 
-		if (isset($_POST['cat_id'])) {
-			$category_id = $_POST['cat_id'];
-			$course_id = $con->lastInsertId();
-			$q = $con->prepare("insert into course_categories values(:course_id, :category_id)");
-			$q->bindParam("course_id", $course_id);
-			$q->bindParam("category_id", $category_id);
-			$q->execute();
+		$course_id = $con->lastInsertId();
+
+		if (isset($_POST['categories']) && is_array($_POST['categories'])) {
+			foreach ($_POST['categories'] as $category_id) {
+				$q = $con->prepare("insert into course_categories values(:course_id, :category_id)");
+				$q->bindParam("course_id", $course_id);
+				$q->bindParam("category_id", $category_id);
+				$success = $success && $q->execute();
+			}
 		}
 
-		if ($r == true) {
+		if (isset($_POST['pro_langs']) && is_array($_POST['pro_langs'])) {
+			foreach ($_POST['pro_langs'] as $pro_lang_id) {
+				$q = $con->prepare("insert into course_programming_languages values(:course_id, :pro_lang_id)");
+				$q->bindParam("course_id", $course_id);
+				$q->bindParam("pro_lang_id", $pro_lang_id);
+				$success = $success && $q->execute();
+			}
+		}
+
+		if ($success == true) {
 			$_SESSION["success_message"] = "Add course successfully!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		} else {
 			$_SESSION["failed_message"] = "Add course failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		}
+
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollBack();
+		$_SESSION["failed_message"] = "Add course failed!";
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
+		return;
 	}
 }
 
@@ -79,6 +107,17 @@ if (isset($_POST['del_course'])) {
 
 if (isset($_POST['del_course_id'])) {
 	$course_id = $_POST['course_id'];
+	// Remove image
+	$q = $con->prepare("SELECT course_image courses WHERE id=:course_id");
+	$q->bindParam("course_id", $course_id);
+	$q->execute();
+
+	$old_img = $q->fetch()['course_image'];
+	$old_img_path = '/opt/lampp/htdocs/ELearning/' . $old_img;
+	if (file_exists($old_img_path)) {
+		unlink($old_img_path);
+	}
+
 	$q = $con->prepare("DELETE FROM courses WHERE id=:course_id");
 	$q->bindParam("course_id", $course_id);
 	$r = $q->execute();
@@ -100,6 +139,7 @@ if (isset($_POST['update_course'])) {
 	$course_id = $_POST['selected_course'];
 	$course_img = $_FILES['course_image'];
 	$course_desc = $_POST['course_desc'];
+	$course_lang_id = $_POST['lang_id'];
 
 	$file_name = $course_img['name'];
 	$file_error = $course_img['error'];
@@ -125,28 +165,63 @@ if (isset($_POST['update_course'])) {
 		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
 		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+	}
 
-		$q = $con->prepare("UPDATE courses SET course_image=:destination_file,course_description=:course_desc WHERE id=:course_id");
+	try {
+		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$con->beginTransaction();
+
+		$success = true;
+
+
+		$q = $con->prepare("UPDATE courses SET course_image=:destination_file,course_description=:course_desc,language_id=:language_id WHERE id=:course_id");
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
 		$q->bindParam("course_id", $course_id);
-		$r = $q->execute();
+		$q->bindParam("language_id", $course_lang_id);
+		$success = $success && $q->execute();
 
-		if (isset($_POST['cat_id'])) {
-			$category_id = $_POST['cat_id'];
-			$q = $con->prepare("update course_categories set category_id=:category_id where course_id=:course_id");
+		if (isset($_POST['categories']) && is_array($_POST['categories'])) {
+			// Clean up
+			$q = $con->prepare("DELETE FROM course_categories WHERE course_id=:course_id");
 			$q->bindParam("course_id", $course_id);
-			$q->bindParam("category_id", $category_id);
-			$q->execute();
+			$success = $success && $q->execute();
+			foreach ($_POST['categories'] as $category_id) {
+				$q = $con->prepare("insert into course_categories values(:course_id, :category_id)");
+				$q->bindParam("course_id", $course_id);
+				$q->bindParam("category_id", $category_id);
+				$success = $success && $q->execute();
+			}
 		}
 
-		if ($r == true) {
+		if (isset($_POST['pro_langs']) && is_array($_POST['pro_langs'])) {
+			// Clean up
+			$q = $con->prepare("DELETE FROM course_programming_languages WHERE course_id=:course_id");
+			$q->bindParam("course_id", $course_id);
+			$success = $success && $q->execute();
+			foreach ($_POST['pro_langs'] as $pro_lang_id) {
+				$q = $con->prepare("insert into course_programming_languages values(:course_id, :pro_lang_id)");
+				$q->bindParam("course_id", $course_id);
+				$q->bindParam("pro_lang_id", $pro_lang_id);
+				$success = $success && $q->execute();
+			}
+		}
+
+		if ($success == true) {
 			$_SESSION["success_message"] = "Update course successfully!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		} else {
 			$_SESSION["failed_message"] = "Update course failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		}
+
+
+		$con->commit();
+	} catch (Exception $e) {
+		$con->rollBack();
+		$_SESSION["failed_message"] = "Add course failed!";
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
+		return;
 	}
 }
 
