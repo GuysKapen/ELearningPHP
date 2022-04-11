@@ -37,10 +37,13 @@ function get_course($course_id)
 // code to add a new course by admin from manage_courses.php
 
 if (isset($_POST['add_course'])) {
+	$user_id = $_SESSION['user'];
+	if (!isset($user_id)) return;
+
 	$course_name = $_POST['course_name'];
 	$course_img = $_FILES['course_image'];
 	$course_desc = $_POST['course_desc'];
-	$course_lang_id = $_POST['lang_id'];
+	$course_lang_id = isset($_POST['lang_id']) && !empty($_POST['lang_id']) ? (int)$_POST['lang_id'] : null;
 
 	$file_name = $course_img['name'];
 	$file_error = $course_img['error'];
@@ -65,11 +68,13 @@ if (isset($_POST['add_course'])) {
 
 		$success = true;
 
-		$q = $con->prepare("insert into courses(course_name,course_image,course_description, language_id) values(:course_name, :destination_file, :course_desc, :language_id)");
+
+		$q = $con->prepare("insert into courses(course_name,course_image,course_description, language_id, user_id) values(:course_name, :destination_file, :course_desc, :language_id, :user_id)");
 		$q->bindParam("course_name", $course_name);
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
 		$q->bindParam("language_id", $course_lang_id);
+		$q->bindParam("user_id", $user_id);
 		$success = $success && $q->execute();
 
 		$course_id = $con->lastInsertId();
@@ -102,6 +107,8 @@ if (isset($_POST['add_course'])) {
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		}
 	} catch (Exception $e) {
+		print_r($e->getMessage());
+		return;
 		$con->rollBack();
 		$_SESSION["failed_message"] = "Add course failed!";
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
@@ -225,7 +232,7 @@ if (isset($_POST['update_course'])) {
 		$con->beginTransaction();
 
 		$success = true;
-		
+
 		$q = $con->prepare("UPDATE courses SET course_name=:course_name, course_image=:destination_file,course_description=:course_desc,language_id=:language_id WHERE id=:course_id");
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
@@ -351,10 +358,13 @@ if (isset($_POST['del_topic'])) {
 }
 
 if (isset($_POST['add_course_video'])) {
+	$user_id = $_SESSION['user'];
+	if (!isset($user_id)) return;
+
 	$course_name = $_POST['course_name'];
 	$course_img = $_FILES['course_image'];
 	$course_desc = $_POST['course_desc'];
-	$course_lang_id = $_POST['lang_id'];
+	$course_lang_id = isset($_POST['lang_id']) && !empty($_POST['lang_id']) ? (int)$_POST['lang_id'] : null;
 
 	$file_name = $course_img['name'];
 	$file_error = $course_img['error'];

@@ -125,7 +125,7 @@ $courses = display_course_videos(); ?>
                                                 Language
                                             </label>
                                             <select name="lang_id" id="lang_id" class="form-select mt-1 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
-                                                <option value="">Select language</option>
+                                                <option>Select language</option>
                                                 <?php
                                                 $cats = select_langs();
                                                 foreach ($cats as $cat) {
@@ -223,7 +223,7 @@ $courses = display_course_videos(); ?>
                                                 Language
                                             </label>
                                             <select name="lang_id" id="lang_id" class="form-select mt-1 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
-                                                <option value="">Select language</option>
+                                                <option>Select language</option>
                                                 <?php
                                                 $cats = select_langs();
                                                 foreach ($cats as $cat) {
