@@ -647,7 +647,7 @@ function display_courses()
 function course_topics($course_id)
 {
     include("inc/connect.php");
-    $topic_list;
+    $topic_list = [];
     $query = $con->prepare("select * from course_topics where course_id=:course_id");
     $query->bindParam("course_id", $course_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);

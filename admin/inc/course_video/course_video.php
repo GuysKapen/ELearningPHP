@@ -151,7 +151,7 @@ $courses = display_course_videos(); ?>
                                             <label class="mt-2 text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4 w-1/6 flex-shrink-0" for="exampleFormControlSelect1">
                                                 Select course
                                             </label>
-                                            <select class="form-control mt-1" id="exampleFormControlSelect1" name="selected_course">
+                                            <select class="form-control mt-1" id="exampleFormControlSelect1" name="course_id">
 
                                                 <?php foreach ($courses as $course) {
                                                 ?>

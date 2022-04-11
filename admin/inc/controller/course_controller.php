@@ -7,6 +7,31 @@ session_start();
 include("../connect.php");
 include("../utils.php");
 
+function get_course_video($course_id)
+{
+	include("../connect.php");
+	$query = $con->prepare("select * from course_videos where id=:course_id");
+	$query->bindParam("course_id", $course_id);
+	$query->setFetchMode(PDO::FETCH_ASSOC);
+	$query->execute();
+
+	$row = $query->fetch();
+	$con = null;
+	return $row;
+}
+
+function get_course($course_id)
+{
+	include("../connect.php");
+	$query = $con->prepare("select * from courses where id=:course_id");
+	$query->bindParam("course_id", $course_id);
+	$query->setFetchMode(PDO::FETCH_ASSOC);
+	$query->execute();
+
+	$row = $query->fetch();
+	$con = null;
+	return $row;
+}
 // ==========================================================================================
 
 // code to add a new course by admin from manage_courses.php
@@ -76,8 +101,6 @@ if (isset($_POST['add_course'])) {
 			$_SESSION["failed_message"] = "Add course failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		}
-
-
 	} catch (Exception $e) {
 		$con->rollBack();
 		$_SESSION["failed_message"] = "Add course failed!";
@@ -146,7 +169,6 @@ if (isset($_POST['del_course_id'])) {
 			$_SESSION["failed_message"] = "Delete course failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		}
-
 	} catch (Exception $e) {
 		$con->rollBack();
 		$_SESSION["failed_message"] = "Update course failed!" . $e->getMessage();
@@ -161,10 +183,14 @@ if (isset($_POST['del_course_id'])) {
 
 
 if (isset($_POST['update_course'])) {
-	$course_id = $_POST['selected_course'];
+	$course_id = $_POST['course_id'];
+
+	$course = get_course_video($course_id);
+
 	$course_img = $_FILES['course_image'];
-	$course_desc = $_POST['course_desc'];
-	$course_lang_id = $_POST['lang_id'];
+	$course_name = $_POST['course_name'] ?? $course['course_name'];
+	$course_desc = $_POST['course_desc'] ?? $course['course_description'];
+	$course_lang_id = $_POST['lang_id'] ?? $course['language_id'];
 
 	$file_name = $course_img['name'];
 	$file_error = $course_img['error'];
@@ -192,14 +218,15 @@ if (isset($_POST['update_course'])) {
 		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
 	}
 
+	$destination_file = $destination_file ?? $course['course_image'];
+
 	try {
 		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$con->beginTransaction();
 
 		$success = true;
-
-
-		$q = $con->prepare("UPDATE courses SET course_image=:destination_file,course_description=:course_desc,language_id=:language_id WHERE id=:course_id");
+		
+		$q = $con->prepare("UPDATE courses SET course_name=:course_name, course_image=:destination_file,course_description=:course_desc,language_id=:language_id WHERE id=:course_id");
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
 		$q->bindParam("course_id", $course_id);
@@ -241,8 +268,6 @@ if (isset($_POST['update_course'])) {
 			$_SESSION["failed_message"] = "Update course failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		}
-
-
 	} catch (Exception $e) {
 		$con->rollBack();
 		$_SESSION["failed_message"] = "Add course failed!";
@@ -399,10 +424,14 @@ if (isset($_POST['add_course_video'])) {
 }
 
 if (isset($_POST['update_course_video'])) {
-	$course_id = $_POST['selected_course'];
+	$course_id = $_POST['course_id'];
+
+	$course = get_course_video($course_id);
+
 	$course_img = $_FILES['course_image'];
-	$course_desc = $_POST['course_desc'];
-	$course_lang_id = $_POST['lang_id'];
+	$course_name = $_POST['course_name'] ?? $course['course_name'];
+	$course_desc = $_POST['course_desc'] ?? $course['course_description'];
+	$course_lang_id = $_POST['lang_id'] ?? $course['language_id'];
 
 	$file_name = $course_img['name'];
 	$file_error = $course_img['error'];
@@ -430,14 +459,16 @@ if (isset($_POST['update_course_video'])) {
 		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
 	}
 
+	$destination_file = $destination_file ?? $course['course_image'];
+
 	try {
 		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$con->beginTransaction();
 
 		$success = true;
 
-
-		$q = $con->prepare("UPDATE course_videos SET course_image=:destination_file,course_description=:course_desc,language_id=:language_id WHERE id=:course_id");
+		$q = $con->prepare("UPDATE course_videos SET course_name=:course_name, course_image=:destination_file,course_description=:course_desc,language_id=:language_id WHERE id=:course_id");
+		$q->bindParam("course_name", $course_name);
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
 		$q->bindParam("course_id", $course_id);
@@ -479,8 +510,6 @@ if (isset($_POST['update_course_video'])) {
 			$_SESSION["failed_message"] = "Update course failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course_video');
 		}
-
-
 	} catch (Exception $e) {
 		$con->rollBack();
 		$_SESSION["failed_message"] = "Update course failed!" . $e->getMessage();
@@ -531,8 +560,6 @@ if (isset($_POST['del_course_video'])) {
 			$_SESSION["failed_message"] = "Delete course video failed!";
 			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course_video');
 		}
-
-
 	} catch (Exception $e) {
 		$con->rollBack();
 		$_SESSION["failed_message"] = "Update course failed!" . $e->getMessage();
