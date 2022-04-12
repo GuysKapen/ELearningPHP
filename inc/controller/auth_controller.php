@@ -47,7 +47,7 @@ if (isset($_POST['registration'])) {
     if (
         !isset($_POST['username']) ||
         !isset($_POST['email']) ||
-        !isset($_POST['password'])
+        !isset($_POST['password']) 
     ) {
         return;
     }
@@ -55,6 +55,7 @@ if (isset($_POST['registration'])) {
     $name = $_POST['username'];
     $pass = $_POST['password'];
     $email = $_POST['email'];
+    $phone = $_POST['phone'];
 
     $check = $con->prepare("select 1 as result from users where email=:email limit 1");
     $check->bindParam("email", $email);
@@ -67,9 +68,10 @@ if (isset($_POST['registration'])) {
         return;
     }
 
-    $query = $con->prepare("insert into users (username, email, password) values (:username, :email, :password)");
+    $query = $con->prepare("insert into users (username, email, password, phone, role_id) values (:username, :email, :password, :phone, 1)");
     $query->bindParam("username", $name);
     $query->bindParam("email", $email);
+    $query->bindParam("phone", $phone);
     $hashed_password = password_hash($pass, PASSWORD_BCRYPT);
     $query->bindParam("password", $hashed_password);
 

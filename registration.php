@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-control mt-2">
                     <i class="fa fa-phone"></i>
-                    <input type="text" name="phone" placeholder="Please enter your phone">
+                    <input type="tel" name="phone" placeholder="Please enter your phone">
                 </div>
                 <div class="form-control mt-2">
                     <i class="fa fa-lock"></i>

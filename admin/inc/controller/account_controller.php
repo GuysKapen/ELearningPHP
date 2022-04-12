@@ -19,6 +19,7 @@ if (isset($_POST['update_account'])) {
     $pass = $_POST['old_password'];
     $name = $_POST['username'];
     $email = $_POST['email'];
+    $phone = $_POST['phone'];
     $new_pass = $_POST['new_password'];
     $id = $_POST['id'];
 
@@ -37,9 +38,10 @@ if (isset($_POST['update_account'])) {
 
         if (password_verify($pass, $hashed_password)) {
 
-            $query = $con->prepare("update users set username=:username email=:email password=:password role_id=:role_id");
+            $query = $con->prepare("update users set username=:username, email=:email, password=:password, role_id=:role_id, phone=:phone");
             $query->bindParam("username", $name);
             $query->bindParam("email", $email);
+            $query->bindParam("phone", $phone);
             $query->bindParam("role_id", $role_id);
             $hashed_password = password_hash($pass, PASSWORD_BCRYPT);
             $query->bindParam("password", $hashed_password);
@@ -58,12 +60,13 @@ if (isset($_POST['update_account'])) {
             return;
         }
     } else {
-        $query = $con->prepare("update users set username=:username, email=:email where id=:id");
+        $query = $con->prepare("update users set username=:username, email=:email, role_id=:role_id, phone=:phone where id=:id");
         $query->bindParam("username", $name);
         $query->bindParam("email", $email);
+        $query->bindParam("phone", $phone);
         $query->bindParam("id", $id);
         $query->bindParam("role_id", $role_id);
-        
+
         if ($query->execute()) {
             $_SESSION["success_message"] = "Update account successfully!";
             header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin?account');
