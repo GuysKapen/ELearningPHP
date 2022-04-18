@@ -16,12 +16,11 @@ if (isset($_SESSION["error_message"])) {
         <div id="link">
             <ul>
                 <?php
-                $contact = get_contact();
-                echo '<li><a href="https://facebook.com/' . $contact["fb"] . '"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="https://twitter.com/' . $contact["tw"] . '"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="https://google-plus.com/' . $contact["gp"] . '"><i class="fab fa-google-plus"></i></a></li>
-                    <li><a href="https://youtube.com/' . $contact["yt"] . '"><i class="fab fa-youtube"></i></a></li>
-                    <li><a href="https://linkedin.com/' . $contact["link"] . '"><i class="fab fa-linkedin"></i></a></li>';
+                echo '<li><a href="https://facebook.com/#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="https://twitter.com/#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://google-plus.com/#"><i class="fab fa-google-plus"></i></a></li>
+                    <li><a href="https://youtube.com/#"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="https://linkedin.com/#"><i class="fab fa-linkedin"></i></a></li>';
                 ?>
             </ul>
         </div>

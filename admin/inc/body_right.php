@@ -11,18 +11,6 @@
         include("category/category.php");
     }
 
-    if (isset($_GET['sub_cat'])) {
-        include("sub_category/sub_category.php");
-    }
-
-    if (isset($_GET['edit_cat'])) {
-        include("category/edit_category.php");
-    }
-
-    if (isset($_GET['edit_sub_cat'])) {
-        include("sub_category/edit_sub_category.php");
-    }
-
     if (isset($_GET['lang'])) {
         include("language/language.php");
     }

@@ -41,38 +41,6 @@ INSERT INTO `categories` VALUES (1,'Development',NULL),(2,'Design',NULL),(3,'Man
 UNLOCK TABLES;
 
 --
--- Table structure for table `contacts`
---
-
-DROP TABLE IF EXISTS `contacts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `contacts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(64) DEFAULT NULL,
-  `address_1` varchar(512) DEFAULT NULL,
-  `address_2` varchar(512) DEFAULT NULL,
-  `yt` varchar(64) DEFAULT NULL,
-  `fb` varchar(64) DEFAULT NULL,
-  `gp` varchar(64) DEFAULT NULL,
-  `tw` varchar(64) DEFAULT NULL,
-  `link` varchar(64) DEFAULT NULL,
-  `phone` varchar(12) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `contacts`
---
-
-LOCK TABLES `contacts` WRITE;
-/*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
-INSERT INTO `contacts` VALUES (1,'guys@gmail.com','Address 1','Address 2','yt\n','fb','gp','tw','link','1238485928');
-/*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `course_categories`
 --
 
@@ -85,8 +53,7 @@ CREATE TABLE `course_categories` (
   `course_type` varchar(32) DEFAULT 'course',
   PRIMARY KEY (`course_id`,`category_id`),
   KEY `course_categories_category_fk` (`category_id`),
-  CONSTRAINT `course_categories_category_fk` FOREIGN KEY (`category_id`) REFERENCES `categories` (`cat_id`),
-  CONSTRAINT `course_categories_course_fk` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
+  CONSTRAINT `course_categories_category_fk` FOREIGN KEY (`category_id`) REFERENCES `categories` (`cat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -113,7 +80,6 @@ CREATE TABLE `course_programming_languages` (
   `course_type` varchar(32) DEFAULT 'course',
   PRIMARY KEY (`course_id`,`programming_language_id`),
   KEY `course_programming_language_language_fk` (`programming_language_id`),
-  CONSTRAINT `course_programming_language_course_fk` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE,
   CONSTRAINT `course_programming_language_language_fk` FOREIGN KEY (`programming_language_id`) REFERENCES `programming_languages` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -357,31 +323,6 @@ INSERT INTO `courses` VALUES (1,'Java','Java course for beginner','upload_imgs/j
 UNLOCK TABLES;
 
 --
--- Table structure for table `faqs`
---
-
-DROP TABLE IF EXISTS `faqs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `faqs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `question` varchar(512) DEFAULT NULL,
-  `answer` varchar(512) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `faqs`
---
-
-LOCK TABLES `faqs` WRITE;
-/*!40000 ALTER TABLE `faqs` DISABLE KEYS */;
-INSERT INTO `faqs` VALUES (1,'How','How what?');
-/*!40000 ALTER TABLE `faqs` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `languages`
 --
 
@@ -455,58 +396,6 @@ INSERT INTO `roles` VALUES (1,'user'),(2,'admin');
 UNLOCK TABLES;
 
 --
--- Table structure for table `sub_categories`
---
-
-DROP TABLE IF EXISTS `sub_categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sub_categories` (
-  `sub_cat_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sub_cat_name` varchar(32) DEFAULT NULL,
-  `cat_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`sub_cat_id`),
-  KEY `cat_id` (`cat_id`),
-  CONSTRAINT `sub_categories_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`cat_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sub_categories`
---
-
-LOCK TABLES `sub_categories` WRITE;
-/*!40000 ALTER TABLE `sub_categories` DISABLE KEYS */;
-INSERT INTO `sub_categories` VALUES (2,'PHP',1),(3,'Web Dev',1),(4,'UI Design',2),(5,'UX Design',2);
-/*!40000 ALTER TABLE `sub_categories` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `terms`
---
-
-DROP TABLE IF EXISTS `terms`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `terms` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) DEFAULT NULL,
-  `type` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `terms`
---
-
-LOCK TABLES `terms` WRITE;
-/*!40000 ALTER TABLE `terms` DISABLE KEYS */;
-INSERT INTO `terms` VALUES (2,'Instrutor should share 30% revenue with our website','teacher');
-/*!40000 ALTER TABLE `terms` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `users`
 --
 
@@ -519,6 +408,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `role_id` int(11) NOT NULL DEFAULT 1,
+  `phone` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `role_fk` (`role_id`),
   CONSTRAINT `role_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
@@ -531,7 +421,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Ele','$2y$10$Ce/Fk1iu6yS2xFPYQIxfRuyg09lMCvyJjS3UB3MUrSc1FTR.sKvC2','guys@gmail.com',1),(3,'Guys','$2y$10$mNWyBOsduRhuL.VD6CytJeCplyp65GtwxwL2Y3C.SZCIgrgGleFSG','guyskapen@gmail.com',2);
+INSERT INTO `users` VALUES (1,'Ele','$2y$10$Ce/Fk1iu6yS2xFPYQIxfRuyg09lMCvyJjS3UB3MUrSc1FTR.sKvC2','guys@gmail.com',1,'0120499232'),(3,'Guys','$2y$10$mNWyBOsduRhuL.VD6CytJeCplyp65GtwxwL2Y3C.SZCIgrgGleFSG','guyskapen@gmail.com',2,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -544,4 +434,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-11 15:21:41
+-- Dump completed on 2022-04-18 13:23:38
