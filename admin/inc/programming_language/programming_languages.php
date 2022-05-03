@@ -70,8 +70,7 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Image</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-right">Action</th>
                                     </tr>
                                 </thead>
@@ -90,10 +89,9 @@
                                                     <div class="text-sm font-medium text-gray-900"> <?php echo $lang['name'] ?> </div>
                                                 </div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"> Active </span>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                <img src="<?php echo '/ELearning/' . $lang['lang_image'] ?>" class="w-32 object-cover mx-auto" />
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a href="index.php?edit_pro_lang=<?php echo $lang['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                                 <a href="index.php?del_pro_lang=<?php echo $lang['id'] ?>" class="text-red-600 hover:text-red-900 ml-2">Delete</a>

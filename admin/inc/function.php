@@ -150,7 +150,7 @@ function select_categories()
 
     $cats = array();
     while ($row = $sel_cat->fetch()) {
-        array_push($cats, array("name" => $row["cat_name"], "id" => $row["cat_id"]));
+        array_push($cats, array("name" => $row["cat_name"], "id" => $row["cat_id"], "slug" => $row["slug"]));
     }
     $con = null;
     return $cats;
@@ -398,7 +398,7 @@ function get_programming_language($id)
 
     $row = $sel_lang->fetch();
     $con = null;
-    return array("name" => $row["lang_name"], "id" => $row["id"]);
+    return array("name" => $row["lang_name"], "id" => $row["id"], "lang_image" => $row["lang_image"]);
 }
 
 function select_programming_langs()
@@ -410,7 +410,7 @@ function select_programming_langs()
 
     $langs = array();
     while ($row = $sel_lang->fetch()) {
-        array_push($langs, array("name" => $row["lang_name"], "id" => $row["id"]));
+        array_push($langs, array("name" => $row["lang_name"], "id" => $row["id"], "lang_image" => $row["lang_image"]));
     }
     $con = null;
     return $langs;
@@ -634,7 +634,7 @@ function display_courses()
 {
     include("inc/connect.php");
     $course_list;
-    $query = $con->prepare("select * from courses");
+    $query = $con->prepare("select c.*, u.username from courses c inner join users u on c.user_id=u.id");
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
 
@@ -692,7 +692,7 @@ function display_course_videos()
 {
     include("inc/connect.php");
     $course_video_list = [];
-    $query = $con->prepare("select * from course_videos");
+    $query = $con->prepare("select c.*, u.username from course_videos c inner join users u on c.user_id=u.id");
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
 
