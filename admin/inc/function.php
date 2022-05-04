@@ -174,7 +174,7 @@ function select_roles()
 function select_accounts()
 {
     include("inc/connect.php");
-    $sel_cat = $con->prepare("select * from users u inner join roles r on r.id=u.role_id");
+    $sel_cat = $con->prepare("select u.*, r.name from users u inner join roles r on r.id=u.role_id");
     $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
     $sel_cat->execute();
 

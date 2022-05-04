@@ -92,19 +92,23 @@ include("inc/function.php")
 						</a>
 					</li>
 					<?php
-					$topic_id = $_GET['topic_id'];
-					$topic = get_topic($topic_id);
-					$topics = course_topics($topic["course_id"]);
-					foreach ($topics as $res) { ?>
-						<li>
-							<a href="?topic_id=<?php echo $res["id"] ?>" class="flex items-center py-3 px-4 font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 link-no-styled <?php echo (($topic_id == $res["id"]) ? "active" : ""); ?>">
-								<span class="ml-3">
-									<?php echo $res['topic_name']; ?>
-								</span>
-							</a>
-						</li>
+					if (!empty($_GET['topic_id'])) {
+						$topic_id = $_GET['topic_id'];
+						$topic = get_topic($topic_id);
+						$topics = course_topics($topic["course_id"]);
+						$next_topic = next_topic($topic_id, $topic["course_id"]);
+						foreach ($topics as $res) { ?>
+							<li>
+								<a href="?topic_id=<?php echo $res["id"] ?>" class="flex items-center py-3 px-4 font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 link-no-styled <?php echo (($topic_id == $res["id"]) ? "active" : ""); ?>">
+									<span class="ml-3">
+										<?php echo $res['topic_name']; ?>
+									</span>
+								</a>
+							</li>
 
-					<?php } ?>
+					<?php }
+					} ?>
+
 				</ul>
 			</div>
 		</aside>
@@ -129,9 +133,14 @@ include("inc/function.php")
 
 			</div>
 
-			<div class="text-right">
-				<button id="btn_next" class="px-24 py-4 bg-indigo-600 text-xl font-black text-white">Next</button>
-			</div>
+			<?php
+			if (isset($next_topic)) { ?>
+				<div class="text-right">
+					<a href="topic.php?topic_id=<?php echo $next_topic['id'] ?>">
+						<button id="btn_next" class="px-24 py-4 bg-indigo-600 text-xl font-black text-white">Next</button>
+					</a>
+				</div>
+			<?php			} ?>
 
 		</div>
 

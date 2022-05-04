@@ -19,6 +19,14 @@ if (isset($_POST['login'])) {
     $check->bindParam("email", $email);
     $check->execute();
     $user = $check->fetch();
+
+    if ($user == null) {
+        $_SESSION["error_message"] = "Incorrect email or password";
+        $con = null;
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/login.php');
+        return;
+    }
+
     $hashed_password = $user['password'];
 
     if ($hashed_password == null) {
@@ -31,11 +39,12 @@ if (isset($_POST['login'])) {
         $_SESSION["success_message"] = "Login success";
         $con = null;
         $_SESSION['user'] = $user['id'];
-        header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning\/' . $_SESSION['redirect'] ?? 'index.php');
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/' . $_SESSION['redirect'] ?? 'index.php');
         return;
     } else {
         $_SESSION["failed_message"] = "Incorrect email or password";
         $con = null;
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/login.php');
         return;
     }
 

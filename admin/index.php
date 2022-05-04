@@ -52,6 +52,10 @@ if (
             echo '<script type="text/javascript">toastr.error("' . $_SESSION["error_message"] . '")</script>';
             unset($_SESSION["error_message"]);
         }
+        if (isset($_SESSION["failed_message"])) {
+            echo '<script type="text/javascript">toastr.error("' . $_SESSION["failed_message"] . '")</script>';
+            unset($_SESSION["failed_message"]);
+        }
 
         ?>
 

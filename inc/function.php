@@ -134,7 +134,7 @@ function get_course_videos_match($keyword)
 function course_topics($course_id)
 {
     include("connect.php");
-    $topic_list;
+    $topic_list = [];
     $query = $con->prepare("select * from course_topics where course_id=:course_id");
     $query->bindParam("course_id", $course_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -167,6 +167,21 @@ function get_topic($topic_id)
     $topic_list;
     $query = $con->prepare("select * from courses c inner join course_topics t on c.id=t.course_id where t.id=:topic_id");
     $query->bindParam("topic_id", $topic_id);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $query->execute();
+
+    $row = $query->fetch();
+    $con = null;
+    return $row;
+}
+
+function next_topic($topic_id, $course_id)
+{
+    include("inc/connect.php");
+    $topic_list;
+    $query = $con->prepare("select * from courses c inner join course_topics t on c.id=t.course_id where t.id > :topic_id and t.course_id=:course_id order by t.id limit 1");
+    $query->bindParam("topic_id", $topic_id);
+    $query->bindParam("course_id", $course_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $query->execute();
 
