@@ -59,7 +59,7 @@ if (isset($_POST['add_course'])) {
 	if (in_array($file_check, $file_ext_stored)) {
 		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
-		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+		move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . '/ELearning/upload_imgs/' . $file_name);
 	}
 
 	try {
@@ -144,7 +144,7 @@ if (isset($_POST['del_course_id'])) {
 	$q->execute();
 
 	$old_img = $q->fetch()['course_image'];
-	$old_img_path = '/opt/lampp/htdocs/ELearning/' . $old_img;
+	$old_img_path = $_SERVER['DOCUMENT_ROOT'] . '/ELearning/' . $old_img;
 	if (file_exists($old_img_path)) {
 		unlink($old_img_path);
 	}
@@ -215,14 +215,14 @@ if (isset($_POST['update_course'])) {
 		$q->bindParam("course_id", $course_id);
 		$q->execute();
 		$old_img = $q->fetch()['course_image'];
-		$old_img_path = '/opt/lampp/htdocs/ELearning/' . $old_img;
+		$old_img_path = $_SERVER['DOCUMENT_ROOT'] . '/ELearning/' . $old_img;
 		if (file_exists($old_img_path)) {
 			unlink($old_img_path);
 		}
 
 		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
-		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+		move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . '/ELearning/upload_imgs/' . $file_name);
 	}
 
 	$destination_file = $destination_file ?? $course['course_image'];
@@ -380,7 +380,7 @@ if (isset($_POST['add_course_video'])) {
 	if (in_array($file_check, $file_ext_stored)) {
 		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
-		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+		move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] .  '/ELearning/upload_imgs/' . $file_name);
 	}
 
 	try {
@@ -459,14 +459,14 @@ if (isset($_POST['update_course_video'])) {
 		$q->bindParam("course_id", $course_id);
 		$q->execute();
 		$old_img = $q->fetch()['course_image'];
-		$old_img_path = '/opt/lampp/htdocs/ELearning/' . $old_img;
+		$old_img_path = $_SERVER['DOCUMENT_ROOT'] . '/ELearning/' . $old_img;
 		if (file_exists($old_img_path)) {
 			unlink($old_img_path);
 		}
 
 		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
-		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+		move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . '/ELearning/upload_imgs/' . $file_name);
 	}
 
 	$destination_file = $destination_file ?? $course['course_image'];
@@ -537,7 +537,7 @@ if (isset($_POST['del_course_video'])) {
 	$q->execute();
 
 	$old_img = $q->fetch()['course_image'];
-	$old_img_path = '/opt/lampp/htdocs/ELearning/' . $old_img;
+	$old_img_path = $_SERVER['DOCUMENT_ROOT'] . '/ELearning/' . $old_img;
 	if (file_exists($old_img_path)) {
 		unlink($old_img_path);
 	}
@@ -600,7 +600,7 @@ if (isset($_POST['add_video_topic'])) {
 
 	if (in_array($file_check, $file_ext_stored)) {
 		$destination_file = 'upload_imgs/' . $file_name;
-		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+		move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . '/ELearning/upload_imgs/' . $file_name);
 
 		$q = $con->prepare("INSERT INTO `course_video_topics`( `topic_name`, `topic_image`, `video_path`, `course_id`) VALUES (:topic_name, :topic_image, :video_path, :course_id)");
 		$q->bindParam("topic_name", $topic_name);
@@ -642,7 +642,7 @@ if (isset($_POST['update_video_topic'])) {
 
 		if (in_array($file_check, $file_ext_stored)) {
 			$destination_file = 'upload_imgs/' . $file_name;
-			move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+			move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . '/ELearning/upload_imgs/' . $file_name);
 
 			$q = $con->prepare("UPDATE course_video_topics SET topic_name=:topic_name, topic_image=:topic_image, video_path=:video_path WHERE id=:topic_id");
 			$q->bindParam("topic_name", $topic_name);

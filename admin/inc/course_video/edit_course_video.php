@@ -135,7 +135,7 @@ $course = get_course_video($course_id);
                       <a href="index.php?edit_video_topic=<?php echo $res['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                       <form action="inc/controller/course_controller.php" method="POST">
                         <input type="hidden" name="topic_id" value="<?php echo $res['id'] ?>">
-                        <button name="del_topic" class="text-red-600 hover:text-red-900 ml-2">Delete</button>
+                        <button name="del_topic" class="text-red-600 hover:text-red-900 ml-2" onclick="return confirm('Are you sure?');">Delete</button>
                       </form>
                     </td>
                   </tr>
