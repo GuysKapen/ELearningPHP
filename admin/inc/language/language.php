@@ -72,7 +72,7 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a href="index.php?edit_lang=<?php echo $lang['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                <a href="index.php?del_lang=<?php echo $lang['id'] ?>" class="text-red-600 hover:text-red-900 ml-2">Delete</a>
+                                                <a href="index.php?del_lang=<?php echo $lang['id'] ?>" class="text-red-600 hover:text-red-900 ml-2" onclick="return confirm('Are you sure?');">Delete</a>
                                             </td>
                                         </tr>
 

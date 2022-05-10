@@ -188,7 +188,7 @@ $quizz = display_quizz(); ?>
                                             <a href="index.php?edit_quiz=<?php echo $quiz['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                             <form action="inc/controller/course_quiz_controller.php" method="POST">
                                                 <input type="hidden" name="quiz_id" value="<?php echo $quiz['id'] ?>">
-                                                <button name="del_quiz" class="text-red-600 hover:text-red-900 ml-2">Delete</button>
+                                                <button name="del_quiz" class="text-red-600 hover:text-red-900 ml-2" onclick="return confirm('Are you sure?');">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

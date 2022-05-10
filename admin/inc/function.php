@@ -361,7 +361,7 @@ function del_lang()
     if (!isset($_GET['del_lang'])) return;
     $id = $_GET['del_lang'];
     
-    include_once($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $del_lang = $con->prepare("delete from languages where lang_id=:id");
     $del_lang->bindParam("id", $id);
     if ($del_lang->execute()) {

@@ -96,7 +96,7 @@
                                                 <a href="index.php?edit_pro_lang=<?php echo $lang['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                                 <form action="inc/controller/pro_lang_controller.php" method="POST">
                                                     <input type="hidden" name="pro_lang_id" value="<?php echo $lang['id'] ?>">
-                                                    <button name="del_pro_lang" class="text-red-600 hover:text-red-900 ml-2">Delete</button>
+                                                    <button name="del_pro_lang" class="text-red-600 hover:text-red-900 ml-2" onclick="return confirm('Are you sure?');">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
