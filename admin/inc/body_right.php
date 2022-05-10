@@ -99,6 +99,8 @@
         include("faq.php");
     }
 
+    echo del_category();
+    echo del_lang();
 
     ?>
 

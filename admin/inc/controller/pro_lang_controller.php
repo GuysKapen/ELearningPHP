@@ -6,6 +6,7 @@ session_start();
 
 include("../connect.php");
 include("../utils.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/function.php");
 
 // ==========================================================================================
 
@@ -40,7 +41,7 @@ if (isset($_POST['add_pro_lang'])) {
 	if (in_array($file_check, $file_ext_stored)) {
 		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
-		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+		move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . '/ELearning/upload_imgs/' . $file_name);
 
 		$add_lang = $con->prepare("insert into programming_languages (lang_name, lang_image) values (:name, :image)");
 		$add_lang->bindParam("name", $lang_name);
@@ -81,7 +82,7 @@ if (isset($_POST['update_pro_lang'])) {
 		$q->bindParam("id", $lang_id);
 		$q->execute();
 		$old_img = $q->fetch()['lang_image'];
-		$old_img_path = '/opt/lampp/htdocs/ELearning/' . $old_img;
+		$old_img_path = $_SERVER['DOCUMENT_ROOT'] . '/ELearning/' . $old_img;
 		if (file_exists($old_img_path)) {
 			unlink($old_img_path);
 		}
@@ -89,7 +90,7 @@ if (isset($_POST['update_pro_lang'])) {
 
 		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
-		move_uploaded_file($file_tmp, '/opt/lampp/htdocs/ELearning/upload_imgs/' . $file_name);
+		move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . '/ELearning/upload_imgs/' . $file_name);
 
 		$update_lang = $con->prepare("update programming_languages set lang_name=:name, lang_image=:image where id=:id");
 		$update_lang->bindParam("name", $lang_name);
@@ -108,18 +109,31 @@ if (isset($_POST['update_pro_lang'])) {
 }
 
 
-if (isset($_GET['del_pro_lang'])) {
+if (isset($_POST['del_pro_lang'])) {
 
-	$id = $_GET['del_lang'];
-	include("inc/connect.php");
-	$del_lang = $con->prepare("delete from programming_languages where lang_id=:id");
+	$id = $_POST['pro_lang_id'];
+
+	
+	$pro_lang = get_programming_language($id);
+	
+	if ($pro_lang == null) {
+		return;
+	}
+
+	//Remove old file
+	$old_file = $_SERVER['DOCUMENT_ROOT'] . "/ELearning/" . $pro_lang["lang_image"];
+	if (file_exists($old_file)) {
+		unlink($old_file);
+	}
+
+	$del_lang = $con->prepare("delete from programming_languages where id=:id");
 	$del_lang->bindParam("id", $id);
 	if ($del_lang->execute()) {
-		echo "<script>alert('Delete language successfully!');</script>";
-		echo "<script>window.open('index.php?lang', '_self')</script>";
+		$_SESSION['success_message'] = 'Delete programming language successfully!';
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?pro_lang');
 	} else {
-		echo "<script>alert('Delete language Failed!');</script>";
-		echo "<script>window.open('index.php?lang', '_self')</script>";
+		$_SESSION['failed_message'] = 'Delete programming lang failed!';
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?pro_lang');
 	}
 	$con = null;
 }

@@ -77,7 +77,7 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo $cat['slug'] ?></td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a href="index.php?edit_cat=<?php echo $cat['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                <a href="index.php?del_cat=<?php echo $cat['id'] ?>" class="text-red-600 hover:text-red-900 ml-2">Delete</a>
+                                                <a href="index.php?del_cat=<?php echo $cat['id'] ?>" class="text-red-600 hover:text-red-900 ml-2" onclick="return confirm('Are you sure?');">Delete</a>
                                             </td>
                                         </tr>
 
@@ -102,3 +102,5 @@
 
 
 </div>
+
+<?php echo add_cat(); ?>

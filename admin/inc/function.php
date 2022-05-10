@@ -2,7 +2,7 @@
 
 function is_admin($user_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $check = $con->prepare("select role_id from users where id=:id limit 1");
     $check->bindParam("id", $user_id);
     $check->execute();
@@ -12,7 +12,7 @@ function is_admin($user_id)
 
 function add_cat()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['add_cat'])) {
         $cat_name = $_POST["cat_name"];
 
@@ -22,7 +22,7 @@ function add_cat()
         $count = $check->fetch()['result'];
 
         if ($count > 0) {
-            echo "<script>alert('Category already existed');</script>";
+            $_SESSION["failed_message"] = "Category already existed";
             $con = null;
             return;
         }
@@ -30,10 +30,10 @@ function add_cat()
         $add_cat = $con->prepare("insert into categories (cat_name) values (:name)");
         $add_cat->bindParam("name", $cat_name);
         if ($add_cat->execute()) {
-            echo "<script>alert('Add category successfully!');</script>";
+            $_SESSION["success_message"] = "Add category successfully!";
             echo "<script>window.open('index.php?cat', '_self')</script>";
         } else {
-            echo "<script>alert('Add category Failed!');</script>";
+            $_SESSION["failed_message"] = "Add category failed!";
             echo "<script>window.open('index.php?cat', '_self')</script>";
         }
         $con = null;
@@ -42,7 +42,7 @@ function add_cat()
 
 function update_cat()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['update_cat'])) {
         $cat_name = $_POST["name"];
         $cat_id = $_POST["id"];
@@ -53,7 +53,7 @@ function update_cat()
         $res = $check->fetch(PDO::FETCH_ASSOC);
         $count = $res['result'];
         if ($count > 0) {
-            echo "<script>alert('Category already existed');</script>";
+            $_SESSION["failed_message"] = "Category already existed";
             $con = null;
             return;
         }
@@ -62,10 +62,10 @@ function update_cat()
         $update_cat->bindParam("name", $cat_name);
         $update_cat->bindParam("id", $cat_id);
         if ($update_cat->execute()) {
-            echo "<script>alert('Update category successfully!');</script>";
+            $_SESSION["success_message"] = "Update category successfully!";
             echo "<script>window.open('index.php?cat', '_self')</script>";
         } else {
-            echo "<script>alert('Update category Failed!');</script>";
+            $_SESSION["failed_message"] = "Update category failed!";
             echo "<script>window.open('index.php?cat', '_self')</script>";
         }
         $con = null;
@@ -74,7 +74,7 @@ function update_cat()
 
 function add_sub_cat()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['add_sub_cat'])) {
         $cat_name = $_POST["sub_cat_name"];
         $cat_id = $_POST["cat_id"];
@@ -106,7 +106,7 @@ function add_sub_cat()
 
 function update_sub_cat()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['update_sub_cat'])) {
         $cat_name = $_POST["name"];
         $cat_id = $_POST["cat_id"];
@@ -143,7 +143,7 @@ function update_sub_cat()
 
 function select_categories()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_cat = $con->prepare("select * from categories");
     $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
     $sel_cat->execute();
@@ -158,7 +158,7 @@ function select_categories()
 
 function select_roles()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_cat = $con->prepare("select * from roles");
     $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
     $sel_cat->execute();
@@ -173,7 +173,7 @@ function select_roles()
 
 function select_accounts()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_cat = $con->prepare("select u.*, r.name from users u inner join roles r on r.id=u.role_id");
     $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
     $sel_cat->execute();
@@ -190,7 +190,7 @@ function select_accounts()
 
 function select_sub_categories()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_cat = $con->prepare("select c.cat_name, s.sub_cat_name, s.sub_cat_id from categories c inner join sub_categories s on c.cat_id=s.cat_id");
     $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
     $sel_cat->execute();
@@ -205,7 +205,7 @@ function select_sub_categories()
 
 function get_category($id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_cat = $con->prepare("select * from categories where cat_id=:id");
     $sel_cat->bindParam("id", $id);
     $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
@@ -218,7 +218,7 @@ function get_category($id)
 
 function get_account($id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_cat = $con->prepare("select * from users u inner join roles r on r.id=u.role_id where u.id=:id");
     $sel_cat->bindParam("id", $id);
     $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
@@ -231,7 +231,7 @@ function get_account($id)
 
 function get_sub_category($id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_cat = $con->prepare("select * from sub_categories where sub_cat_id=:id");
     $sel_cat->bindParam("id", $id);
     $sel_cat->setFetchMode(PDO::FETCH_ASSOC);
@@ -248,15 +248,15 @@ function del_category()
 {
     if (!isset($_GET['del_cat'])) return;
     $id = $_GET['del_cat'];
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $del_cat = $con->prepare("delete from categories where cat_id=:id");
     $del_cat->bindParam("id", $id);
     if ($del_cat->execute()) {
-        echo "<script>alert('Delete category successfully!');</script>";
-        echo "<script>window.open('index.php?sub_cat', '_self')</script>";
+        $_SESSION["success_message"] = "Delete category successfully";
+        echo "<script>window.open('index.php?cat', '_self')</script>";
     } else {
-        echo "<script>alert('Delete category Failed!');</script>";
-        echo "<script>window.open('index.php?sub_cat', '_self')</script>";
+        $_SESSION["failed_message"] = "Delete category failed";
+        echo "<script>window.open('index.php?cat', '_self')</script>";
     }
     $con = null;
 }
@@ -266,7 +266,7 @@ function del_sub_category()
 {
     if (!isset($_GET['del_sub_cat'])) return;
     $id = $_GET['del_sub_cat'];
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $del_cat = $con->prepare("delete from sub_categories where sub_cat_id=:id");
     $del_cat->bindParam("id", $id);
     if ($del_cat->execute()) {
@@ -282,7 +282,7 @@ function del_sub_category()
 
 function add_lang()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['add_lang'])) {
         $lang_name = $_POST["name"];
 
@@ -292,7 +292,7 @@ function add_lang()
         $count = $check->fetch()['result'];
 
         if ($count > 0) {
-            echo "<script>alert('Language already existed');</script>";
+            $_SESSION["failed_message"] = "Language already existed";
             $con = null;
             return;
         }
@@ -300,10 +300,10 @@ function add_lang()
         $add_lang = $con->prepare("insert into languages (lang_name) values (:name)");
         $add_lang->bindParam("name", $lang_name);
         if ($add_lang->execute()) {
-            echo "<script>alert('Add lang successfully!');</script>";
+            $_SESSION["success_message"] = "Add language successfully!";
             echo "<script>window.open('index.php?lang', '_self')</script>";
         } else {
-            echo "<script>alert('Add lang Failed!');</script>";
+            $_SESSION["failed_message"] = "Add language failed!";
             echo "<script>window.open('index.php?lang', '_self')</script>";
         }
         $con = null;
@@ -312,7 +312,7 @@ function add_lang()
 
 function get_language($id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_lang = $con->prepare("select * from languages where lang_id=:id");
     $sel_lang->bindParam("id", $id);
     $sel_lang->setFetchMode(PDO::FETCH_ASSOC);
@@ -325,7 +325,7 @@ function get_language($id)
 
 function update_lang()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['update_lang'])) {
         $lang_name = $_POST["name"];
         $lang_id = $_POST["id"];
@@ -360,14 +360,15 @@ function del_lang()
 {
     if (!isset($_GET['del_lang'])) return;
     $id = $_GET['del_lang'];
-    include("inc/connect.php");
+    
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $del_lang = $con->prepare("delete from languages where lang_id=:id");
     $del_lang->bindParam("id", $id);
     if ($del_lang->execute()) {
-        echo "<script>alert('Delete language successfully!');</script>";
+        $_SESSION["success_message"] = "Delete language successfully!";
         echo "<script>window.open('index.php?lang', '_self')</script>";
     } else {
-        echo "<script>alert('Delete language Failed!');</script>";
+        $_SESSION["failed_message"] = "Delete language failed!";
         echo "<script>window.open('index.php?lang', '_self')</script>";
     }
     $con = null;
@@ -375,7 +376,7 @@ function del_lang()
 
 function select_langs()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_lang = $con->prepare("select * from languages");
     $sel_lang->setFetchMode(PDO::FETCH_ASSOC);
     $sel_lang->execute();
@@ -390,7 +391,7 @@ function select_langs()
 
 function get_programming_language($id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_lang = $con->prepare("select * from programming_languages where id=:id");
     $sel_lang->bindParam("id", $id);
     $sel_lang->setFetchMode(PDO::FETCH_ASSOC);
@@ -403,7 +404,7 @@ function get_programming_language($id)
 
 function select_programming_langs()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_lang = $con->prepare("select * from programming_languages");
     $sel_lang->setFetchMode(PDO::FETCH_ASSOC);
     $sel_lang->execute();
@@ -419,7 +420,7 @@ function select_programming_langs()
 
 function select_terms()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel_term = $con->prepare("select * from terms");
     $sel_term->setFetchMode(PDO::FETCH_ASSOC);
     $sel_term->execute();
@@ -434,7 +435,7 @@ function select_terms()
 
 function add_term()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['add_term'])) {
         $term_name = $_POST["name"];
         $term_type = $_POST["type"];
@@ -466,7 +467,7 @@ function add_term()
 
 function update_term()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['update_term'])) {
         $term_name = $_POST["name"];
         $term_id = $_POST["id"];
@@ -503,7 +504,7 @@ function del_term()
 {
     if (!isset($_GET['del_term'])) return;
     $id = $_GET['del_term'];
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $del = $con->prepare("delete from terms where id=:id");
     $del->bindParam("id", $id);
     if ($del->execute()) {
@@ -518,7 +519,7 @@ function del_term()
 
 function get_term($id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel = $con->prepare("select * from terms where id=:id");
     $sel->bindParam("id", $id);
     $sel->setFetchMode(PDO::FETCH_ASSOC);
@@ -531,7 +532,7 @@ function get_term($id)
 
 function add_faq()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['add_faq'])) {
         $question = $_POST["question"];
         $answer = $_POST["answer"];
@@ -566,7 +567,7 @@ function del_faq()
 {
     if (!isset($_GET['del_faq'])) return;
     $id = $_GET['del_faq'];
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $del = $con->prepare("delete from faqs where id=:id");
     $del->bindParam("id", $id);
     if ($del->execute()) {
@@ -581,7 +582,7 @@ function del_faq()
 
 function update_faq()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     if (isset($_POST['update_faq'])) {
         $question = $_POST["question"];
         $id = $_POST["id"];
@@ -617,7 +618,7 @@ function update_faq()
 
 function select_faqs()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $sel = $con->prepare("select * from faqs");
     $sel->setFetchMode(PDO::FETCH_ASSOC);
     $sel->execute();
@@ -632,7 +633,7 @@ function select_faqs()
 
 function display_courses()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $course_list;
     $query = $con->prepare("select c.*, u.username from courses c inner join users u on c.user_id=u.id");
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -646,7 +647,7 @@ function display_courses()
 
 function course_topics($course_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $topic_list = [];
     $query = $con->prepare("select * from course_topics where course_id=:course_id");
     $query->bindParam("course_id", $course_id);
@@ -662,7 +663,7 @@ function course_topics($course_id)
 
 function get_topic($topic_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $topic_list;
     $query = $con->prepare("select * from courses c inner join course_topics t on c.id=t.course_id where t.id=:topic_id");
     $query->bindParam("topic_id", $topic_id);
@@ -676,7 +677,7 @@ function get_topic($topic_id)
 
 function get_course($course_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $query = $con->prepare("select * from courses where id=:course_id");
     $query->bindParam("course_id", $course_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -690,7 +691,7 @@ function get_course($course_id)
 
 function display_course_videos()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $course_video_list = [];
     $query = $con->prepare("select c.*, u.username from course_videos c inner join users u on c.user_id=u.id");
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -705,7 +706,7 @@ function display_course_videos()
 
 function get_course_video($course_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $query = $con->prepare("select * from course_videos where id=:course_id");
     $query->bindParam("course_id", $course_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -719,7 +720,7 @@ function get_course_video($course_id)
 
 function course_video_topics($course_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $topic_list = [];
     $query = $con->prepare("select * from course_video_topics where course_id=:course_id");
     $query->bindParam("course_id", $course_id);
@@ -734,7 +735,7 @@ function course_video_topics($course_id)
 
 function display_quizz()
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $list = [];
     $query = $con->prepare("select q.*, c.course_name from course_quizz q inner join courses c on q.course_id=c.id");
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -748,7 +749,7 @@ function display_quizz()
 
 function get_quiz($quiz_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $query = $con->prepare("select * from course_quizz where id=:quiz_id");
     $query->bindParam("quiz_id", $quiz_id);
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -761,7 +762,7 @@ function get_quiz($quiz_id)
 
 function quiz_questions($quiz_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $topic_list = [];
     $query = $con->prepare("select * from course_questions where quiz_id=:quiz_id");
     $query->bindParam("quiz_id", $quiz_id);
@@ -776,7 +777,7 @@ function quiz_questions($quiz_id)
 
 function quiz_question_options($quiz_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $separator = '<--br-->';
     $concat_sep = '<---->';
     $topic_list = [];
@@ -808,7 +809,7 @@ function quiz_question_options($quiz_id)
 
 function get_question($question_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $separator = '<--br-->';
     $query = $con->prepare("select q.*, group_concat(o.content separator  '<--br-->') as options, group_concat(o.id separator '<--br-->') as option_ids,  group_concat(distinct a.option_answer_id separator '<--br-->') as answers from course_questions q inner join course_question_options o on q.id = o.question_id left join course_question_answer a on q.id=a.question_id where q.id=:question_id group by q.id;");
     $query->bindParam("question_id", $question_id);
@@ -825,7 +826,7 @@ function get_question($question_id)
 
 function get_topic_video($topic_id)
 {
-    include("inc/connect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/ELearning/admin/inc/connect.php");
     $topic_list;
     $query = $con->prepare("select * from course_videos c inner join course_video_topics t on c.id=t.course_id where t.id=:topic_id");
     $query->bindParam("topic_id", $topic_id);
