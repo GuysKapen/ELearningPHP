@@ -238,6 +238,7 @@ if (isset($_POST['update_course'])) {
 		$q->bindParam("course_desc", $course_desc);
 		$q->bindParam("course_id", $course_id);
 		$q->bindParam("language_id", $course_lang_id);
+		$q->bindParam("course_name", $course_name);
 		$success = $success && $q->execute();
 
 		if (isset($_POST['categories']) && is_array($_POST['categories'])) {
@@ -277,8 +278,10 @@ if (isset($_POST['update_course'])) {
 		}
 	} catch (Exception $e) {
 		$con->rollBack();
-		$_SESSION["failed_message"] = "Add course failed!";
-		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
+		print_r($q->errorInfo());
+		print_r($e->getMessage());
+		// $_SESSION["failed_message"] = "Update course failed!";
+		// header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
 		return;
 	}
 }
@@ -308,10 +311,10 @@ if (isset($_POST['add_topic'])) {
 	$r = $q->execute();
 	if ($r == true) {
 		$_SESSION["success_message"] = "Add topic successfully!";
-		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course=' . $course_id);
 	} else {
 		$_SESSION["failed_message"] = "Add topic failed!";
-		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?course');
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?edit_course=' . $course_id);
 	}
 }
 
@@ -345,7 +348,7 @@ if (isset($_POST['update_topic'])) {
 
 if (isset($_POST['del_topic'])) {
 	$topic_id = $_POST['topic_id'];
-	$q = $con->prepare("DELETE FROM course_topic WHERE id=:topic_id");
+	$q = $con->prepare("DELETE FROM course_topics WHERE id=:topic_id");
 	$q->bindParam("topic_id", $topic_id);
 	$r = $q->execute();
 	if ($r == true) {
@@ -599,6 +602,7 @@ if (isset($_POST['add_video_topic'])) {
 	$file_ext_stored = array('png', 'jpg', 'jpeg');
 
 	if (in_array($file_check, $file_ext_stored)) {
+		$file_name = unique_file_name($file_check);
 		$destination_file = 'upload_imgs/' . $file_name;
 		move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . '/ELearning/upload_imgs/' . $file_name);
 
@@ -641,6 +645,7 @@ if (isset($_POST['update_video_topic'])) {
 		$file_ext_stored = array('png', 'jpg', 'jpeg');
 
 		if (in_array($file_check, $file_ext_stored)) {
+			$file_name = unique_file_name($file_check);
 			$destination_file = 'upload_imgs/' . $file_name;
 			move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . '/ELearning/upload_imgs/' . $file_name);
 
