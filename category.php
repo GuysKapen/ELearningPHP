@@ -26,7 +26,7 @@
             </div>
             <div class="flex space-between p-6">
                 <h2>
-                    <?php echo $category['name'] ?>
+                    Courses
                 </h2>
                 <span>
                     <i class="fa fa-arrow-right"></i>
@@ -52,6 +52,33 @@
 
             </div>
 
+            <div class="flex space-between p-6">
+                <h2>
+                    Courses video
+                </h2>
+                <span>
+                    <i class="fa fa-arrow-right"></i>
+                </span>
+            </div>
+
+            <div class="grid grid-col-3 grid-gap-2 justify-start mx-8 mb-8">
+
+                <?php
+
+                $courses = get_courses_video_of_category($category['id']);
+
+                foreach ($courses as $course) { ?>
+                    <div class="course-card">
+                        <a href="topic_videos.php?course_id=<?php echo $course["id"] ?>">
+                            <img src="<?php echo $course["course_image"] ?>" alt="">
+                            <h3><?php echo $course["course_name"] ?></h3>
+                            <h4><?php echo $course["course_description"] ?></h4>
+                            <h5>Teacher: <?php echo $course["username"] ?></h5>
+                        </a>
+                    </div>
+                <?php } ?>
+
+            </div>
         </div>
 
     </div>
