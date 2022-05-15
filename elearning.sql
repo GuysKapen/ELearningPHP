@@ -117,7 +117,7 @@ CREATE TABLE `course_question_answer` (
 
 LOCK TABLES `course_question_answer` WRITE;
 /*!40000 ALTER TABLE `course_question_answer` DISABLE KEYS */;
-INSERT INTO `course_question_answer` VALUES (3,9),(4,14),(4,16),(5,19),(6,21),(7,25),(7,27),(8,31),(9,34),(13,66);
+INSERT INTO `course_question_answer` VALUES (3,9),(4,14),(4,16),(5,19),(6,21),(7,25),(7,27),(8,31),(9,34),(13,66),(14,70),(15,76),(16,81),(17,85),(18,89),(19,93);
 /*!40000 ALTER TABLE `course_question_answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `course_question_options` (
   PRIMARY KEY (`id`),
   KEY `course_question_option_fk` (`question_id`),
   CONSTRAINT `course_question_option_fk` FOREIGN KEY (`question_id`) REFERENCES `course_questions` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +144,7 @@ CREATE TABLE `course_question_options` (
 
 LOCK TABLES `course_question_options` WRITE;
 /*!40000 ALTER TABLE `course_question_options` DISABLE KEYS */;
-INSERT INTO `course_question_options` VALUES (9,3,'PHP: Hypertext Preprocessor'),(10,3,'Private Home Page'),(11,3,'Personal Hypertext Processor'),(12,3,'Hypertext Transfer Protoco'),(13,4,'Document.Write(\"Hello World\")'),(14,4,'echo \"Hello World\"'),(15,4,'\"Hello World\"'),(16,4,'print \"Hello World\"'),(17,5,'Class creation'),(18,5,'Object creation'),(19,5,'Object instantiation'),(20,5,'Class instantiation'),(21,6,'<?php ?>'),(22,6,'< php >'),(23,6,'< ? php ?>'),(24,6,'<? ?>'),(25,7,'#'),(26,7,'\\\\'),(27,7,'/* */'),(28,7,'All of the mentioned'),(29,8,'functionName(parameters) {function body}'),(30,8,'function {function body}'),(31,8,'function functionName(parameters) {function body}'),(32,8,'data type functionName(parameters) {function body}'),(33,9,'$3hello'),(34,9,'$_hello'),(35,9,'$this'),(36,9,'$5_Hello'),(66,13,'6'),(67,13,'3'),(68,13,'4'),(69,13,'5');
+INSERT INTO `course_question_options` VALUES (9,3,'PHP: Hypertext Preprocessor'),(10,3,'Private Home Page'),(11,3,'Personal Hypertext Processor'),(12,3,'Hypertext Transfer Protoco'),(13,4,'Document.Write(\"Hello World\")'),(14,4,'echo \"Hello World\"'),(15,4,'\"Hello World\"'),(16,4,'print \"Hello World\"'),(17,5,'Class creation'),(18,5,'Object creation'),(19,5,'Object instantiation'),(20,5,'Class instantiation'),(21,6,'<?php ?>'),(22,6,'< php >'),(23,6,'< ? php ?>'),(24,6,'<? ?>'),(25,7,'#'),(26,7,'\\\\'),(27,7,'/* */'),(28,7,'All of the mentioned'),(29,8,'functionName(parameters) {function body}'),(30,8,'function {function body}'),(31,8,'function functionName(parameters) {function body}'),(32,8,'data type functionName(parameters) {function body}'),(33,9,'$3hello'),(34,9,'$_hello'),(35,9,'$this'),(36,9,'$5_Hello'),(66,13,'6'),(67,13,'3'),(68,13,'4'),(69,13,'5'),(70,14,'Bytecode is executed by JVM'),(71,14,'The applet makes the Java code secure and portable'),(72,14,'Use of exception handling'),(73,14,'Dynamic binding between objects'),(74,15,'Dynamic'),(75,15,'Architecture Neutral'),(76,15,'Use of pointers'),(77,15,'Object-oriented'),(78,16,'JVM'),(79,16,'JRE'),(80,16,'JDK'),(81,16,'JDB'),(82,17,'10, 5, 0, 20, 0'),(83,17,'10, 30, 20'),(84,17,'60, 5, 0, 20'),(85,17,'60, 30, 0, 20, 0'),(86,18,'24'),(87,18,'23'),(88,18,'20'),(89,18,'25'),(90,19,'Instance block, method, static block, and constructor'),(91,19,'Method, constructor, instance block, and static block'),(92,19,'Static block, method, instance block, and constructor'),(93,19,'Static block, instance block, constructor, and method');
 /*!40000 ALTER TABLE `course_question_options` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +162,7 @@ CREATE TABLE `course_questions` (
   PRIMARY KEY (`id`),
   KEY `course_question_quiz_fk` (`quiz_id`),
   CONSTRAINT `course_question_quiz_fk` FOREIGN KEY (`quiz_id`) REFERENCES `course_quizz` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +171,7 @@ CREATE TABLE `course_questions` (
 
 LOCK TABLES `course_questions` WRITE;
 /*!40000 ALTER TABLE `course_questions` DISABLE KEYS */;
-INSERT INTO `course_questions` VALUES (3,'What does PHP stand for?',1),(4,'How do you write \"Hello World\" in PHP',1),(5,'The practice of creating objects based on predefined classes is often referred to as..',1),(6,'Which of the following is the correct syntax to write a PHP code?',2),(7,'Which of the following is the correct way to add a comment in PHP code?',2),(8,'How to define a function in PHP?',2),(9,'Which is the right way of declaring a variable in PHP?',2),(13,'What will be the output of the following PHP program?\r\n\r\n\r\n&lt;?php\r\n$fruits = array (&quot;apple&quot;, &quot;orange&quot;, array (&quot;pear&quot;, &quot;mango&quot;),&quot;banana&quot;);\r\necho (count($fruits, 1));\r\n?&gt;',2);
+INSERT INTO `course_questions` VALUES (3,'What does PHP stand for?',1),(4,'How do you write \"Hello World\" in PHP',1),(5,'The practice of creating objects based on predefined classes is often referred to as..',1),(6,'Which of the following is the correct syntax to write a PHP code?',2),(7,'Which of the following is the correct way to add a comment in PHP code?',2),(8,'How to define a function in PHP?',2),(9,'Which is the right way of declaring a variable in PHP?',2),(13,'What will be the output of the following PHP program?\r\n\r\n\r\n&lt;?php\r\n$fruits = array (&quot;apple&quot;, &quot;orange&quot;, array (&quot;pear&quot;, &quot;mango&quot;),&quot;banana&quot;);\r\necho (count($fruits, 1));\r\n?&gt;',2),(14,'Which of the following option leads to the portability and security of Java?',4),(15,'Which of the following is not a Java features?',4),(16,'_____ is used to find and fix bugs in the Java programs.',4),(17,'What will be the output of the following program?\r\n\r\npublic class MyFirst {  \r\n      public static void main(String[] args) {  \r\n         MyFirst obj = new MyFirst(n);  \r\n }  \r\n static int a = 10;  \r\n static int n;  \r\n int b = 5;  \r\n int c;  \r\n public MyFirst(int m) {  \r\n       System.out.println(a + &quot;, &quot; + b + &quot;, &quot; + c + &quot;, &quot; + n + &quot;, &quot; + m);  \r\n   }  \r\n// Instance Block  \r\n  {  \r\n     b = 30;  \r\n     n = 20;  \r\n  }   \r\n// Static Block  \r\n  static   \r\n{  \r\n          a = 60;  \r\n     }   \r\n }  ',5),(18,'Evaluate the following Java expression, if x=3, y=5, and z=10:\r\n\r\n++z + y - y + z + x++',5),(19,'What should be the execution order, if a class has a method, static block, instance block, and constructor, as shown below?\r\n\r\npublic class First_C {  \r\n      public void myMethod()   \r\n    {  \r\n    System.out.println(&quot;Method&quot;);  \r\n    }  \r\n      \r\n    {  \r\n    System.out.println(&quot; Instance Block&quot;);  \r\n    }  \r\n          \r\n    public void First_C()  \r\n    {  \r\n    System.out.println(&quot;Constructor &quot;);  \r\n    }  \r\n    static {  \r\n        System.out.println(&quot;static block&quot;);  \r\n    }  \r\n    public static void main(String[] args) {  \r\n    First_C c = new First_C();  \r\n    c.First_C();  \r\n    c.myMethod();  \r\n  }  \r\n}   ',5);
 /*!40000 ALTER TABLE `course_questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +198,7 @@ CREATE TABLE `course_quizz` (
 
 LOCK TABLES `course_quizz` WRITE;
 /*!40000 ALTER TABLE `course_quizz` DISABLE KEYS */;
-INSERT INTO `course_quizz` VALUES (1,'Mid term',1),(2,'Final term',71),(4,'Mid term',1),(5,'Final term',1);
+INSERT INTO `course_quizz` VALUES (1,'Mid term',71),(2,'Final term',71),(4,'Mid term',1),(5,'Final term',1);
 /*!40000 ALTER TABLE `course_quizz` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -435,4 +435,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-15 14:40:01
+-- Dump completed on 2022-05-15 14:59:12
