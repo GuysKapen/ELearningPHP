@@ -26,12 +26,7 @@
             </label>
             <select class="form-control-block mt-4" id="select-quiz" name="quiz_id">
 
-                <?php
-                $quizz = get_quizz();
-                foreach ($quizz as $quiz) {
-                ?>
-                    <option value="<?php echo $quiz['id'] ?>"><?php echo  $quiz['quiz_name']; ?></option>
-                <?php } ?>
+               
 
             </select>
 
@@ -98,7 +93,7 @@
                         
                     }
 
-                    $("#select-quiz").html(x)
+                    $("#select-quiz").html(options)
                 }
             });
 

@@ -7,7 +7,7 @@
 <body>
 
     <?php include("inc/header.php") ?>
-    <div id="wrap">
+    <div id="wrap" class="pb-16">
         <?php include("inc/slider.php") ?>
         <?php include("inc/category.php") ?>
         <?php include("inc/courses.php") ?>

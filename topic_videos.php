@@ -16,7 +16,7 @@
 <body>
 
     <?php include("inc/header.php") ?>
-    <div id="wrap">
+    <div id="wrap" class="py-8">
         <?php include("inc/topic_videos.php") ?>
     </div>
 

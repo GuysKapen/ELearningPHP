@@ -87,8 +87,8 @@
         include("term.php");
     }
 
-    if (isset($_GET['edit_term'])) {
-        include("edit_term.php");
+    if (isset($_GET['edit_cat'])) {
+        include("category/edit_category.php");
     }
 
     if (isset($_GET['contact'])) {
