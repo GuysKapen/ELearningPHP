@@ -81,6 +81,7 @@ if (isset($_POST['update_account'])) {
 
 
 if (isset($_POST['del_account'])) {
+    include $_SERVER["DOCUMENT_ROOT"] . "/ELearning/admin/inc/function.php";
     if (
         !isset($_SESSION['user'])
         || !is_admin($_SESSION['user'])

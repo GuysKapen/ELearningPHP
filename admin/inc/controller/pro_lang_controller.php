@@ -78,7 +78,7 @@ if (isset($_POST['update_pro_lang'])) {
 
 	if (in_array($file_check, $file_ext_stored)) {
 		// Remove old image
-		$q = $con->prepare("select lang_image from programming_laanguages WHERE id=:id");
+		$q = $con->prepare("select lang_image from programming_languages WHERE id=:id");
 		$q->bindParam("id", $lang_id);
 		$q->execute();
 		$old_img = $q->fetch()['lang_image'];
