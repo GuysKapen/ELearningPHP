@@ -95,7 +95,7 @@ $courses = display_courses();
                       <div class="flex justify-end items-center">
                         <a href="index.php?edit_question=<?php echo $res['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                         <form action="inc/controller/course_quiz_controller.php" method="POST">
-                          <input type="hidden" name="topic_id" value="<?php echo $res['id'] ?>">
+                          <input type="hidden" name="question_id" value="<?php echo $res['id'] ?>">
                           <button name="del_question" class="text-red-600 hover:text-red-900 ml-2" onclick="return confirm('Are you sure?');">Delete</button>
                         </form>
                       </div>

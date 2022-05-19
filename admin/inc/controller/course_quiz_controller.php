@@ -57,15 +57,55 @@ if (isset($_POST['update_quiz'])) {
 
 if (isset($_POST['del_quiz'])) {
 	$quiz_id = $_POST['quiz_id'];
-	$q = $con->prepare("DELETE FROM course_quizz WHERE id=:quiz_id");
-	$q->bindParam("quiz_id", $quiz_id);
-	$r = $q->execute();
-	if ($r == true) {
-		$_SESSION["success_message"] = "Delete quiz successful!";
+	
+	$r = true;
+	try {
+		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$con->beginTransaction(); 
+		
+		$q = $con->prepare("SELECT id FROM course_questions where quiz_id=:quiz_id");
+		$q->bindParam('quiz_id', $quiz_id);
+		$q->execute();	
+		
+		while ($row = $q->fetch()) {
+
+			$question_id = $row["id"];
+			
+			$q = $con->prepare("DELETE FROM course_question_answer where question_id=:question_id");
+			$q->bindParam("question_id", $question_id);
+			$r = $r && $q->execute()	;
+			
+			$q = $con->prepare("DELETE FROM course_question_options where question_id=:question_id");
+			$q->bindParam("question_id", $question_id);
+			$r = $r && $q->execute();
+			
+			$q = $con->prepare("DELETE FROM course_questions WHERE id=:question_id");
+			$q->bindParam("question_id", $question_id);
+			$r = $r && $q->execute();
+			print_r($question_id);
+		}	
+
+		$q = $con->prepare("DELETE FROM course_quizz WHERE id=:quiz_id");
+		$q->bindParam("quiz_id", $quiz_id);
+		$r = $r && $q->execute();
+		
+		if ($r == true) {
+			$con->commit();
+			$_SESSION["success_message"] = "Delete quiz successful!";
+			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
+		} else {
+			$con->rollBack();
+			$_SESSION["success_message"] = "Delete quiz failed!";
+			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
+		}
+
+	} catch (Exception $e) {
+		$con->rollBack();
+		print_r($e->getMessage());
+		return;
+		$_SESSION["error_message"] = "Delete quiz failed!" . $e->getMessage();
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
-	} else {
-		$_SESSION["success_message"] = "Delete quiz failed!";
-		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
+		return;
 	}
 }
 
@@ -231,4 +271,42 @@ if (isset($_POST['update_question'])) {
 
 	$_SESSION["success_message"] = "Update question successful!";
 	header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
+}
+
+if (isset($_POST['del_question'])) {
+	$question_id = $_POST['question_id'];
+
+	$r = true;
+	try {
+		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$con->beginTransaction(); 
+
+		$q = $con->prepare("DELETE FROM course_question_answer where question_id=:question_id");
+		$q->bindParam("question_id", $question_id);
+		$r = $r && $q->execute()	;
+
+		$q = $con->prepare("DELETE FROM course_question_options where question_id=:question_id");
+		$q->bindParam("question_id", $question_id);
+		$r = $r && $q->execute();
+
+		$q = $con->prepare("DELETE FROM course_questions WHERE id=:question_id");
+		$q->bindParam("question_id", $question_id);
+		$r = $r && $q->execute();
+		if ($r == true) {
+			$con->commit();
+			$_SESSION["success_message"] = "Delete question successful!";
+			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
+		} else {
+			$con->rollBack();
+			$_SESSION["success_message"] = "Delete question failed!";
+			header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
+		}
+
+	} catch (Exception $e) {
+		$con->rollBack();
+		$_SESSION["error_message"] = "Delete question failed!" . $e->getMessage();
+		header("Location: http://" . $_SERVER['HTTP_HOST'] . '/ELearning/admin/index.php?quiz');
+		return;
+	}
+	
 }

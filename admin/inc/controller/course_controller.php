@@ -392,11 +392,12 @@ if (isset($_POST['add_course_video'])) {
 
 		$success = true;
 
-		$q = $con->prepare("insert into course_videos(course_name,course_image,course_description, language_id) values(:course_name, :destination_file, :course_desc, :language_id)");
+		$q = $con->prepare("insert into course_videos(course_name,course_image,course_description,user_id, language_id) values(:course_name, :destination_file, :course_desc, :user_id, :language_id)");
 		$q->bindParam("course_name", $course_name);
 		$q->bindParam("destination_file", $destination_file);
 		$q->bindParam("course_desc", $course_desc);
 		$q->bindParam("language_id", $course_lang_id);
+		$q->bindParam("user_id", $user_id);
 		$success = $success && $q->execute();
 
 		$course_id = $con->lastInsertId();
