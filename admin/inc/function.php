@@ -16,6 +16,8 @@ function add_cat()
     if (isset($_POST['add_cat'])) {
         $cat_name = $_POST["cat_name"];
 
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $cat_name)));
+
         $check = $con->prepare("select 1 as result from categories where cat_name like :cat_name limit 1");
         $check->bindParam("cat_name", $cat_name);
         $check->execute();
@@ -27,7 +29,8 @@ function add_cat()
             return;
         }
 
-        $add_cat = $con->prepare("insert into categories (cat_name) values (:name)");
+        $add_cat = $con->prepare("insert into categories (cat_name, slug) values (:name, :slug)");
+        $add_cat->bindParam("slug", $slug);
         $add_cat->bindParam("name", $cat_name);
         if ($add_cat->execute()) {
             $_SESSION["success_message"] = "Add category successfully!";
@@ -47,18 +50,10 @@ function update_cat()
         $cat_name = $_POST["name"];
         $cat_id = $_POST["id"];
 
-        $check = $con->prepare("select 1 as result from categories where cat_name like :cat_name limit 1");
-        $check->bindParam("cat_name", $cat_name);
-        $check->execute();
-        $res = $check->fetch(PDO::FETCH_ASSOC);
-        $count = $res['result'];
-        if ($count > 0) {
-            $_SESSION["failed_message"] = "Category already existed";
-            $con = null;
-            return;
-        }
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $cat_name)));
 
-        $update_cat = $con->prepare("update categories set cat_name=:name where cat_id=:id");
+        $update_cat = $con->prepare("update categories set cat_name=:name, slug=:slug where cat_id=:id");
+        $update_cat->bindParam("slug", $slug);
         $update_cat->bindParam("name", $cat_name);
         $update_cat->bindParam("id", $cat_id);
         if ($update_cat->execute()) {

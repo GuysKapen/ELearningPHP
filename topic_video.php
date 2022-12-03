@@ -44,8 +44,10 @@ include("inc/function.php")
 
 				foreach ($related as $topic) { ?>
 					<div class="flex items-start mb-4">
-						<a href="?topic_video_id=<?php echo $topic['id'] ?>"><img src="<?php echo $topic['topic_image']; ?>" class="w-64"></a>
-						<p class="ml-2 text-sm"><?php echo $topic['topic_name'] ?></p>
+						<div class="w-8/12 flex-shrink-0">
+							<a href="?topic_video_id=<?php echo $topic['id'] ?>"><img src="<?php echo $topic['topic_image']; ?>" class="w-64"></a>
+						</div>
+						<p class="ml-2 text-sm w-4/12"><?php echo $topic['topic_name'] ?></p>
 					</div>
 				<?php } ?>
 			</div>

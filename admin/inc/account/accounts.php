@@ -64,9 +64,9 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-capitalize text-sm text-gray-500"><?php echo $account['name'] ?></td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end">
                                                 <a href="index.php?edit_account=<?php echo $account['id'] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                <form action="inc/controller/account_controller.php">
+                                                <form action="inc/controller/account_controller.php" method="POST">
                                                     <input type="hidden" name="account_id" value="<?php echo $account['id'] ?>">
-                                                    <button type="submit" class="text-red-600 hover:text-red-900 ml-2" onclick="return confirm('Are you sure?');">Delete</a>
+                                                    <button type="submit" name="del_account" class="text-red-600 hover:text-red-900 ml-2" onclick="return confirm('Are you sure?');">Delete</a>
                                                 </form>
                                             </td>
                                         </tr>
