@@ -111,8 +111,12 @@ To get a local copy up and running follow these simple example steps.
    DB_USERNAME=username
    DB_PASSWORD=password
    ```
+4. Edit permission for upload_imgs folders
 
-4. Start server and browse in browsers
+  ```sh
+  chmod 777 upload_imgs
+  ```
+5. Start server and browse in browsers
 
 <!-- USAGE EXAMPLES -->
 ## Usage

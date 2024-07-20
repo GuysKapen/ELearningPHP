@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,13 +21,13 @@
 
 DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
   `cat_id` int NOT NULL AUTO_INCREMENT,
   `cat_name` varchar(32) DEFAULT NULL,
   `slug` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`cat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `course_categories` (
   `course_id` int NOT NULL,
   `category_id` int NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE `course_categories` (
   PRIMARY KEY (`course_id`,`category_id`),
   KEY `course_categories_category_fk` (`category_id`),
   CONSTRAINT `course_categories_category_fk` FOREIGN KEY (`category_id`) REFERENCES `categories` (`cat_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_programming_languages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `course_programming_languages` (
   `course_id` int NOT NULL,
   `programming_language_id` int NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `course_programming_languages` (
   PRIMARY KEY (`course_id`,`programming_language_id`),
   KEY `course_programming_language_language_fk` (`programming_language_id`),
   CONSTRAINT `course_programming_language_language_fk` FOREIGN KEY (`programming_language_id`) REFERENCES `programming_languages` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +100,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_question_answer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `course_question_answer` (
   `question_id` int NOT NULL,
   `option_answer_id` int NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE `course_question_answer` (
   KEY `course_question_answer_option_fk` (`option_answer_id`),
   CONSTRAINT `course_question_answer_option_fk` FOREIGN KEY (`option_answer_id`) REFERENCES `course_question_options` (`id`),
   CONSTRAINT `course_question_answer_question_fk` FOREIGN KEY (`question_id`) REFERENCES `course_questions` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_question_options`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `course_question_options` (
   `id` int NOT NULL AUTO_INCREMENT,
   `question_id` int DEFAULT NULL,
@@ -135,7 +135,7 @@ CREATE TABLE `course_question_options` (
   PRIMARY KEY (`id`),
   KEY `course_question_option_fk` (`question_id`),
   CONSTRAINT `course_question_option_fk` FOREIGN KEY (`question_id`) REFERENCES `course_questions` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_questions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `course_questions` (
   `id` int NOT NULL AUTO_INCREMENT,
   `question` text,
@@ -162,7 +162,7 @@ CREATE TABLE `course_questions` (
   PRIMARY KEY (`id`),
   KEY `course_question_quiz_fk` (`quiz_id`),
   CONSTRAINT `course_question_quiz_fk` FOREIGN KEY (`quiz_id`) REFERENCES `course_quizz` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +181,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_quizz`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `course_quizz` (
   `id` int NOT NULL AUTO_INCREMENT,
   `quiz_name` varchar(255) DEFAULT NULL,
@@ -189,7 +189,7 @@ CREATE TABLE `course_quizz` (
   PRIMARY KEY (`id`),
   KEY `quizz_course_fk` (`course_id`),
   CONSTRAINT `quizz_course_fk` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_topics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `course_topics` (
   `id` int NOT NULL AUTO_INCREMENT,
   `course_id` int DEFAULT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE `course_topics` (
   PRIMARY KEY (`id`),
   KEY `course_fk` (`course_id`),
   CONSTRAINT `course_fk` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +236,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_video_topics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `course_video_topics` (
   `id` int NOT NULL AUTO_INCREMENT,
   `video_path` varchar(255) DEFAULT NULL,
@@ -246,7 +246,7 @@ CREATE TABLE `course_video_topics` (
   PRIMARY KEY (`id`),
   KEY `course_video_fk` (`course_id`),
   CONSTRAINT `course_video_fk` FOREIGN KEY (`course_id`) REFERENCES `course_videos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,7 +265,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_videos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `course_videos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `course_name` varchar(255) DEFAULT NULL,
@@ -278,7 +278,7 @@ CREATE TABLE `course_videos` (
   KEY `course_video_language_fk` (`language_id`),
   CONSTRAINT `course_video_language_fk` FOREIGN KEY (`language_id`) REFERENCES `languages` (`lang_id`) ON DELETE SET NULL,
   CONSTRAINT `course_video_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,7 +297,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `courses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `courses` (
   `id` int NOT NULL AUTO_INCREMENT,
   `course_name` varchar(255) DEFAULT NULL,
@@ -310,7 +310,7 @@ CREATE TABLE `courses` (
   KEY `course_language_fk` (`language_id`),
   CONSTRAINT `course_language_fk` FOREIGN KEY (`language_id`) REFERENCES `languages` (`lang_id`) ON DELETE SET NULL,
   CONSTRAINT `course_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,12 +329,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `languages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `languages` (
   `lang_id` int NOT NULL AUTO_INCREMENT,
   `lang_name` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`lang_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,7 +353,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `programming_languages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `programming_languages` (
   `id` int NOT NULL AUTO_INCREMENT,
   `lang_name` varchar(255) DEFAULT NULL,
@@ -378,12 +378,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `roles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -402,7 +402,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
@@ -413,7 +413,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `role_fk` (`role_id`),
   CONSTRAINT `role_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
